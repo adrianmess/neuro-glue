@@ -1,6 +1,8 @@
 import React from 'react';
 
 class AddCard extends React.Component{
+	cardFrontInput = React.createRef();
+	cardBackInput = React.createRef();
 	render() {
 		return(
 			<>

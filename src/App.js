@@ -4,8 +4,6 @@ import AddCard from './AddCard';
 import './App.css';
 
 class App extends React.Component {
-  cardFrontInput = React.createRef();
-  cardBackInput = React.createRef();
 
   addCard = event => {
     // stop form from submitting
