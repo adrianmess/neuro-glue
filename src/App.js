@@ -10,7 +10,14 @@ state = {
 };
 
 addCard = card => {
-  console.log('fish')
+  // take copy of existing state
+  const cards = { ...this.state.cards };
+  // add new card to cards variable
+  cards[`card${Date.now()}`] = card;
+  // set new fish object to state
+  this.setState({
+    cards: cards
+  });
 }
 
   render() {

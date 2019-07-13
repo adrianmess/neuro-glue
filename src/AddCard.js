@@ -10,7 +10,6 @@ class AddCard extends React.Component{
 			front: this.cardFront.current.value,
 			back: this.cardBack.current.value
 		}
-		// console.log(card);
 		this.props.addCard(card);
 	};
 
