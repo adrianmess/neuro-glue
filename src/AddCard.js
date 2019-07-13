@@ -1,18 +1,29 @@
 import React from 'react';
 
 class AddCard extends React.Component{
-	cardFrontInput = React.createRef();
-	cardBackInput = React.createRef();
+	cardFront = React.createRef();
+	cardBack = React.createRef();
+
+	createCard = event => {
+		event.preventDefault();
+		const card = {
+			front: this.cardFront.current.value,
+			back: this.cardBack.current.value
+		}
+		// console.log(card);
+		this.props.addCard(card);
+	};
+
 	render() {
 		return(
 			<>
-				<form className="cards-list-main" onSubmit={this.addCard}>
+				<form className="cards-list-main" onSubmit={this.createCard}>
 					<h2>Create Card</h2>
 					<input
 						className="card-front"
 						type="text"
 						placeholder="Front"
-						ref={this.cardFrontInput}
+						ref={this.cardFront}
 					/>
 
 
@@ -20,7 +31,7 @@ class AddCard extends React.Component{
 						className="card-back"
 						type="text"
 						placeholder="Back"
-						ref={this.cardBackInput}
+						ref={this.cardBack}
 					/>
 					<button className="button" type="submit">Add</button>
 				</form>
