@@ -7,12 +7,17 @@ class App extends React.Component {
 
 state = {
   cards: {}
+};
+
+addCard = card => {
+  console.log('fish')
 }
+
   render() {
     return (
       <>
         <CardsList/>
-        <AddCard/>
+        <AddCard addCard={this.addCard} />
       </>
     );
   }
