@@ -11,6 +11,8 @@ class AddCard extends React.Component{
 			back: this.cardBack.current.value
 		}
 		this.props.addCard(card);
+		//clear/refresh form
+		event.currentTarget.reset();
 	};
 
 	render() {
