@@ -5,14 +5,7 @@ import './App.css';
 
 class App extends React.Component {
 
-  addCard = event => {
-    // stop form from submitting
-    event.preventDefault();
-    //get text from input
-    console.log(this.cardFrontInput.current.value);
-    console.log(this.cardBackInput.current.value);
 
-  }
   render() {
     return (
       <>
