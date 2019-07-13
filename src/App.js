@@ -5,7 +5,9 @@ import './App.css';
 
 class App extends React.Component {
 
-
+state = {
+  cards: {}
+}
   render() {
     return (
       <>
