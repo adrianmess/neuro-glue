@@ -1,0 +1,8 @@
+#card-container {
+	margin-bottom: 10px;
+
+    border-width: 1px;
+    border-color: blue;
+    border-style: solid;
+    width: 153px;
+}
