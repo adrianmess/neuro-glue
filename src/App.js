@@ -1,7 +1,6 @@
 import React from 'react';
 import CardsList from './CardsList';
 import AddCard from './AddCard';
-import Card from './Card';
 import './App.css';
 
 class App extends React.Component {
@@ -9,6 +8,7 @@ class App extends React.Component {
 state = {
   cards: {}
 };
+
 
 addCard = card => {
   // take copy of existing state
@@ -18,8 +18,15 @@ addCard = card => {
   cards[`card${Date.now()}`] = card;
   // set new fish object to state
   this.setState({
-    cards: cards
+    cards
   });
+}
+
+deleteCard = (key) => {
+  const cards = { ...this.state.cards};
+
+  delete cards[key]
+  this.setState({ cards })
 }
 
   render() {
@@ -27,6 +34,7 @@ addCard = card => {
       <>
         <CardsList
         cards={this.state.cards}
+        deleteCard={this.deleteCard}
          />
         <AddCard addCard={this.addCard} />
       </>
