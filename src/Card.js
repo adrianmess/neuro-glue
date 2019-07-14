@@ -7,10 +7,11 @@ class Card extends React.Component {
 		return (
 			<>
 			<div id="card-container">
-			<div id="card-front">{front}</div>
-			<div id="card-back">{back}</div>
+			<div id="card-front" name="front">{front}</div>
+			<div id="card-back" name="back">{back}</div>
 			</div>
-			<button id="card-button-remove">remove</button>
+			{/* using inline function for button onClick handler */}
+			<button id="card-button-remove" onClick={() => this.props.deleteCard(this.props.index)}>remove</button>
 			</>
 		)
 	}
