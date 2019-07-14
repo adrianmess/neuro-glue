@@ -1,6 +1,7 @@
 import React from 'react';
 import CardsList from './CardsList';
 import AddCard from './AddCard';
+import Card from './Card';
 import './App.css';
 
 class App extends React.Component {
@@ -24,7 +25,9 @@ addCard = card => {
   render() {
     return (
       <>
-        <CardsList cards={this.state.cards}/>
+        <CardsList
+        cards={this.state.cards}
+         />
         <AddCard addCard={this.addCard} />
       </>
     );
