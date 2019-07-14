@@ -18,6 +18,10 @@ componentDidMount(){
   console.log(this.ref);
 }
 
+componentWillUnmount(){
+  base.removeBinding(this.ref);
+}
+
 
 addCard = card => {
   // take copy of existing state
