@@ -2,10 +2,11 @@ import React from 'react';
 
 class Card extends React.Component {
 	render() {
+		const { front, back} = this.props.details;
 		return (
 			<>
 			<div>
-			<p>{this.props.details.front}</p>
+			<p>{front}</p>
 			</div>
 			</>
 		)
