@@ -3,7 +3,7 @@ import './Card.css';
 
 class Card extends React.Component {
 	render() {
-		const { front, back} = this.props.details;
+		const { front, back} = this.props.card;
 		return (
 			<>
 			<div id="card-container">
