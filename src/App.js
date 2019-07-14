@@ -2,12 +2,21 @@ import React from 'react';
 import CardsList from './CardsList';
 import AddCard from './AddCard';
 import './App.css';
+import base from './firebase';
 
 class App extends React.Component {
 
 state = {
   cards: {}
 };
+
+componentDidMount(){
+  this.ref = base.syncDoc('Test/document', {
+    context: this,
+    state: 'cards'
+  });
+  console.log(this.ref);
+}
 
 
 addCard = card => {
