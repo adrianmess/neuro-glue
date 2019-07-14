@@ -24,7 +24,7 @@ addCard = card => {
   render() {
     return (
       <>
-        <CardsList/>
+        <CardsList cards={this.state.cards}/>
         <AddCard addCard={this.addCard} />
       </>
     );
