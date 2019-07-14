@@ -6,7 +6,13 @@ class CardsList extends React.Component{
 		return(
 			<>
 			<ul>
-				{Object.keys(this.props.cards).map(key => <Card key={key} details={this.props.cards[key]}/> )}
+				{Object.keys(this.props.cards).map(key =>
+				<Card
+				key={key}
+				index={key}
+				card={this.props.cards[key]}
+				deleteCard={this.props.deleteCard}
+				/> )}
 			</ul>
 			</>
 		);
