@@ -17,7 +17,10 @@ componentDidMount(){
     state: 'cards'
   });
 
-  this.refNotes = base.syncDoc('User/Notes')
+  this.refNotes = base.syncDoc('User/Notes', {
+    context: this,
+    state: 'notes'
+  })
 }
 
 componentWillUnmount(){
