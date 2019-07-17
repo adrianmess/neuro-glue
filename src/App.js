@@ -1,6 +1,7 @@
 import React from 'react';
 import CardsList from './CardsList';
 import AddCard from './AddCard';
+import Note from './Note';
 import './App.css';
 import base from './firebase';
 
@@ -55,6 +56,7 @@ deleteCard = (key) => {
         deleteCard={this.deleteCard}
          />
         <AddCard addCard={this.addCard} />
+        <Note />
       </>
     );
   }
