@@ -7,19 +7,21 @@ import base from './firebase';
 class App extends React.Component {
 
 state = {
-  cards: {}
+  cards: {},
+  notes: {}
 };
 
 componentDidMount(){
-  this.ref = base.syncDoc('Test/document', {
+  this.refCards = base.syncDoc('User/Cards', {
     context: this,
     state: 'cards'
   });
-  console.log(this.ref);
+
+  this.refNotes = base.syncDoc('User/Notes')
 }
 
 componentWillUnmount(){
-  base.removeBinding(this.ref);
+  base.removeBinding(this.refCards);
 }
 
 
