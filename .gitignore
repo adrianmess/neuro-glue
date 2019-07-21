@@ -17,6 +17,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+prepros-6.config
 
 npm-debug.log*
 yarn-debug.log*
