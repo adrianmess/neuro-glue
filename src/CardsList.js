@@ -2,11 +2,18 @@ import React from 'react';
 import Card from './Card';
 
 class CardsList extends React.Component{
+	constructor(props){
+		super(props);
+	}
+
+
+
 	render() {
 		return(
 			<>
-			<ul>
-				{Object.keys(this.props.cards).map(key =>
+			<div>
+				<ul>
+					{Object.keys(this.props.cards).map(key =>
 						<Card
 							id="card-in-cardList"
 							key={key}
@@ -14,8 +21,9 @@ class CardsList extends React.Component{
 							card={this.props.cards[key]}
 							deleteCard={this.props.deleteCard}
 						/>
-				 )}
-			</ul>
+					)}
+				</ul>
+			</div>
 			</>
 		);
 	}
