@@ -61,6 +61,7 @@ console.log('State select card function');
           deleteCard={this.deleteCard}
           addCard={this.addCard}
           selectCard={this.selectCard}
+          selectedCardIndex={this.state.selectedCardIndex}
       />
       </>
     );
