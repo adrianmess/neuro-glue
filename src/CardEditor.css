@@ -1,7 +1,11 @@
 #reactQuill-container {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
   width: 372px;
-  float: right;
-  margin-right: 100px;
+  position: fixed; }
+
+#bottom-quill > div:nth-child(1) > div:nth-child(1) {
+  position: absolute;
+  top: 0;
+  width: 100%; }
+
+#reactQuill-subContainer {
   position: relative; }
