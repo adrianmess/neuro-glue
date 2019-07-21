@@ -7,12 +7,14 @@ class CardsList extends React.Component{
 			<>
 			<ul>
 				{Object.keys(this.props.cards).map(key =>
-				<Card
-				key={key}
-				index={key}
-				card={this.props.cards[key]}
-				deleteCard={this.props.deleteCard}
-				/> )}
+						<Card
+							id="card-in-cardList"
+							key={key}
+							index={key}
+							card={this.props.cards[key]}
+							deleteCard={this.props.deleteCard}
+						/>
+				 )}
 			</ul>
 			</>
 		);
