@@ -4,20 +4,36 @@ import 'react-quill/dist/quill.snow.css';
 import './CardEditor.css';
 
 class CardEditor extends React.Component {
-	constructor(props) {
-		super(props)
+	constructor() {
+		super()
 		this.state = {
-			text: '',
-			subtext:'',
+			textFront: '',
+			textBack: ''
 			} // You can also pass a Quill Delta here
-		this.handleChange = this.handleChange.bind(this);
+
+		this.handleChangeFront = this.handleChangeFront.bind(this);
+		this.handleChangeBack = this.handleChangeBack.bind(this);
 		this.bottomActive = this.bottomActive.bind(this);
 		this.topActive = this.topActive.bind(this);
-		this.myRef = React.createRef();
 	}
 
-	handleChange(value) {
-		this.setState({ text: value })
+		createCard = event => {
+		event.preventDefault();
+		const card = {
+			front: this.state.textFront,
+			back: this.state.textBack
+		}
+		this.props.addCard(card);
+		//clear/refresh form
+		// event.currentTarget.reset();
+	};
+
+	handleChangeFront(value) {
+		this.setState({ textFront: value })
+	}
+
+	handleChangeBack(value) {
+		this.setState({ textBack: value })
 	}
 
 	componentDidMount(){
@@ -26,10 +42,6 @@ class CardEditor extends React.Component {
 
 		topToolBar.style.zIndex="101";
 		bottomToolBar.style.zIndex="100";
-		bottomToolBar.style.top="240px";
-		topToolBar.style.position ="relative";
-		bottomToolBar.style.position ="fixed";
-
 	}
 
 	topActive(){
@@ -41,8 +53,6 @@ class CardEditor extends React.Component {
 	}
 
 	bottomActive(){
-
-		const bottomDiv = document.getElementById('bottom-quill');
 		const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
 		const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
 		topToolBar.style.zIndex = "100";
@@ -54,19 +64,28 @@ class CardEditor extends React.Component {
 		return(
 			<>
 			<div id="reactQuill-container">
-				<div id="top-quill"
-				onClick={event => this.topActive(event)}>
-					<ReactQuill id="top-quill"
-						value={this.state.text}
-						subtext={this.state.subtext}
-						onChange={this.handleChange}>
-					</ReactQuill>
+					<div id="reactQuill-subContainer">
+					<div id="top-quill"
+						onClick={event => this.topActive(event)}
+					>
+						<ReactQuill
+							value={this.state.textFront}
+							onChange={this.handleChangeFront}>
+						</ReactQuill>
+					</div>
+
+					<div id="bottom-quill"
+						onClick={event => this.bottomActive(event)}
+					>
+						<ReactQuill
+							value={this.state.textBack}
+							onChange={this.handleChangeBack}>
+
+						</ReactQuill>
+					</div>
 				</div>
 
-				<div id="bottom-quill"
-					onClick={event => this.bottomActive(event)}>
-					<ReactQuill	ref={this.myRef}></ReactQuill>
-				</div>
+				<button onClick={this.createCard}>Add Card</button>
 			</div>
 			</>
 		)
