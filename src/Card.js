@@ -16,7 +16,8 @@ class Card extends React.Component {
 			</div>
 			</div>
 			{/* using inline function for button onClick handler */}
-			<button id="card-button-remove" onClick={() => this.props.deleteCard(this.props.index)}>remove</button>
+			<button id="card-button-remove"
+			onClick={() => this.props.deleteCard(this.props.index)}>remove</button>
 			</>
 		)
 	}
