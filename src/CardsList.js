@@ -20,6 +20,7 @@ class CardsList extends React.Component{
 							index={key}
 							card={this.props.cards[key]}
 							deleteCard={this.props.deleteCard}
+							selectCard={this.props.selectCard}
 						/>
 					)}
 				</ul>

@@ -12,6 +12,7 @@ class FlashCardEditorMain extends React.Component{
 					<CardsList
 						cards={this.props.cards}
 						deleteCard={this.props.deleteCard}
+						selectCard={this.props.selectCard}
 					/>
 			</div>
 			<div id="cardEditor">

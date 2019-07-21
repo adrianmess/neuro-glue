@@ -7,7 +7,9 @@ class Card extends React.Component {
 		const { front, back} = this.props.card;
 		return (
 			<>
-			<div id="card-container">
+			<div id="card-container"
+			onClick={() => this.props.selectCard(this.props.index)}
+			>
 			<div id="card-front" name="front">
 				{renderHTML(front)}
 			</div>

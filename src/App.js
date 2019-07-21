@@ -9,6 +9,7 @@ class App extends React.Component {
 
 state = {
   cards: {},
+  selectedCardIndex: {},
   notes: {}
 };
 
@@ -48,6 +49,10 @@ deleteCard = (key) => {
   this.setState({ cards })
 }
 
+selectCard = (index) =>{
+console.log('State select card function');
+}
+
   render() {
     return (
       <>
@@ -55,6 +60,7 @@ deleteCard = (key) => {
           cards={this.state.cards}
           deleteCard={this.deleteCard}
           addCard={this.addCard}
+          selectCard={this.selectCard}
       />
       </>
     );
