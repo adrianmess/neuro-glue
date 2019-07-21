@@ -1,9 +1,9 @@
 import React from 'react';
-import CardsList from './CardsList';
 import AddCard from './AddCard';
 import Note from './Note';
 import './App.css';
 import base from './firebase';
+import FlashCardEditorMain from './FlashCardEditorMain';
 
 class App extends React.Component {
 
@@ -51,10 +51,11 @@ deleteCard = (key) => {
   render() {
     return (
       <>
-        <CardsList
-        cards={this.state.cards}
-        deleteCard={this.deleteCard}
-         />
+      <FlashCardEditorMain
+          cards={this.state.cards}
+          deleteCard={this.deleteCard}
+          addCard={this.addCard}
+      />
         <AddCard addCard={this.addCard} />
         <Note />
       </>
