@@ -56,8 +56,6 @@ deleteCard = (key) => {
           deleteCard={this.deleteCard}
           addCard={this.addCard}
       />
-        <AddCard addCard={this.addCard} />
-        <Note />
       </>
     );
   }
