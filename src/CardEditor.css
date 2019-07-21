@@ -1,11 +1,7 @@
-#reactQuill-container{
- /* height: 100%; */
-  /* height: 100%; */
+#reactQuill-container {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  width: calc(100% - 400px);
+  width: 372px;
   float: right;
-}
-
-.my-editing-area{
-
-}
+  margin-right: 100px;
+  position: relative; }
