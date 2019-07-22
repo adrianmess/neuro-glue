@@ -4,11 +4,12 @@ import 'react-quill/dist/quill.snow.css';
 import './CardEditor.css';
 
 class CardEditor extends React.Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			textFront: '',
-			textBack: ''
+			textBack: '',
+			index: this.props.activeItemCardIndex,
 			} // You can also pass a Quill Delta here
 
 		this.handleChangeFront = this.handleChangeFront.bind(this);
@@ -59,6 +60,15 @@ class CardEditor extends React.Component {
 		bottomToolBar.style.zIndex = "101";
 	}
 
+	componentDidUpdate(){
+
+		if(this.props.whichItemActive === 'card') {
+			const index = this.props.activeItemCardIndex;
+			const card = this.props.cards;
+			this.state.textFront = card[index].front;
+			this.state.textBack = card[index].back;
+		}
+	}
 
 	render(){
 		return(
@@ -69,6 +79,7 @@ class CardEditor extends React.Component {
 						onClick={event => this.topActive(event)}
 					>
 						<ReactQuill
+							name="front"
 							value={this.state.textFront}
 							onChange={this.handleChangeFront}>
 						</ReactQuill>
@@ -78,6 +89,7 @@ class CardEditor extends React.Component {
 						onClick={event => this.bottomActive(event)}
 					>
 						<ReactQuill
+							name="back"
 							value={this.state.textBack}
 							onChange={this.handleChangeBack}>
 
