@@ -6,12 +6,14 @@ import base from './firebase';
 import FlashCardEditorMain from './FlashCardEditorMain';
 
 class App extends React.Component {
-
-state = {
-  cards: {},
-  selectedCardIndex: {},
-  notes: {}
-};
+constructor(props){
+  super(props);
+  this.state = {
+    cards: {},
+    selectedCardIndex: {},
+    notes: {}
+  }
+}
 
 componentDidMount(){
   this.refCards = base.syncDoc('User/Cards', {
@@ -49,8 +51,11 @@ deleteCard = (key) => {
   this.setState({ cards })
 }
 
-selectCard = (index) =>{
-console.log('State select card function');
+updateCard = (key, updatedCard) =>{
+  const cards = {...this.state.cards};
+  console.log(cards);
+  // cards[key] = updatedCard;
+  // this.setState({ cards : cards})
 }
 
   render() {
@@ -60,7 +65,7 @@ console.log('State select card function');
           cards={this.state.cards}
           deleteCard={this.deleteCard}
           addCard={this.addCard}
-          selectCard={this.selectCard}
+          updateCard={this.updateCard}
           selectedCardIndex={this.state.selectedCardIndex}
       />
       </>
