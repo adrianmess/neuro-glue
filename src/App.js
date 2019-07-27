@@ -42,7 +42,9 @@ addCard = card => {
   cards[`card${Date.now()}`] = card;
   // set new fish object to state
   this.setState({
-    cards
+    cards,
+    selectedCardIndex: null,
+    selectCard: null,
   });
 }
 
