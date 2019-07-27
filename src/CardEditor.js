@@ -40,27 +40,27 @@ class CardEditor extends React.Component {
 		await this.setState({ back: value })
 	}
 
-	componentDidMount = () =>{
+	// componentDidMount = () =>{
+	// 	const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
+	// 	const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
+
+	// 	topToolBar.style.zIndex="101";
+	// 	bottomToolBar.style.zIndex="100";
+	// }
+
+	topActive(){
 		const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
 		const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
-
-		topToolBar.style.zIndex="101";
-		bottomToolBar.style.zIndex="100";
+		topToolBar.style.display = "inherit";
+		bottomToolBar.style.display = "none";
 	}
 
-	// topActive(){
-	// 	const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
-	// 	const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
-	// 	topToolBar.style.zIndex = "101";
-	// 	bottomToolBar.style.zIndex = "100";
-	// }
-
-	// bottomActive(){
-	// 	const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
-	// 	const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
-	// 	topToolBar.style.zIndex = "100";
-	// 	bottomToolBar.style.zIndex = "101";
-	// }
+	bottomActive(){
+		const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
+		const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
+		// topToolBar.style.display = "none";
+		bottomToolBar.style.display = "inherit";
+	}
 
 
 	componentDidUpdate = () => {
@@ -83,7 +83,7 @@ class CardEditor extends React.Component {
 			<div id="reactQuill-container">
 					<div id="reactQuill-subContainer">
 					<div id="top-quill"
-						// onClick={this.topActive}
+						onClick={this.topActive}
 					>
 						<ReactQuill
 							name="front"
@@ -93,7 +93,7 @@ class CardEditor extends React.Component {
 					</div>
 
 					<div id="bottom-quill"
-						// onClick={event => this.bottomActive(event)}
+						onClick={event => this.bottomActive(event)}
 					>
 						<ReactQuill
 							name="back"
