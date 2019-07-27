@@ -21,6 +21,9 @@ class CardsList extends React.Component{
 							card={this.props.cards[key]}
 							deleteCard={this.props.deleteCard}
 							selectCard={this.props.selectCard}
+							selectedCardIndex={this.props.selectedCardIndex}
+							cardSelected={this.props.cardSelected}
+							setCardActive={this.props.setCardActive}
 						/>
 					)}
 				</ul>

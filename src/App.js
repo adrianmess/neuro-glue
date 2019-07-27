@@ -10,7 +10,8 @@ constructor(props){
   super(props);
   this.state = {
     cards: {},
-    selectedCardIndex: {},
+    selectedCardIndex: null,
+    selectedCard: null,
     notes: {}
   }
 }
@@ -18,6 +19,7 @@ constructor(props){
 componentDidMount(){
   this.refCards = base.syncDoc('User/Cards', {
     context: this,
+    // withIds: true,
     state: 'cards'
   });
 
@@ -54,9 +56,13 @@ deleteCard = (key) => {
 updateCard = (key, updatedCard) =>{
   const cards = {...this.state.cards};
   console.log(cards);
-  // cards[key] = updatedCard;
-  // this.setState({ cards : cards})
 }
+
+  selectCard = (card, index) => this.setState({
+    selectedCard: card,
+    selectedCardIndex: index
+
+  })
 
   render() {
     return (
@@ -66,6 +72,8 @@ updateCard = (key, updatedCard) =>{
           deleteCard={this.deleteCard}
           addCard={this.addCard}
           updateCard={this.updateCard}
+          selectCard={this.selectCard}
+          selectedCard={this.state.selectedCard}
           selectedCardIndex={this.state.selectedCardIndex}
       />
       </>
