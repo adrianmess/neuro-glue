@@ -19,7 +19,6 @@ constructor(props){
 componentDidMount(){
   this.refCards = base.syncDoc('User/Cards', {
     context: this,
-    // withIds: true,
     state: 'cards'
   });
 
@@ -61,7 +60,6 @@ updateCard = (key, updatedCard) =>{
   selectCard = (card, index) => this.setState({
     selectedCard: card,
     selectedCardIndex: index
-
   })
 
   render() {
