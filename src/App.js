@@ -4,6 +4,7 @@ import Note from './Note';
 import './App.css';
 import base from './firebase';
 import FlashCardEditorMain from './FlashCardEditorMain';
+import { blockStatement } from '@babel/types';
 
 class App extends React.Component {
 constructor(props){
@@ -45,6 +46,17 @@ addCard = card => {
   });
 }
 
+updateCard = (index, cardFront, cardBack) =>{
+  const cardsCopy = JSON.parse(JSON.stringify(this.state.cards))
+    cardsCopy[index].front = cardFront
+    cardsCopy[index].back = cardBack
+
+    this.setState({
+      cards: cardsCopy
+    })
+
+}
+
 deleteCard = (key) => {
   const cards = { ...this.state.cards};
 
@@ -52,10 +64,7 @@ deleteCard = (key) => {
   this.setState({ cards })
 }
 
-updateCard = (key, updatedCard) =>{
-  const cards = {...this.state.cards};
-  console.log(cards);
-}
+
 
   selectCard = (card, index) => this.setState({
     selectedCard: card,
