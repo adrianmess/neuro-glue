@@ -16,7 +16,6 @@ class CardEditor extends React.Component {
 		this.handleChangeBack = this.handleChangeBack.bind(this);
 		// this.bottomActive = this.bottomActive.bind(this);
 		// this.topActive = this.topActive.bind(this);
-		this.updateCard = this.updateCard.bind(this);
 	}
 
 	createCard = event => {
@@ -76,6 +75,10 @@ class CardEditor extends React.Component {
 		if (this.props.selectedCardIndex == this.state.index) {
 			this.updateCard();
 		}
+	}
+
+	updateCard(){
+
 	}
 
 
