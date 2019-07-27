@@ -2,12 +2,6 @@ import React from 'react';
 import Card from './Card';
 
 class CardsList extends React.Component{
-	constructor(props){
-		super(props);
-	}
-
-
-
 	render() {
 		return(
 			<>
@@ -22,8 +16,6 @@ class CardsList extends React.Component{
 							deleteCard={this.props.deleteCard}
 							selectCard={this.props.selectCard}
 							selectedCardIndex={this.props.selectedCardIndex}
-							cardSelected={this.props.cardSelected}
-							setCardActive={this.props.setCardActive}
 						/>
 					)}
 				</ul>
