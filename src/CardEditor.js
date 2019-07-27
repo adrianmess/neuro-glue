@@ -16,6 +16,7 @@ class CardEditor extends React.Component {
 		this.handleChangeBack = this.handleChangeBack.bind(this);
 		// this.bottomActive = this.bottomActive.bind(this);
 		// this.topActive = this.topActive.bind(this);
+		this.updateCard = this.updateCard.bind(this);
 	}
 
 	createCard = event => {
@@ -72,13 +73,14 @@ class CardEditor extends React.Component {
 				index: this.props.selectedCardIndex
 			})
 		}
+		if (this.props.selectedCardIndex == this.state.index) {
+			this.updateCard();
+		}
 	}
 
 
 	render(){
-
 		return(
-
 			<>
 			<div id="reactQuill-container">
 					<div id="reactQuill-subContainer">
@@ -87,7 +89,7 @@ class CardEditor extends React.Component {
 					>
 						<ReactQuill
 							name="front"
-								value={this.state.front ? this.state.front: ''}
+							value={this.state.front ? this.state.front: ''}
 							onChange={this.handleChangeFront}>
 						</ReactQuill>
 					</div>
@@ -97,14 +99,21 @@ class CardEditor extends React.Component {
 					>
 						<ReactQuill
 							name="back"
-								value={this.state.back ? this.state.back : ''}
+							value={this.state.back ? this.state.back : ''}
 							onChange={this.handleChangeBack}>
 
 						</ReactQuill>
 					</div>
 				</div>
 
-				<button onClick={this.createCard}>Add Card</button>
+				<button
+				onClick={this.createCard}>Add Card</button>
+				 {
+				 this.state.index ?
+				 <button
+					id="updateCard-btn"
+					onClick={this.updateCard}>Update</button> : null
+				}
 			</div>
 			</>
 		)
