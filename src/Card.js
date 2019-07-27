@@ -5,29 +5,25 @@ import './Card.css';
 
 
 class Card extends React.Component {
-	constructor(props){
-		super(props);
 
-		this.cardSelected = this.cardSelected.bind(this);
-	}
 
-	cardSelected(){
-		this.props.setCardActive(this.props.index);
+	selectCard(card, index){
+		this.props.selectCard(card, index);
 	}
 
 	render() {
-		const { front, back} = this.props.card;
+		const card = this.props.card;
+		const index = this.props.index;
 		return (
 			<>
 			<div id="card-container"
-			onClick={() => this.props.selectCard(this.props.index)}
-			onClick={this.cardSelected}
+					onClick={() => this.selectCard(card, index)}
 			>
 			<div id="card-front" name="front">
-				{renderHTML(front)}
+				{renderHTML(card.front)}
 			</div>
 			<div id="card-back" name="back">
-				{renderHTML(back)}
+				{renderHTML(card.back)}
 			</div>
 			</div>
 			{/* using inline function for button onClick handler */}
