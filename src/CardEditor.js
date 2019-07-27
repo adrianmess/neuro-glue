@@ -4,40 +4,43 @@ import 'react-quill/dist/quill.snow.css';
 import './CardEditor.css';
 
 class CardEditor extends React.Component {
-	constructor(props) {
-		super(props)
+	constructor() {
+		super()
 		this.state = {
-			textFront: '',
-			textBack: '',
-			index: this.props.activeItemCardIndex,
-			} // You can also pass a Quill Delta here
+			front: '',
+			back: '',
+			index: null,
+			};
 
 		this.handleChangeFront = this.handleChangeFront.bind(this);
 		this.handleChangeBack = this.handleChangeBack.bind(this);
-		this.bottomActive = this.bottomActive.bind(this);
-		this.topActive = this.topActive.bind(this);
+		// this.bottomActive = this.bottomActive.bind(this);
+		// this.topActive = this.topActive.bind(this);
 	}
 
-		createCard = event => {
+	createCard = event => {
 		event.preventDefault();
 		const card = {
-			front: this.state.textFront,
-			back: this.state.textBack
+			front: this.state.front,
+			back: this.state.back
 		}
 		this.props.addCard(card);
 		//clear/refresh form
 		// event.currentTarget.reset();
 	};
 
-	handleChangeFront(value) {
-		this.setState({ textFront: value })
+
+
+
+	handleChangeFront = async (value) => {
+		await this.setState({ front: value })
 	}
 
-	handleChangeBack(value) {
-		this.setState({ textBack: value })
+	handleChangeBack = async (value) =>{
+		await this.setState({ back: value })
 	}
 
-	componentDidMount(){
+	componentDidMount = () =>{
 		const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
 		const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
 
@@ -45,52 +48,56 @@ class CardEditor extends React.Component {
 		bottomToolBar.style.zIndex="100";
 	}
 
-	topActive(){
-		const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
-		const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
+	// topActive(){
+	// 	const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
+	// 	const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
+	// 	topToolBar.style.zIndex = "101";
+	// 	bottomToolBar.style.zIndex = "100";
+	// }
 
-		topToolBar.style.zIndex = "101";
-		bottomToolBar.style.zIndex = "100";
-	}
+	// bottomActive(){
+	// 	const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
+	// 	const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
+	// 	topToolBar.style.zIndex = "100";
+	// 	bottomToolBar.style.zIndex = "101";
+	// }
 
-	bottomActive(){
-		const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
-		const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
-		topToolBar.style.zIndex = "100";
-		bottomToolBar.style.zIndex = "101";
-	}
 
-	componentDidUpdate(){
+	componentDidUpdate = () => {
 
-		if(this.props.whichItemActive === 'card') {
-			const index = this.props.activeItemCardIndex;
-			const card = this.props.cards;
-			this.state.textFront = card[index].front;
-			this.state.textBack = card[index].back;
+		if (this.props.selectedCardIndex !== this.state.index) {
+			this.setState({
+				front: this.props.selectedCard.front,
+				back: this.props.selectedCard.back,
+				index: this.props.selectedCardIndex
+			})
 		}
 	}
 
+
 	render(){
+
 		return(
+
 			<>
 			<div id="reactQuill-container">
 					<div id="reactQuill-subContainer">
 					<div id="top-quill"
-						onClick={event => this.topActive(event)}
+						// onClick={this.topActive}
 					>
 						<ReactQuill
 							name="front"
-							value={this.state.textFront}
+								value={this.state.front ? this.state.front: ''}
 							onChange={this.handleChangeFront}>
 						</ReactQuill>
 					</div>
 
 					<div id="bottom-quill"
-						onClick={event => this.bottomActive(event)}
+						// onClick={event => this.bottomActive(event)}
 					>
 						<ReactQuill
 							name="back"
-							value={this.state.textBack}
+								value={this.state.back ? this.state.back : ''}
 							onChange={this.handleChangeBack}>
 
 						</ReactQuill>
