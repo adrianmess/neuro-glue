@@ -6,7 +6,7 @@ import { firebaseApp } from './firebase';
 class Header extends React.Component{
 
 	authHandler = async (authData) => {
-		console.log(authData)
+		const user = await base.fetch(this.props.userId, { context: this });
 	}
 	authenticate = provider => {
 		const authProvider = new firebase.auth[`${provider}AuthProvider`]();
