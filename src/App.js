@@ -4,7 +4,7 @@ import Note from './Note';
 import './App.css';
 import base from './firebase';
 import FlashCardEditorMain from './FlashCardEditorMain';
-import { blockStatement } from '@babel/types';
+import Header from './Header';
 
 class App extends React.Component {
 constructor(props){
@@ -13,7 +13,8 @@ constructor(props){
     cards: {},
     selectedCardIndex: null,
     selectedCard: null,
-    notes: {}
+    notes: {},
+    loggedIn: '',
   }
 }
 
@@ -33,6 +34,8 @@ componentWillUnmount(){
   base.removeBinding(this.refCards);
 }
 
+  userLogin = uid => {
+  }
 
 addCard = card => {
   // take copy of existing state
@@ -83,6 +86,9 @@ deleteCard = (key) => {
   render() {
     return (
       <>
+      <Header
+      userLogin={this.userLogin}
+      />
       <FlashCardEditorMain
           cards={this.state.cards}
           deleteCard={this.deleteCard}
