@@ -5,28 +5,18 @@ import base, { firebaseApp } from './firebase';
 
 
 class Login extends React.Component{
-	constructor(props){
-		super(props);
-		this.state ={
-			isLoggedIn: false
-		}
-	}
 
-	// componentDidUpdate(){
-	// 	isLoggedIn?
-	// 		this.props.isLoggedInAction(true):
-	// 		this.props.isLoggedInAction(false)
-	// }
+	componentDidMount(){
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				this.authHandler({ user });
+			}
+		})
+	}
 	authHandler = async (authData) =>{
 		const userID = await authData.user.uid;
 		this.props.isLoggedInAction(true)
-		// userID?
-		// this.setState({
-		// 	isLoggedIn: true
-		// }) :
-		// 	this.setState({
-		// 		isLoggedIn: false
-		// 	})
+		this.props.setUserId(userID)
 		// const user = await base.fetch(this.props.userId, { context: this });
 
 		// if (!user.owner) {
