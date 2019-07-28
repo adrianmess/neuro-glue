@@ -1,12 +1,14 @@
 import React from 'react';
+import Login from './Login';
 
 class Header extends React.Component{
+	authenticate = () => {
+		alert('yeah')
+	}
 	render(){
 		return(
 			<>
-			<div id="header-container">
-
-			</div>
+			<Login authenticate={this.authenticate}/>
 			</>
 		)
 	}
