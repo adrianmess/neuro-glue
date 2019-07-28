@@ -8,14 +8,15 @@ class FlashCardEditorMain extends React.Component{
 	constructor(props){
 		super(props);
 			this.state= {
-				cardSetTitle: 'sds'
+				cardCategory: ''
 			}
 	}
 
 handleChange = event => {
 	this.setState({
-		cardSetTitle: event.target.value
+		cardCategory: event.target.value
 	})
+	// this.props.createTitle(this.state.cardCategory)
 }
 
 	render(){
@@ -23,13 +24,14 @@ handleChange = event => {
 			<>
 			<div id="flashCardEditorContainer">
 
+				{this.props.isLoggedIn?
 				<p>
 					<input
 					placeholder= "FlashCard Set Title"
 					type= "text"
 					onChange={this.handleChange}
 					value={this.state.cardSetTitle}></input>
-				</p>
+				</p>: <span></span>}
 				<button>Delete Set</button>
 					<div id="cardList">
 						<CardsList

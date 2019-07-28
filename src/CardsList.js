@@ -13,9 +13,9 @@ class CardsList extends React.Component{
 							key={key}
 							index={key}
 							card={this.props.cards[key]}
-							deleteCard={this.props.deleteCard}
-							selectCard={this.props.selectCard}
-							selectedCardIndex={this.props.selectedCardIndex}
+							// deleteCard={this.props.deleteCard}
+							// selectCard={this.props.selectCard}
+							// selectedCardIndex={this.props.selectedCardIndex}
 						/>
 					)}
 				</ul>

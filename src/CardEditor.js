@@ -6,11 +6,11 @@ import './CardEditor.css';
 class CardEditor extends React.Component {
 	constructor() {
 		super()
-		this.state = {
-			front: '',
-			back: '',
-			index: null,
-			};
+		// this.state = {
+		// 	front: '',
+		// 	back: '',
+		// 	index: null,
+		// 	};
 
 		this.handleChangeFront = this.handleChangeFront.bind(this);
 		this.handleChangeBack = this.handleChangeBack.bind(this);
@@ -18,16 +18,15 @@ class CardEditor extends React.Component {
 		// this.topActive = this.topActive.bind(this);
 	}
 
-	createCard = event => {
-		event.preventDefault();
-		const card = {
-			front: this.state.front,
-			back: this.state.back
-		}
-		this.props.addCard(card);
+	// ############################################
+	// createCard = event => {
+	// 	event.preventDefault();
 
-	};
 
+	// 	this.setState({})
+
+	// };
+// ############################################
 
 
 
@@ -61,20 +60,21 @@ class CardEditor extends React.Component {
 		bottomToolBar.style.display = "inherit";
 	}
 
+// ############################################
+	// componentDidUpdate = () => {
 
-	componentDidUpdate = () => {
-
-		if (this.props.selectedCardIndex !== this.state.index) {
-			this.setState({
-				front: this.props.selectedCard.front,
-				back: this.props.selectedCard.back,
-				index: this.props.selectedCardIndex
-			})
-		}
+	// 	if (this.props.selectedCardIndex !== this.state.index) {
+	// 		this.setState({
+	// 			front: this.props.selectedCard.front,
+	// 			back: this.props.selectedCard.back,
+	// 			index: this.props.selectedCardIndex
+	// 		})
+	// 	}
 		// if (this.props.selectedCardIndex === this.state.index) {
 
 		// }
-	}
+	// }
+// ############################################
 
 updateCard = () =>{
 	const index = this.state.index;
@@ -96,7 +96,7 @@ updateCard = () =>{
 					>
 						<ReactQuill
 							name="front"
-							value={this.state.front ? this.state.front: ''}
+							// value={this.state.front ? this.state.front: ''}
 							onChange={this.handleChangeFront}>
 						</ReactQuill>
 					</div>
@@ -106,14 +106,14 @@ updateCard = () =>{
 					>
 						<ReactQuill
 							name="back"
-							value={this.state.back ? this.state.back : ''}
+							// value={this.state.back ? this.state.back : ''}
 							onChange={this.handleChangeBack}>
 
 						</ReactQuill>
 					</div>
 				</div>
 
-				<button
+				{/* <button
 				onClick={this.createCard}
 				>Add Card</button>
 				 {this.state.index ?
@@ -124,7 +124,7 @@ updateCard = () =>{
 					{this.state.index ?
 					<button
 					id="newCArd-btn"
-					onClick={this.props.newCard}>New Card</button>:null}
+					onClick={this.props.newCard}>New Card</button>:null} */}
 			</div>
 			</>
 		)
