@@ -30,6 +30,12 @@ componentDidMount(){
   })
 }
 
+componentDidUpdate(){
+  localStorage
+  .setItem('cards',
+    JSON.stringify(this.state.cards));
+}
+
 componentWillUnmount(){
   base.removeBinding(this.refCards);
 }
