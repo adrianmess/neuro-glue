@@ -21,6 +21,7 @@ class FlashCardEditorMain extends React.Component{
 						cards={this.props.cards}
 						addCard={this.props.addCard}
 						updateCard={this.props.updateCard}
+						newCard={this.props.newCard}
 						selectedCard={this.props.selectedCard}
 						selectedCardIndex={this.props.selectedCardIndex}
 					/>

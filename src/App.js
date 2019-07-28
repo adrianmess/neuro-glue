@@ -43,8 +43,8 @@ addCard = card => {
   // set new fish object to state
   this.setState({
     cards,
-    selectedCardIndex: null,
-    selectCard: null,
+    selectedCardIndex: '',
+    selectedCard: '',
   });
 }
 
@@ -58,6 +58,13 @@ updateCard = (index, cardFront, cardBack) =>{
     })
 
 }
+
+  newCard = () => {
+    this.setState({
+      selectedCardIndex: '',
+      selectedCard: '',
+    })
+  }
 
 deleteCard = (key) => {
   const cards = { ...this.state.cards};
@@ -81,6 +88,7 @@ deleteCard = (key) => {
           deleteCard={this.deleteCard}
           addCard={this.addCard}
           updateCard={this.updateCard}
+          newCard={this.newCard}
           selectCard={this.selectCard}
           selectedCard={this.state.selectedCard}
           selectedCardIndex={this.state.selectedCardIndex}

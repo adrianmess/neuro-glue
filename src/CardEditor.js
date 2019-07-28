@@ -25,8 +25,7 @@ class CardEditor extends React.Component {
 			back: this.state.back
 		}
 		this.props.addCard(card);
-		//clear/refresh form
-		// event.currentTarget.reset();
+
 	};
 
 
@@ -72,14 +71,19 @@ class CardEditor extends React.Component {
 				index: this.props.selectedCardIndex
 			})
 		}
-		if (this.props.selectedCardIndex == this.state.index) {
-			this.updateCard();
-		}
+		// if (this.props.selectedCardIndex === this.state.index) {
+
+		// }
 	}
 
-	updateCard(){
+updateCard = () =>{
+	const index = this.state.index;
+	const cardFront = this.state.front;
+	const cardBack = this.state.back;
+	this.props.updateCard(index, cardFront, cardBack)
+}
 
-	}
+
 
 
 	render(){
@@ -110,13 +114,17 @@ class CardEditor extends React.Component {
 				</div>
 
 				<button
-				onClick={this.createCard}>Add Card</button>
-				 {
-				 this.state.index ?
+				onClick={this.createCard}
+				>Add Card</button>
+				 {this.state.index ?
 				 <button
 					id="updateCard-btn"
 					onClick={this.updateCard}>Update</button> : null
 				}
+					{this.state.index ?
+					<button
+					id="newCArd-btn"
+					onClick={this.props.newCard}>New Card</button>:null}
 			</div>
 			</>
 		)
