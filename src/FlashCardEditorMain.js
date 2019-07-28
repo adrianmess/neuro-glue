@@ -30,7 +30,7 @@ handleChange = event => {
 					onChange={this.handleChange}
 					value={this.state.cardSetTitle}></input>
 				</p>
-
+				<button>Delete Set</button>
 					<div id="cardList">
 						<CardsList
 							cards={this.props.cards}
