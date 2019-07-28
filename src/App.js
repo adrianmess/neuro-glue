@@ -141,20 +141,28 @@ deleteCard = (key) => {
     selectedCardIndex: index
   })
 
+  isLoggedInAction = (boolean) =>{
+    boolean?
+    this.setState({
+      isLoggedIn: true
+    }) :
+    this.setState({
+      isLoggedIn: false
+    })
+  }
+
   render() {
     return (
       <>
 
 
-        {this.isLoggedIn?
+        {this.state.isLoggedIn?
         <div>
         <div>
             <Header
               userLogin={this.userLogin}
             />
         </div>
-
-            <div>
             <FlashCardEditorMain
               cards={this.state.cards}
               deleteCard={this.deleteCard}
@@ -165,9 +173,13 @@ deleteCard = (key) => {
               selectedCard={this.state.selectedCard}
               selectedCardIndex={this.state.selectedCardIndex}
               isLoggedIn={this.state.isLoggedIn} />
-            </div>
-
-          </div> : <div><Login /></div>  }
+          </div>
+          :
+          <div>
+            <Login
+              isLoggedInAction={this.isLoggedInAction}/>
+          </div>
+        }
 
       </>
     );

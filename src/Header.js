@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './Login';
+// import Login from './Login';
 import firebase from 'firebase';
 import base, { firebaseApp } from './firebase';
 
@@ -29,7 +29,7 @@ class Header extends React.Component{
 	render(){
 		return(
 			<>
-			<Login authenticate={this.authenticate}/>
+			{/* <Login authenticate={this.authenticate}/> */}
 			</>
 		)
 	}
