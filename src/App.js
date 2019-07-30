@@ -6,17 +6,20 @@ import base from './firebase';
 import FlashCardEditorMain from './FlashCardEditorMain';
 import Header from './Header';
 import Login from './Login';
+import FlashCardSetTitles from './FlashCardSetTitles';
 
 class App extends React.Component {
 constructor(props){
   super(props);
   this.state = {
     cards: '',
+    selectedCardCategory: '',
     selectedCardIndex: null,
     selectedCard: null,
     notes: {},
     isLoggedIn: false,
     userID: '',
+    cardCategory: '',
   }
 }
 
@@ -37,6 +40,9 @@ componentDidMount(){
   //   context: this,
   //   state: 'notes'
   // })
+
+  //keep user signed in after refresh
+
 }
 
 componentDidUpdate(){
@@ -47,7 +53,7 @@ componentDidUpdate(){
 //   base.removeBinding(this.refCards);
 // }
 
-  userLogin = uid => {
+  setUserId = uid => {
     this.setState({
       loggedIn: true,
       userID: uid
@@ -65,7 +71,7 @@ componentDidUpdate(){
     //   context: this,
     //   state: 'cards'
     // });
-    console.log(this.refCards)
+    // console.log(this.refCards)
 
     const uids = { user: uid }
     this.setState({
@@ -141,6 +147,10 @@ deleteCard = (key) => {
     selectedCardIndex: index
   })
 
+  selectCardCategory = (category) => this.setState({
+    selectedCardCategory: category
+  })
+
   isLoggedInAction = (boolean) =>{
     boolean?
     this.setState({
@@ -151,6 +161,7 @@ deleteCard = (key) => {
     })
   }
 
+
   render() {
     return (
       <>
@@ -158,11 +169,20 @@ deleteCard = (key) => {
 
         {this.state.isLoggedIn?
         <div>
-        <div>
+        {/* <div>
             <Header
-              userLogin={this.userLogin}
+              setUserId={this.setUserId}
+              cards={this.state.cards}
+              history={this.props.history}
+              selectCardCategory={this.selectCardCategory}
             />
         </div>
+
+        <FlashCardSetTitles
+            cards={this.state.cards}
+            selectedCardCategory={this.state.selectedCardCategory}
+        /> */}
+
             <FlashCardEditorMain
               cards={this.state.cards}
               deleteCard={this.deleteCard}
@@ -172,12 +192,15 @@ deleteCard = (key) => {
               selectCard={this.selectCard}
               selectedCard={this.state.selectedCard}
               selectedCardIndex={this.state.selectedCardIndex}
-              isLoggedIn={this.state.isLoggedIn} />
+              isLoggedIn={this.state.isLoggedIn}
+              cardCategory={this.state.cardCategory}
+              />
           </div>
           :
           <div>
             <Login
-              isLoggedInAction={this.isLoggedInAction}/>
+              isLoggedInAction={this.isLoggedInAction}
+              setUserId={this.setUserId}/>
           </div>
         }
 
