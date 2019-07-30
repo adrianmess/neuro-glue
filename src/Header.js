@@ -1,35 +1,41 @@
 import React from 'react';
 // import Login from './Login';
-import firebase from 'firebase';
-import base, { firebaseApp } from './firebase';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 class Header extends React.Component{
 	constructor(){
 		super()
 	}
 
-	authHandler = async (authData) => {
-		const userID = await authData.user.uid;
-		this.props.userLogin(userID);
-		// const user = await base.fetch(this.props.userId, { context: this });
+	selectCategories =(event, category) =>{
 
-		// if (!user.owner) {
-		// 	await base.post(`${this.props.userId}/owner`, {
-		// 		data: authData.user.uid
-		// 	});
-		// }
+		event.preventDefault();
+		console.log(category)
+		this.props.history.push(`/flashcards/${category}`)
 	}
-	authenticate = provider => {
-		const authProvider = new firebase.auth[`${provider}AuthProvider`]();
-		firebaseApp
-		.auth()
-		.signInWithPopup(authProvider)
-		.then(this.authHandler);
-	};
+
+	selectCardCategory(category){
+		this.props.selectCardCategory(category);
+	}
+
 	render(){
+		const {cards} = this.props;
 		return(
 			<>
-			{/* <Login authenticate={this.authenticate}/> */}
+				<Dropdown>
+					<Dropdown.Toggle variant="success" id="dropdown-basic">
+						Category
+ 				 </Dropdown.Toggle>
+					<Dropdown.Menu>
+						{Object.keys(cards).map(key =>
+							<Dropdown.Item key={key}
+								index={key}
+								onClick={ () => {this.selectCardCategory(cards[key].Category)}}>
+								{cards[key].Category}
+							</Dropdown.Item>)}
+					</Dropdown.Menu>
+				</Dropdown>
 			</>
 		)
 	}
