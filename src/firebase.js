@@ -19,7 +19,7 @@ const firestore = firebaseApp.firestore();
 const base = Rebase.createClass(firestore);
 
 //named export
-export { firebaseApp };
+export { firebaseApp, firestore };
 
 // default export
 export default base;
