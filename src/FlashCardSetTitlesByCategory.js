@@ -9,20 +9,14 @@ class FlashCardSetTitlesByCategory extends React.Component{
 	}
 
 	render(){
-		const cardCategory = this.props.selectedCardCategory;
+		const allCards = this.props.cards;
+		const categories = Object.keys(allCards).map(key => allCards[key].Category);
+		const uniqueCategories = Array.from(new Set(categories));
+
 		return(
 			<>
 			<div>
-			test
-				{/* {Object.keys(this.props.cards).map(key =>
-					<div
-					id="cardCategory"
-					key={key}
-					index={key}>
-					{this.props.cards[key].cardCategory}
-					</div>
-					)} */}
-
+			{uniqueCategories.map((uniqueCategories) => <div>{uniqueCategories}</div>)}
 			</div>
 			</>
 		)
