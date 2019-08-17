@@ -2,6 +2,12 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import {
+	BrowserRouter as Router,
+	Route,
+	Link,
+	Redirect,
+} from 'react-router-dom';
 
 export default function SimpleMenu (props) {
 
@@ -18,9 +24,9 @@ export default function SimpleMenu (props) {
 
 
 	const { cards } = props;
-	const cat2 = Object.keys(cards).map(key => key);
-	console.log(cat2);
+
 	const cat = Object.keys(cards).map(key => cards[key].Category);
+	console.log(cat);
 	const uniqueCategories = Array.from(new Set(cat));
 
 	const categoryList = uniqueCategories.map((uniqueCategories)=>
@@ -28,7 +34,12 @@ export default function SimpleMenu (props) {
 		key={uniqueCategories}
 		value={uniqueCategories}
 		onClick={() => { props.select(uniqueCategories); }}>
-		{uniqueCategories}
+			<Link to={`/${uniqueCategories}`}>
+					{uniqueCategories}
+			</Link>
+			{/* <Link to={`/flashcards/:${uniqueCategories}`}>
+					{uniqueCategories}
+			</Link> */}
 		</MenuItem>
 	);
 	return (
