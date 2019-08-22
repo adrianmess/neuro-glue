@@ -1,12 +1,24 @@
 import React from 'react';
-import AddCard from './AddCard';
 import Note from './Note';
 import './App.css';
-import base from './firebase';
+import firebase from 'firebase/app';
+import base, { firestore, firebaseApp }  from './firebase';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import FlashCardEditorMain from './FlashCardEditorMain';
 import Header from './Header';
 import Login from './Login';
-import FlashCardSetTitles from './FlashCardSetTitles';
+import FlashCardSetTitlesByCategory from './FlashCardSetTitlesByCategory';
+import FlashCardSetsByTitle from './FlashCardSetsByTitle';
+import FlashCardTest from './FlashCardTest';
+
+
+
 
 class App extends React.Component {
 constructor(props){
@@ -20,16 +32,36 @@ constructor(props){
     isLoggedIn: false,
     userID: '',
     cardCategory: '',
+    redirect: false,
+    // #########################
+    currentCardSetID:'card123455187',
+    currentCardSet: '',
+    currentCardSetCategory: '',
+    currentCardSetTitle: '',
+    currentCardSetScores: '',
+    currentCardSetCards: '',
+    currentCardSetCardsCardDate: '',
+    currentCardSetCardsCardFront: '',
+    currentCardSetCardsCardFack: '',
+    currentCardSetCardsCardFotes: '',
   }
+  this.addOrUpdateCard = this.addOrUpdateCard.bind(this);
+  // this.addCard = this.addCard.bind(this);
+
 }
 
+
+
 componentDidMount(){
-  // if (this.state.isLoggedIn == true) {
-  // const userID = this.state.userID;
-  // this.refCards = base.syncDoc(`/User/${userID}`, {
-  //   context: this,
-  //   state: 'cards'
-  // });
+
+  if (this.state.isLoggedIn == true) {
+  const userID = this.state.userID;
+  this.refCards = base.syncDoc(`/User/${userID}`, {
+    context: this,
+    state: 'cards'
+  });
+}
+
   // this.refCards = base.syncDoc('/User/Cards', {
   //   context: this,
   //   state: 'cards'
@@ -45,9 +77,76 @@ componentDidMount(){
 
 }
 
-componentDidUpdate(){
+  addOrUpdateCard (newCardSet) {
+  let userID = this.state.userID;
+  // console.log(this.state)
+  let data = {
+    card123455687: {
+      Category: 'JavaScript',
+      CardSetTitle: 'JavaScript Functions',
+      Scores: {
+        date: 'score'
+      },
+      Cards: {
+        date: { }
+      }
+    }
+  };
 
+    const JavaSCript = {
+      "CardSetTitle": "JavaScript Functions",
+      "Cards": {
+        "date": {
+          "back": "Answer",
+          "front": "the TERM",
+          "notes": "notes"
+        }
+      },
+      "Category": "JavaScript",
+      "Scores": {
+        "date": "score"
+      }  };
+
+    // const carssd = {
+    //   Category: 'JavaSCript',
+    //   CardSetTitle: 'JavaScript Functions',
+    //   Scores: {
+    //     date: 'score'
+    //   },
+    //   Cards: {
+    //     date: {
+    //       front: 'the TERM',
+    //       back: 'Answer',
+    //       notes: 'notes'
+    //     }
+    //   }
+    // };
+
+// console.log(newCardSet);
+
+// SET DATA !!!!!
+// console.log(data)
+
+    // firestore.collection(`${userID}`).doc('Cards').update({
+    //   [`${cardDate}.Cards.date.back`]: "back of card update"
+    // })
+
+    firestore.collection(`${userID}`).doc('Cards').update({ JavaSCript});
+
+
+//ADD OR UPDATE cards in CARDS document
+
+  // let cardsRef = firestore.collection(`${userID}`).doc('Cards')
+  // return cardsRef.update({data})
+
+  // base.syncDoc(`${userID}/Cards`, data)
+  //   .then(() => {
+  //     //document is updated
+  //   }).catch(err => {
+  //     //handle error
+  //   });
 }
+
 
 // componentWillUnmount(){
 //   base.removeBinding(this.refCards);
@@ -72,15 +171,28 @@ componentDidUpdate(){
     //   state: 'cards'
     // });
     // console.log(this.refCards)
-
-    const uids = { user: uid }
-    this.setState({
-      userid: uids
-    })
   }
 
-addCard = card => {
+addCard = (date, card) => {
+  console.log(card);
 
+  let userID = this.state.userID;
+  let cardDate = 'card123455187';
+   firestore.collection(`${userID}`).doc('Cards').update({
+    [`${cardDate}.Cards.date.back`]: "back of card update"
+  })
+
+
+
+  // console.log(cardsRef)
+  // return cardsRef.update({ data })
+//   const card = {
+//    `${cardIndex}`: {
+//       front: cardFront,
+//       back: cardBack
+//     }
+//   }
+// console.log(card);
   // if (this.state.isLoggedIn == false) {
   //   this.setState({
   //     cards: card
@@ -102,17 +214,18 @@ addCard = card => {
   // } else {
 
   // take copy of existing state
-  const cards = { ...this.state.cards };
+//  ## const cards = { ...this.state.cards };
   // add new card to cards variable
   // Use Timestamp as keys
-  cards[`card${Date.now()}`] = card;
+// ##  cards[`card${Date.now()}`] = card;
   // set new fish object to state
-  this.setState({
-    cards,
-    selectedCardIndex: '',
-    selectedCard: '',
-  });
-
+// ##
+//   this.setState({
+//     cards,
+//     selectedCardIndex: '',
+//     selectedCard: '',
+//   });
+// ##
 }
 
 updateCard = (index, cardFront, cardBack) =>{
@@ -134,10 +247,10 @@ updateCard = (index, cardFront, cardBack) =>{
   }
 
 deleteCard = (key) => {
-  const cards = { ...this.state.cards};
+  const cards = { ...this.state.currentCardSet};
 
   delete cards[key]
-  this.setState({ cards })
+  this.setState({ currentCardSet: cards })
 }
 
 
@@ -145,11 +258,59 @@ deleteCard = (key) => {
   selectCard = (card, index) => this.setState({
     selectedCard: card,
     selectedCardIndex: index
+  });
+
+
+
+    selectCardCategory = (CardCategory) => {
+      this.setState({
+        selectedCardCategory: CardCategory,
+        redirect: true,
+      });
+
+      // document.getElementById('routerLink').click()
+  };
+
+selectedCardSet = (event) =>{
+  event.preventDefault();
+  const { cards, currentCardSetID } = this.state;
+  // console.log(cards[`${currentCardSetID}`]);
+  const cardSet = cards[`${currentCardSetID}`];
+  console.log(cardSet);
+  const list = {}
+  for (const card in cardSet) {
+    console.log(cardSet[card])
+    const cardsList = cardSet[card];
+    Object.assign(list, cardsList);
+  }
+
+  this.setState({
+    currentCardSet: list
   })
 
-  selectCardCategory = (category) => this.setState({
-    selectedCardCategory: category
-  })
+};
+
+  saveCurrentCardSet = ()=>{
+    this.setState({
+      cards: this.state.currentCardSet
+    })
+  }
+
+  setCurrentCardSetTitle = ( cardSetTitle, cardSetID) =>{
+    this.setState({
+      currentCardSetTitle: cardSetTitle,
+      currentCardSetID: cardSetID
+    })
+    this.setCurrentCardSet(cardSetID);
+  }
+
+  setCurrentCardSet = (cardSetID)=>{
+    const allCards = {...this.state.cards}
+    const cards = allCards[cardSetID]['Cards']
+    this.setState({
+      currentCardSet: cards
+    })
+  }
 
   isLoggedInAction = (boolean) =>{
     boolean?
@@ -159,31 +320,69 @@ deleteCard = (key) => {
     this.setState({
       isLoggedIn: false
     })
-  }
+  };
+
 
 
   render() {
+    const { currentCardSet, currentCardSetTitle, cards} = this.state
+
+
     return (
       <>
-
-
         {this.state.isLoggedIn?
-        <div>
-        {/* <div>
-            <Header
-              setUserId={this.setUserId}
-              cards={this.state.cards}
-              history={this.props.history}
-              selectCardCategory={this.selectCardCategory}
-            />
-        </div>
 
-        <FlashCardSetTitles
+        <div>
+          <Router>
+
+              <Header
+                setUserId={this.setUserId}
+                cards={this.state.cards}
+                history={this.props.history}
+                userID={this.state.userID}
+                selectCardCategory={this.selectCardCategory}
+              />
+              {/* <Link
+
+                to={`/flashcards/:${category}`}>
+                <span id="routerLink"
+                  onClick={event => this.selectedCardSet(event)}>asdasd</span>
+              </Link> */}
+
+              {/* {routes.map(({ path, component: C, selectedCardCategory }) => (
+                <Route
+                  path={path}
+                  render={(props) => <C {...props} selectedCardCategory={selectedCardCategory} />}
+                />
+              ))} */}
+
+                <Route path={`/flashcards/:${this.state.selectedCardCategory}`} component={FlashCardEditorMain} />
+
+                <Route path="/Categories"
+                render={() => <FlashCardSetTitlesByCategory cards={cards}/>} />
+
+              <Route path="/FlashCards"
+                render={(props) => <FlashCardSetsByTitle
+                cards={cards}
+                  setCurrentCardSetTitle={this.setCurrentCardSetTitle} />}
+                />
+
+              <Route path={`/FlashCardTest/${currentCardSetTitle}`}
+                render={(props) => <FlashCardTest
+                cards={cards}
+                currentCardSetTitle={currentCardSetTitle}
+                currentCardSet={currentCardSet}
+
+                />} />
+
+            </Router>
+        {/* <FlashCardSetTitlesByCategory
             cards={this.state.cards}
             selectedCardCategory={this.state.selectedCardCategory}
         /> */}
 
-            <FlashCardEditorMain
+
+            {/* <FlashCardEditorMain
               cards={this.state.cards}
               deleteCard={this.deleteCard}
               addCard={this.addCard}
@@ -194,9 +393,24 @@ deleteCard = (key) => {
               selectedCardIndex={this.state.selectedCardIndex}
               isLoggedIn={this.state.isLoggedIn}
               cardCategory={this.state.cardCategory}
-              />
+              addOrUpdateCard={this.addOrUpdateCard}
+
+              // ####################################
+              userID={this.state.userID}
+              saveCurrentCardSet={this.saveCurrentCardSet}
+              currentCardSet={this.state.currentCardSet}
+              currentCardSetID={this.state.currentCardSetID}
+              currentCardSetCategory={this.state.currentCardSetCategory}
+              currentCardSetTitle={this.state.currentCardSetTitle}
+              currentCardSetScores={this.state.currentCardSetScores}
+              currentCardSetCards={this.state.currentCardSetCards}
+              currentCardSetCardsCardDate={this.state.currentCardSetCardsCardDate}
+              currentCardSetCardsCardFront={this.state.currentCardSetCardsCardFront}
+              currentCardSetCardsCardFack={this.state.currentCardSetCardsCardFack}
+              currentCardSetCardsCardFotes={this.state.currentCardSetCardsCardFotes}
+              /> */}
           </div>
-          :
+                    :
           <div>
             <Login
               isLoggedInAction={this.isLoggedInAction}

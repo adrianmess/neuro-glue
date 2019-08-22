@@ -1,24 +1,43 @@
 import React from 'react';
-import Card from './Card';
+import renderHTML from 'react-render-html';
+
 
 class CardsList extends React.Component{
+	constructor(){
+		super()
+	}
+
+
+
 	render() {
+
+		const cardSet = this.props.currentCardSet;
+
 		return(
 			<>
 			<div>
-				<ul>
-					{Object.keys(this.props.cards).map(key =>
-						<Card
-							id="card-in-cardList"
-							key={key}
-							index={key}
-							card={this.props.cards[key]}
-							// deleteCard={this.props.deleteCard}
-							// selectCard={this.props.selectCard}
-							// selectedCardIndex={this.props.selectedCardIndex}
-						/>
+					{Object.keys(cardSet).map(key =>
+
+					<div id="card-container"
+						// onClick={() => this.selectCard(card, index)}
+					>
+						<div id="card-front" name="front">
+									{renderHTML(cardSet[key].front)}
+						</div>
+
+							<div id="card-back" name="back">
+									{renderHTML(cardSet[key].back)}
+							</div>
+							 <button
+							 	id="card-button-remove"
+							 	onClick={() =>
+								this.props.deleteCard(key)}>
+							remove
+							</button>
+						</div>
+
 					)}
-				</ul>
+
 			</div>
 			</>
 		);
