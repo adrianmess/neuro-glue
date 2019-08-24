@@ -16,9 +16,9 @@ class FlashCardSetTitlesByCategory extends React.Component {
 
     return (
       <>
-        <div>
+        <div id="unique_Categories_Container">
           {uniqueCategories.map(uniqueCategory => (
-            <div key={uniqueCategory}>{uniqueCategory} Test</div>
+            <a key={uniqueCategory}>{uniqueCategory} Test</a>
           ))}
         </div>
       </>
