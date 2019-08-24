@@ -2,7 +2,7 @@ import React from 'react';
 import renderHTML from 'react-render-html';
 
 
-class CardsList extends React.Component{
+class CardEditorList extends React.Component{
 	constructor(){
 		super()
 	}
@@ -44,4 +44,4 @@ class CardsList extends React.Component{
 	}
 }
 
-export default CardsList;
+export default CardEditorList;

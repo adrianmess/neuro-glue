@@ -1,5 +1,5 @@
 import React from 'react';
-import CardsList from './CardsList';
+import CardEditorList from './CardEditorList';
 import CardEditor from './CardEditor';
 import { firestore } from './firebase';
 
@@ -89,7 +89,7 @@ addCard = card =>{
 					>Save</button>
 
 					<div id="cardList">
-						<CardsList
+						<CardEditorList
 							cards={this.props.cards}
 							deleteCard={this.props.deleteCard}
 							// selectCard={this.props.selectCard}
