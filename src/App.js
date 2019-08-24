@@ -389,12 +389,11 @@ class App extends React.Component {
                 )}
               />
             </Router>
-            {/* <FlashCardSetTitlesByCategory
-            cards={this.state.cards}
-            selectedCardCategory={this.state.selectedCardCategory}
-        /> */}
 
-            {/* <FlashCardEditorMain
+            <Router
+              path="/FlashCardEditor"
+              render={props => (
+               <FlashCardEditorMain
               cards={this.state.cards}
               deleteCard={this.deleteCard}
               addCard={this.addCard}
@@ -420,7 +419,9 @@ class App extends React.Component {
               currentCardSetCardsCardFront={this.state.currentCardSetCardsCardFront}
               currentCardSetCardsCardFack={this.state.currentCardSetCardsCardFack}
               currentCardSetCardsCardFotes={this.state.currentCardSetCardsCardFotes}
-              /> */}
+              />
+              )}
+            />
           </div>
         ) : (
           <div>
