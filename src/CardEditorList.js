@@ -18,7 +18,7 @@ class CardEditorList extends React.Component{
 			<div>
 					{Object.keys(cardSet).map(key =>
 
-					<div id="card-container"
+					<div key={key} id="card-container"
 						// onClick={() => this.selectCard(card, index)}
 					>
 						<div id="card-front" name="front">
