@@ -2,7 +2,8 @@ import React from "react";
 import Header from "./Header";
 import { firestore } from "./firebase";
 import { object } from "prop-types";
-import './FlashCardSetTitlesByCategory.css';
+import { Link } from "react-router-dom";
+import "./FlashCardSetTitlesByCategory.css";
 
 class FlashCardSetTitlesByCategory extends React.Component {
   constructor() {
@@ -19,7 +20,9 @@ class FlashCardSetTitlesByCategory extends React.Component {
       <>
         <div id="unique_Categories_Container">
           {uniqueCategories.map(uniqueCategory => (
-            <a key={uniqueCategory}>{uniqueCategory} Test</a>
+            <Link to={`/Category/${uniqueCategory}`} key={uniqueCategory}>
+              {uniqueCategory}
+            </Link>
           ))}
         </div>
       </>
