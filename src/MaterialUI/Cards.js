@@ -62,6 +62,7 @@ export default function Cards(props) {
       >
         <div
           id="cardFront"
+          key="front"
           onClick={event => handleClick(event, props.cardindex)}
         >
           <Card className={classes.card}>
@@ -71,6 +72,7 @@ export default function Cards(props) {
 
         <div
           id="cardBack"
+          key="back"
           onClick={event => handleClick(event, props.cardindex)}
         >
           <Card className={classes.card}>
