@@ -13,7 +13,7 @@ class FlashCardSetsByTitle extends React.Component {
       cardSetID,
       cards[cardSetID].CardSetTitle
     ]);
-    console.log(cardTitles);
+
     return (
       <>
         <div>
@@ -25,11 +25,12 @@ class FlashCardSetsByTitle extends React.Component {
                 }
               >
                 <br />
-                <Link
-                  to={`/FlashCardTest/${cardTitles[1]}`}
-                >
+                <Link to={`/FlashCardTest/${cardTitles[1]}`}>
                   {cardTitles[1]}
                 </Link>
+                <button>
+                  <Link to={"/FlashCardEditor"}>Edit</Link>
+                </button>
               </span>
             </div>
           ))}
