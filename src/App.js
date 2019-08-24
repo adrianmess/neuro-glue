@@ -375,7 +375,7 @@ class App extends React.Component {
     });
   };
 
-  clearSelectCardSet = e => {
+  clearSelectedCardSet = e => {
     e.preventDefault();
     console.log("test");
   };
@@ -404,7 +404,7 @@ class App extends React.Component {
                 history={this.props.history}
                 userID={this.state.userID}
                 selectCardCategory={this.selectCardCategory}
-                clearSelectCardSet={this.clearSelectCardSet}
+                clearSelectedCardSet={this.clearSelectedCardSet}
               />
               {/* <Link
 

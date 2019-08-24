@@ -21,7 +21,7 @@ class Header extends React.Component {
           <Link to="/FlashCards" className="headerLinks">
             Flash Cards
           </Link>
-          <span onClick={event => this.props.clearSelectCardSet(event)}>
+          <span onClick={event => this.props.clearSelectedCardSet(event)}>
             <Link to="/FlashCardEditor" className="headerLinks">
               Create Flash Cards
             </Link>
