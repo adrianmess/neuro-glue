@@ -20,7 +20,11 @@ class FlashCardSetTitlesByCategory extends React.Component {
       <>
         <div id="unique_Categories_Container">
           {uniqueCategories.map(uniqueCategory => (
-            <Link to={`/Category/${uniqueCategory}`} key={uniqueCategory}>
+            <Link
+              to={`/Category/${uniqueCategory}`}
+              key={uniqueCategory}
+              onClick={ event => this.props.selectCardCategory(event, uniqueCategory)}
+            >
               {uniqueCategory}
             </Link>
           ))}

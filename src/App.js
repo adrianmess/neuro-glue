@@ -16,6 +16,7 @@ import Login from "./Login";
 import FlashCardSetTitlesByCategory from "./FlashCardSetTitlesByCategory";
 import FlashCardSetsByTitle from "./FlashCardSetsByTitle";
 import FlashCardTest from "./FlashCardTest";
+import FlashCardSetCategoriesList from "./FlashCardSetCategoriesList";
 
 class App extends React.Component {
   constructor(props) {
@@ -252,7 +253,8 @@ class App extends React.Component {
       selectedCardIndex: index
     });
 
-  selectCardCategory = CardCategory => {
+  selectCardCategory = (e, CardCategory) => {
+    e.preventDefault();
     this.setState({
       selectedCardCategory: CardCategory,
       redirect: true
@@ -347,9 +349,13 @@ class App extends React.Component {
 
               <Route
                 path="/Categories"
-                render={(props) => <FlashCardSetTitlesByCategory cards={cards} {...props} />}
+                render={props => (
+                  <FlashCardSetTitlesByCategory
+                    cards={cards}
+                    selectCardCategory={this.selectCardCategory}
+                  />
+                )}
               />
-
 
               <Route
                 path="/FlashCards"
