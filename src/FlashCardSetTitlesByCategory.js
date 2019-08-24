@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import { firestore } from "./firebase";
 import { object } from "prop-types";
+import './FlashCardSetTitlesByCategory.css';
 
 class FlashCardSetTitlesByCategory extends React.Component {
   constructor() {
