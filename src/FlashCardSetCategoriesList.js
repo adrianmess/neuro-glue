@@ -23,7 +23,7 @@ class FlashCardSetCategoriesList extends React.Component {
     return (
       <>
         {cardSetTitleIDPair.map(keys => (
-          <div key={keys}>
+          <div key={keys[0]}>
             <span
               onClick={event =>
                 this.setCardTitle(event, keys[1], keys[0])
