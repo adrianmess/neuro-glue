@@ -14,7 +14,6 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import { Cake } from "@material-ui/icons";
 import { ThumbUp, ThumbDown } from "@material-ui/icons";
 
-
 class FlashCardTest extends React.Component {
   constructor() {
     super();
@@ -49,12 +48,10 @@ class FlashCardTest extends React.Component {
 
   cardSetScore(a, cardID, cardScore) {}
 
-
   setActiveCard = activeCardIndex => {
     if (this.state.activeCardIndex !== activeCardIndex) {
       this.setState({ activeCardIndex });
     }
-
   };
 
   thumbsUp = e => {
@@ -108,11 +105,16 @@ class FlashCardTest extends React.Component {
     );
 
     const cards = [];
+    console.log(cards);
 
     for (let i = 0; i < cardsArray.length; i++) {
       cards.push(
-        <>
-          <Slide index={i} value={this.props.currentSlide} ref={this.myRef}>
+        <div key={i}>
+          <Slide
+            index={i}
+            value={this.props.currentSlide}
+            ref={this.myRef}
+          >
             <Cards
               cardindex={i}
               card={cardsArray[i]}
@@ -123,7 +125,7 @@ class FlashCardTest extends React.Component {
               activeSlideState={this.myRef}
             />
           </Slide>
-        </>
+        </div>
       );
     }
 
