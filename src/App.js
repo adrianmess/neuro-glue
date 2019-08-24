@@ -388,9 +388,8 @@ class App extends React.Component {
                   />
                 )}
               />
-            </Router>
 
-            <Router
+              <Route
               path="/FlashCardEditor"
               render={props => (
                <FlashCardEditorMain
@@ -421,7 +420,9 @@ class App extends React.Component {
               currentCardSetCardsCardFotes={this.state.currentCardSetCardsCardFotes}
               />
               )}
-            />
+              />
+
+            </Router>
           </div>
         ) : (
           <div>
