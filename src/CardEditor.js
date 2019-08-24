@@ -108,12 +108,12 @@ addCard = () => {
 	const cdate = Date.now();
 
 	// let userID = this.state.userID;
-	let cardDate = 'card123455187';
+	let cardSetID = 'card123455187';
 	firestore.collection(`${userID}`).doc('Cards').update({
-		[`${cardDate}.Cards.${cdate}.front`]: `${cardFront}`
+		[`${cardSetID}.Cards.${cdate}.front`]: `${cardFront}`
 	})
 	firestore.collection(`${userID}`).doc('Cards').update({
-		[`${cardDate}.Cards.${cdate}.back`]: `${cardBack}`
+		[`${cardSetID}.Cards.${cdate}.back`]: `${cardBack}`
 	})
 }
 
