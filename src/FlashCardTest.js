@@ -105,7 +105,6 @@ class FlashCardTest extends React.Component {
     );
 
     const cards = [];
-    console.log(cards);
 
     for (let i = 0; i < cardsArray.length; i++) {
       cards.push(

@@ -1,7 +1,4 @@
 import React from "react";
-import Header from "./Header";
-import { firestore } from "./firebase";
-import { object } from "prop-types";
 import { Link } from "react-router-dom";
 import "./FlashCardSetTitlesByCategory.css";
 
