@@ -32,7 +32,7 @@ class App extends React.Component {
       cardCategory: "",
       redirect: false,
       // #########################
-      currentCardSetID: "card123455187",
+      currentCardSetID: "",
       currentCardSet: "",
       currentCardSetCategory: "",
       currentCardSetTitle: "",
@@ -377,7 +377,11 @@ class App extends React.Component {
 
   clearSelectedCardSet = e => {
     e.preventDefault();
-    console.log("test");
+    this.setState({
+      currentCardSet: "",
+      currentCardSetID: "",
+      currentCardSetTitle: "",
+    });
   };
 
   isLoggedInAction = boolean => {
