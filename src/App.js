@@ -358,6 +358,11 @@ class App extends React.Component {
               />
 
               <Route
+                path={`/Category/${this.state.selectedCardCategory}`}
+                render={props => (<FlashCardSetCategoriesList/>)}
+              />
+
+              <Route
                 path="/FlashCards"
                 render={props => (
                   <FlashCardSetsByTitle
