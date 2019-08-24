@@ -60,9 +60,22 @@ class FlashCardEditorMain extends React.Component {
     this.setState({ cardSet: cards });
   };
 
+  alertMissingTitle = () => {
+    const alert = document.getElementById("alert_missing_title");
+    alert.style.visibility = "initial";
+    setTimeout(function() {
+      alert.style.visibility = "hidden";
+    }, 2000);
+  };
+
   render() {
     return (
       <>
+        <div id="alert_missing_title">
+          <h4>
+            Before you create a card you must a Title for the Flash Card Set
+          </h4>
+        </div>
         <div id="flashCardEditorContainer">
           <p>
             <input
@@ -117,10 +130,10 @@ class FlashCardEditorMain extends React.Component {
               newCard={this.props.newCard}
               newCardSet={this.newCardSet}
               selectedCard={this.props.selectedCard}
-			  selectedCardIndex={this.props.selectedCardIndex}
-
-			  cardSetTitle={this.state.cardSetTitle}
-
+              selectedCardIndex={this.props.selectedCardIndex}
+              cardSetTitle={this.state.cardSetTitle}
+              alertMissingTitle={this.alertMissingTitle}
+              //   ############################
               userID={this.props.userID}
               currentCardSetID={this.props.currentCardSetID}
               currentCardSetCategory={this.props.currentCardSetCategory}

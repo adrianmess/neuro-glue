@@ -1,4 +1,6 @@
 #cardList {
-	float: left;
-	/* position: fixed; */
-}
+  float: left;
+  /* position: fixed; */ }
+
+#alert_missing_title {
+  visibility: hidden; }
