@@ -131,8 +131,11 @@ class FlashCardEditorMain extends React.Component {
               newCardSet={this.newCardSet}
               selectedCard={this.props.selectedCard}
               selectedCardIndex={this.props.selectedCardIndex}
+              //   ############################
+              cardSet={this.state.cardSet}
               cardSetTitle={this.state.cardSetTitle}
               alertMissingTitle={this.alertMissingTitle}
+              setCurrentCardSetID={this.props.setCurrentCardSetID}
               //   ############################
               userID={this.props.userID}
               currentCardSetID={this.props.currentCardSetID}

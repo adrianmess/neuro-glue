@@ -375,12 +375,18 @@ class App extends React.Component {
     });
   };
 
+  setCurrentCardSetID = cardSetID => {
+    this.setState({
+      currentCardSetID: cardSetID
+    });
+  };
+
   clearSelectedCardSet = e => {
     e.preventDefault();
     this.setState({
       currentCardSet: "",
       currentCardSetID: "",
-      currentCardSetTitle: "",
+      currentCardSetTitle: ""
     });
   };
 
@@ -489,6 +495,7 @@ class App extends React.Component {
                     // ####################################
                     userID={this.state.userID}
                     saveCurrentCardSet={this.saveCurrentCardSet}
+                    setCurrentCardSetID={this.setCurrentCardSetID}
                     currentCardSet={this.state.currentCardSet}
                     currentCardSetID={this.state.currentCardSetID}
                     currentCardSetCategory={this.state.currentCardSetCategory}
