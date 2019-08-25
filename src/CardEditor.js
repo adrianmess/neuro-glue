@@ -95,21 +95,58 @@ class CardEditor extends React.Component {
 
   addCard = () => {
     const { cardFront, cardBack } = this.state;
-    const { userID, cardSetTitle } = this.props;
+    const {
+      userID,
+      cardSetTitle,
+      cardSet,
+      currentCardSetID,
+      setCurrentCardSetID
+    } = this.props;
     const cdate = Date.now();
+
+    const cardSetEmpty =
+      Object.entries(cardSet).length === 0 && cardSet.constructor === Object;
 
     console.log();
     if (cardSetTitle === "") {
-      this.props.alertMissingTitle()
+      this.props.alertMissingTitle();
     }
-    // let userID = this.state.userID;
-    // let cardSetID = 'card123455187';
-    // firestore.collection(`${userID}`).doc('Cards').update({
-    // 	[`${cardSetID}.Cards.${cdate}.front`]: `${cardFront}`
-    // })
-    // firestore.collection(`${userID}`).doc('Cards').update({
-    // 	[`${cardSetID}.Cards.${cdate}.back`]: `${cardBack}`
-    // })
+    if (cardSetEmpty === true && currentCardSetID === "") {
+      //   let userID = this.state.userID;
+      const cardSetID = Date.now();
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${cardSetID}.CardsSetTitle`]: `${cardSetTitle}`
+        });
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${cardSetID}.Cards.${cdate}.front`]: `${cardFront}`
+        });
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${cardSetID}.Cards.${cdate}.back`]: `${cardBack}`
+        });
+      setCurrentCardSetID(cardSetID);
+    } else {
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${currentCardSetID}.Cards.${cdate}.front`]: `${cardFront}`
+        });
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${currentCardSetID}.Cards.${cdate}.back`]: `${cardBack}`
+        });
+    }
   };
 
   render() {
