@@ -11,12 +11,17 @@ class FlashCardEditorMain extends React.Component {
     this.state = {
       allCards: {},
       cardSetTitle: "",
+      cardSetCategory: "",
       cardSetDate: Date.now(),
-      cardSet: {},
-      cardFront: "test-CardFront",
-      cardBack: "test-CardBack",
-      cardNote: "test-Notes"
+      cardSetID: Date.now(),
+      currentardSet: "",
+      cardDate: "",
+      cardTitle: "",
+      cardFront: "",
+      cardBack: "",
+      cardNote: ""
     };
+
     this.createNewCardSet = this.createNewCardSet.bind(this);
   }
 
@@ -28,28 +33,59 @@ class FlashCardEditorMain extends React.Component {
   // 	})
   // }
 
+  componentWillMount() {
+    const { cardSetID } = this.props;
+    console.log("component will mount check fire base");
+    this.createNewCardSet();
+  }
+
+  componentWillUnmount() {
+    console.log("FlashCardEditorMain unmounted");
+  }
+
   handleChange = event => {
+    const { currentCardSetID, userID } = this.props;
+    const { cardSetTitle } = this.state;
+
     this.setState({
       cardSetTitle: event.target.value
     });
-    // this.props.createTitle(this.state.cardCategory)
+
+    this.props.selectedCardSet();
   };
+
+  componentDidUpdate() {
+    const { currentCardSetID, userID } = this.props;
+    const { cardSetTitle } = this.state;
+    setTimeout(function() {
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${currentCardSetID}.Title`]: `${cardSetTitle}`
+        });
+    }, 2000);
+  }
 
   selectedCards() {}
 
   createNewCardSet = () => {
-    const cardSetDate = this.state.cardSetDate;
+    // let cardSetDate = this.state.cardSetDate;
+    let cardSetID = Date.now();
     // const Cards
-    const newCardSet = {
-      [`cardSet${cardSetDate}`]: {
+    let newCardSet = {
+      [`cardSet${cardSetID}`]: {
         CardSetTitle: `${this.state.cardSetTitle}`,
         Category: `${this.state.cardSetCategory}`,
-        Cards: JSON.stringify(`${this.state.cardSet}`)
+        Cards: `${this.state.cardSet}`
       }
     };
 
-    console.log(this.state.cardSet);
-    this.props.addOrUpdateCard(newCardSet);
+    this.props.setCurrentCardSetID(cardSetID);
+    console.log("create new card set");
+    this.setState({ allCards: newCardSet });
+    // RESET
+    // this.props.addOrUpdateCard(newCardSet);
   };
 
   addCard = card => {
@@ -84,13 +120,19 @@ class FlashCardEditorMain extends React.Component {
               onChange={this.handleChange}
               value={this.state.cardSetTitle}
             />
+            <input
+              placeholder="FlashCard Set Category"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.cardSetCategory}
+            />
           </p>
           <span />
 
           <button>Delete Set</button>
           <button
-            // onClick={this.props.saveCurrentCardSet}
-            onClick={this.createNewCardSet}
+            onClick={this.props.addOrUpdateCard}
+            // onClick={this.createNewCardSet}
           >
             Save
           </button>
@@ -108,9 +150,7 @@ class FlashCardEditorMain extends React.Component {
               currentCardSetTitle={this.props.currentCardSetTitle}
               currentCardSetScores={this.props.currentCardSetScores}
               currentCardSetCards={this.props.currentCardSetCards}
-              currentCardSetCardsCardDate={
-                this.props.currentCardSetCardsCardDate
-              }
+              currentlySelectedCardID={this.props.currentlySelectedCardID}
               currentCardSetCardsCardFront={
                 this.props.currentCardSetCardsCardFront
               }
@@ -120,6 +160,9 @@ class FlashCardEditorMain extends React.Component {
               currentCardSetCardsCardFotes={
                 this.props.currentCardSetCardsCardFotes
               }
+              setCurrentCardSet={this.props.setCurrentCardSet}
+              selectedCardSet={this.props.selectedCardSet}
+              editSelectedCard={this.props.editSelectedCard}
             />
           </div>
           <div id="cardEditor">
@@ -143,9 +186,7 @@ class FlashCardEditorMain extends React.Component {
               currentCardSetTitle={this.props.currentCardSetTitle}
               currentCardSetScores={this.props.currentCardSetScores}
               currentCardSetCards={this.props.currentCardSetCards}
-              currentCardSetCardsCardDate={
-                this.props.currentCardSetCardsCardDate
-              }
+              currentlySelectedCardID={this.props.currentlySelectedCardID}
               currentCardSetCardsCardFront={
                 this.props.currentCardSetCardsCardFront
               }
