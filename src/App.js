@@ -24,8 +24,8 @@ class App extends React.Component {
     this.state = {
       cards: "",
       selectedCardCategory: "",
-      selectedCardIndex: null,
-      selectedCard: null,
+      selectedCardIndex: '',
+      selectedCard: "",
       notes: {},
       isLoggedIn: false,
       userID: "",
@@ -38,7 +38,7 @@ class App extends React.Component {
       currentCardSetTitle: "",
       currentCardSetScores: "",
       currentCardSetCards: "",
-      currentCardSetCardsCardDate: "",
+      currentlySelectedCardID: "",
       currentCardSetCardsCardFront: "",
       currentCardSetCardsCardFack: "",
       currentCardSetCardsCardFotes: ""
@@ -158,6 +158,8 @@ class App extends React.Component {
       }
     };
 
+    this.setState({ cards: data });
+
     // const JavaSCript = {
     //   CardSetTitle: "JavaScript Functions",
     //   Cards: {
@@ -204,8 +206,8 @@ class App extends React.Component {
 
     //ADD OR UPDATE cards in CARDS document
 
-    let cardsRef = firestore.collection(`${userID}`).doc("Cards");
-    return cardsRef.update({ data });
+    // let cardsRef = firestore.collection(`${userID}`).doc("Cards");
+    // return cardsRef.update({ data });
 
     // base.syncDoc(`${userID}/Cards`, data)
     //   .then(() => {
@@ -335,28 +337,24 @@ class App extends React.Component {
     // document.getElementById('routerLink').click()
   };
 
-  selectedCardSet = event => {
-    event.preventDefault();
+  selectedCardSet = () => {
+    // event.preventDefault();
     const { cards, currentCardSetID } = this.state;
     // console.log(cards[`${currentCardSetID}`]);
     const cardSet = cards[`${currentCardSetID}`];
-    console.log(cardSet);
-    const list = {};
-    for (const card in cardSet) {
-      console.log(cardSet[card]);
-      const cardsList = cardSet[card];
-      Object.assign(list, cardsList);
-    }
+    // console.log(Object.keys(cardSet).map(key => cardSet[key]));
+    // const list = {};
+    // for (const card in cardSet) {
+    //   // console.log(cardSet[card]);
+    //   const cardsList = cardSet[card];
+    //   Object.assign(list, cardsList);
+    // }
 
-    this.setState({
-      currentCardSet: list
-    });
-  };
-
-  saveCurrentCardSet = () => {
-    this.setState({
-      cards: this.state.currentCardSet
-    });
+    // if (!cardSetEmpty) {
+    //   this.setState({
+    //     currentCardSet: list
+    //   });
+    // }
   };
 
   setCurrentCardSetTitle = (cardSetTitle, cardSetID) => {
@@ -369,10 +367,11 @@ class App extends React.Component {
 
   setCurrentCardSet = cardSetID => {
     const allCards = { ...this.state.cards };
-    const cards = allCards[cardSetID]["Cards"];
-    this.setState({
-      currentCardSet: cards
-    });
+    // console.log(allCards["1566766055824"]["Cards"]);
+    // const cards = allCards[cardSetID]["Cards"];
+    // this.setState({
+    //   currentCardSet: cards
+    // });
   };
 
   setCurrentCardSetID = cardSetID => {
@@ -389,6 +388,15 @@ class App extends React.Component {
       currentCardSetTitle: ""
     });
   };
+
+  editSelectedCard = (key, cardfront, cardback) => {
+    const card = { "front": cardfront, "back": cardback };
+    // console.log(card)
+    this.setState({
+      selectedCardIndex: key,
+      selectedCard: card
+    });
+  }
 
   isLoggedInAction = boolean => {
     boolean
@@ -494,17 +502,18 @@ class App extends React.Component {
                     addOrUpdateCard={this.addOrUpdateCard}
                     // ####################################
                     userID={this.state.userID}
+                    selectedCardSet={this.selectedCardSet}
+                    setCurrentCardSet={this.setCurrentCardSet}
                     saveCurrentCardSet={this.saveCurrentCardSet}
                     setCurrentCardSetID={this.setCurrentCardSetID}
+                    editSelectedCard={this.editSelectedCard}
                     currentCardSet={this.state.currentCardSet}
                     currentCardSetID={this.state.currentCardSetID}
                     currentCardSetCategory={this.state.currentCardSetCategory}
                     currentCardSetTitle={this.state.currentCardSetTitle}
                     currentCardSetScores={this.state.currentCardSetScores}
                     currentCardSetCards={this.state.currentCardSetCards}
-                    currentCardSetCardsCardDate={
-                      this.state.currentCardSetCardsCardDate
-                    }
+                    currentlySelectedCardID={this.state.currentlySelectedCardID}
                     currentCardSetCardsCardFront={
                       this.state.currentCardSetCardsCardFront
                     }
