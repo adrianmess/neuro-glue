@@ -52,19 +52,20 @@ class CardEditor extends React.Component {
   }
 
   // ############################################
-  // componentDidUpdate = () => {
+  componentDidUpdate = () => {
+    // if ((this.props.selectedCard && this.props.selectedCardIndex) !== null) {
+      if (this.props.selectedCardIndex !== this.state.index) {
+        this.setState({
+          cardFront: this.props.selectedCard.front,
+          cardBack: this.props.selectedCard.back,
+          index: this.props.selectedCardIndex
+        });
 
-  // 	if (this.props.selectedCardIndex !== this.state.index) {
-  // 		this.setState({
-  // 			front: this.props.selectedCard.front,
-  // 			back: this.props.selectedCard.back,
-  // 			index: this.props.selectedCardIndex
-  // 		})
-  // 	}
-  // if (this.props.selectedCardIndex === this.state.index) {
+      //   if (this.props.selectedCardIndex === this.state.index) {
 
-  // }
-  // }
+      //   }
+    }
+  };
   // ############################################
 
   // ############################################
@@ -104,49 +105,60 @@ class CardEditor extends React.Component {
     } = this.props;
     const cdate = Date.now();
 
-    const cardSetEmpty =
-      Object.entries(cardSet).length === 0 && cardSet.constructor === Object;
+    // const cardSetEmpty =
+    //   Object.entries(cardSet).length === 0 && cardSet.constructor === Object;
 
-    console.log();
-    if (cardSetTitle === "") {
-      this.props.alertMissingTitle();
-    }
-    if (cardSetEmpty === true && currentCardSetID === "") {
-      //   let userID = this.state.userID;
-      const cardSetID = Date.now();
-      firestore
-        .collection(`${userID}`)
-        .doc("Cards")
-        .update({
-          [`${cardSetID}.CardsSetTitle`]: `${cardSetTitle}`
-        });
-      firestore
-        .collection(`${userID}`)
-        .doc("Cards")
-        .update({
-          [`${cardSetID}.Cards.${cdate}.front`]: `${cardFront}`
-        });
-      firestore
-        .collection(`${userID}`)
-        .doc("Cards")
-        .update({
-          [`${cardSetID}.Cards.${cdate}.back`]: `${cardBack}`
-        });
-      setCurrentCardSetID(cardSetID);
-    } else {
-      firestore
-        .collection(`${userID}`)
-        .doc("Cards")
-        .update({
-          [`${currentCardSetID}.Cards.${cdate}.front`]: `${cardFront}`
-        });
-      firestore
-        .collection(`${userID}`)
-        .doc("Cards")
-        .update({
-          [`${currentCardSetID}.Cards.${cdate}.back`]: `${cardBack}`
-        });
-    }
+    // if (cardSetTitle === "") {
+    //   this.props.alertMissingTitle();
+    // }
+    // if (cardSetEmpty === true && currentCardSetID === "") {
+    //   //   let userID = this.state.userID;
+    //   const cardSetID = Date.now();
+    //   firestore
+    //     .collection(`${userID}`)
+    //     .doc("Cards")
+    //     .update({
+    //       [`${cardSetID}.CardsSetTitle`]: `${cardSetTitle}`
+    //     });
+    //   firestore
+    //     .collection(`${userID}`)
+    //     .doc("Cards")
+    //     .update({
+    //       [`${cardSetID}.Cards.${cdate}.front`]: `${cardFront}`
+    //     });
+    //   firestore
+    //     .collection(`${userID}`)
+    //     .doc("Cards")
+    //     .update({
+    //       [`${cardSetID}.Cards.${cdate}.back`]: `${cardBack}`
+    //     });
+    //   setCurrentCardSetID(cardSetID);
+    // } else {
+    //   firestore
+    //     .collection(`${userID}`)
+    //     .doc("Cards")
+    //     .update({
+    //       [`${currentCardSetID}.Cards.${cdate}.front`]: `${cardFront}`
+    //     });
+    //   firestore
+    //     .collection(`${userID}`)
+    //     .doc("Cards")
+    //     .update({
+    //       [`${currentCardSetID}.Cards.${cdate}.back`]: `${cardBack}`
+    //     });
+    // }
+    firestore
+      .collection(`${userID}`)
+      .doc("Cards")
+      .update({
+        [`${currentCardSetID}.Cards.${cdate}.front`]: `${cardFront}`
+      });
+    firestore
+      .collection(`${userID}`)
+      .doc("Cards")
+      .update({
+        [`${currentCardSetID}.Cards.${cdate}.back`]: `${cardBack}`
+      });
   };
 
   render() {
