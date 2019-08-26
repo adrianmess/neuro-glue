@@ -11,7 +11,6 @@ class FlashCardSetTitlesByCategory extends React.Component {
     const allCards = this.props.cards;
     const categories = Object.keys(allCards).map(key => allCards[key].Category);
     const uniqueCategories = Array.from(new Set(categories));
-    uniqueCategories.map(uniqueCategories => Object.keys(uniqueCategories));
 
     return (
       <>
