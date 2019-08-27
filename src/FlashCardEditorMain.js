@@ -44,12 +44,16 @@ class FlashCardEditorMain extends React.Component {
     console.log("FlashCardEditorMain unmounted");
   }
 
-  handleChange = event => {
-    const { currentCardSetID, userID } = this.props;
-    const { cardSetTitle } = this.state;
-
+  handleTitleChange = event => {
     this.setState({
       cardSetTitle: event.target.value
+    });
+
+    this.props.selectedCardSet();
+  };
+  handleCategoryChange = event => {
+    this.setState({
+      cardSetCategory: event.target.value
     });
 
     this.props.selectedCardSet();
@@ -57,13 +61,20 @@ class FlashCardEditorMain extends React.Component {
 
   componentDidUpdate() {
     const { currentCardSetID, userID } = this.props;
-    const { cardSetTitle } = this.state;
+    const { cardSetTitle, cardSetCategory } = this.state;
     setTimeout(function() {
       firestore
         .collection(`${userID}`)
         .doc("Cards")
         .update({
           [`${currentCardSetID}.CardSetTitle`]: `${cardSetTitle}`
+        });
+
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${currentCardSetID}.CardSetCategory`]: `${cardSetCategory}`
         });
     }, 2000);
   }
@@ -124,13 +135,14 @@ class FlashCardEditorMain extends React.Component {
             <input
               placeholder="FlashCard Set Title"
               type="text"
-              onChange={this.handleChange}
+              onChange={this.handleTitleChange}
               value={this.state.cardSetTitle}
             />
+            <br />
             <input
               placeholder="FlashCard Set Category"
               type="text"
-              onChange={this.handleChange}
+              onChange={this.handleCategoryChange}
               value={this.state.cardSetCategory}
             />
           </p>
