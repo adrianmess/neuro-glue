@@ -9,6 +9,7 @@ class CardEditorList extends React.Component {
   selectCard(e, key, cardfront, cardback) {
     e.preventDefault();
     this.props.editSelectedCard(key, cardfront, cardback);
+    this.props.setCardState("updateCard");
   }
 
   render() {

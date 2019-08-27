@@ -10,8 +10,8 @@ class CardEditor extends React.Component {
     super();
     this.state = {
       cardFront: "",
-      cardBack: ""
-      // index: null,
+      cardBack: "",
+      cardIndex: "null"
     };
 
     this.handleChangeFront = this.handleChangeFront.bind(this);
@@ -53,18 +53,22 @@ class CardEditor extends React.Component {
 
   // ############################################
   componentDidUpdate = () => {
-    // if ((this.props.selectedCard && this.props.selectedCardIndex) !== null) {
-      if (this.props.selectedCardIndex !== this.state.index) {
+    console.log(this.props.selectedCardIndex);
+    if ((this.props.selectedCard && this.props.selectedCardIndex) !== "") {
+      if (
+        this.props.selectedCardIndex !== this.state.cardIndex &&
+        this.props.editCardState !== "newCard"
+      ) {
         this.setState({
           cardFront: this.props.selectedCard.front,
           cardBack: this.props.selectedCard.back,
-          index: this.props.selectedCardIndex
+          cardIndex: this.props.selectedCardIndex
         });
 
-      //   if (this.props.selectedCardIndex === this.state.index) {
+        //   if (this.props.selectedCardIndex === this.state.index) {
+      }
+      }
 
-      //   }
-    }
   };
   // ############################################
 
@@ -88,10 +92,10 @@ class CardEditor extends React.Component {
   // ############################################
 
   updateCard = () => {
-    // const index = this.state.index;
-    const cardFront = this.state.front;
-    const cardBack = this.state.back;
-    // this.props.updateCard( cardFront, cardBack)
+    const index = this.state.cardIndex;
+    const cardFront = this.state.cardFront;
+    const cardBack = this.state.cardBack;
+    this.props.updateCard(index, cardFront, cardBack);
   };
 
   addCard = () => {
@@ -105,48 +109,6 @@ class CardEditor extends React.Component {
     } = this.props;
     const cdate = Date.now();
 
-    // const cardSetEmpty =
-    //   Object.entries(cardSet).length === 0 && cardSet.constructor === Object;
-
-    // if (cardSetTitle === "") {
-    //   this.props.alertMissingTitle();
-    // }
-    // if (cardSetEmpty === true && currentCardSetID === "") {
-    //   //   let userID = this.state.userID;
-    //   const cardSetID = Date.now();
-    //   firestore
-    //     .collection(`${userID}`)
-    //     .doc("Cards")
-    //     .update({
-    //       [`${cardSetID}.CardsSetTitle`]: `${cardSetTitle}`
-    //     });
-    //   firestore
-    //     .collection(`${userID}`)
-    //     .doc("Cards")
-    //     .update({
-    //       [`${cardSetID}.Cards.${cdate}.front`]: `${cardFront}`
-    //     });
-    //   firestore
-    //     .collection(`${userID}`)
-    //     .doc("Cards")
-    //     .update({
-    //       [`${cardSetID}.Cards.${cdate}.back`]: `${cardBack}`
-    //     });
-    //   setCurrentCardSetID(cardSetID);
-    // } else {
-    //   firestore
-    //     .collection(`${userID}`)
-    //     .doc("Cards")
-    //     .update({
-    //       [`${currentCardSetID}.Cards.${cdate}.front`]: `${cardFront}`
-    //     });
-    //   firestore
-    //     .collection(`${userID}`)
-    //     .doc("Cards")
-    //     .update({
-    //       [`${currentCardSetID}.Cards.${cdate}.back`]: `${cardBack}`
-    //     });
-    // }
     firestore
       .collection(`${userID}`)
       .doc("Cards")
@@ -159,6 +121,21 @@ class CardEditor extends React.Component {
       .update({
         [`${currentCardSetID}.Cards.${cdate}.back`]: `${cardBack}`
       });
+
+    this.setState({
+      cardFront: "",
+      cardBack: "",
+      cardIndex: ""
+    });
+  };
+
+  newCard = () => {
+    this.props.setCardState("newCard");
+    this.setState({
+      cardFront: "",
+      cardBack: "",
+      cardIndex: ""
+    });
   };
 
   render() {
@@ -183,18 +160,16 @@ class CardEditor extends React.Component {
             </div>
           </div>
 
-          <button onClick={this.addCard}>Add Card</button>
-          {this.state.index ? (
-            <button id="updateCard-btn" onClick={this.updateCard}>
-              Update
-            </button>
-          ) : null}
-
-          {this.state.index ? (
-            <button id="newCArd-btn" onClick={this.props.newCard}>
-              New Card
-            </button>
-          ) : null}
+          {this.props.editCardState === "updateCard" ? (
+            <div>
+              <button id="updateCard-btn" onClick={this.updateCard}>
+                Update
+              </button>
+              <button onClick={this.newCard}>New Card</button>
+            </div>
+          ) : (
+            <button onClick={this.addCard}>Add Card</button>
+          )}
         </div>
       </>
     );

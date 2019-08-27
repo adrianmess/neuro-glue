@@ -19,7 +19,8 @@ class FlashCardEditorMain extends React.Component {
       cardTitle: "",
       cardFront: "",
       cardBack: "",
-      cardNote: ""
+      cardNote: "",
+      editCardState: ""
     };
 
     this.createNewCardSet = this.createNewCardSet.bind(this);
@@ -62,7 +63,7 @@ class FlashCardEditorMain extends React.Component {
         .collection(`${userID}`)
         .doc("Cards")
         .update({
-          [`${currentCardSetID}.Title`]: `${cardSetTitle}`
+          [`${currentCardSetID}.CardSetTitle`]: `${cardSetTitle}`
         });
     }, 2000);
   }
@@ -102,6 +103,12 @@ class FlashCardEditorMain extends React.Component {
     setTimeout(function() {
       alert.style.visibility = "hidden";
     }, 2000);
+  };
+
+  setCardState = cardState => {
+    this.setState({
+      editCardState: cardState
+    });
   };
 
   render() {
@@ -163,6 +170,8 @@ class FlashCardEditorMain extends React.Component {
               setCurrentCardSet={this.props.setCurrentCardSet}
               selectedCardSet={this.props.selectedCardSet}
               editSelectedCard={this.props.editSelectedCard}
+              editCardState={this.state.editCardState}
+              setCardState={this.setCardState}
             />
           </div>
           <div id="cardEditor">
@@ -179,6 +188,8 @@ class FlashCardEditorMain extends React.Component {
               cardSetTitle={this.state.cardSetTitle}
               alertMissingTitle={this.alertMissingTitle}
               setCurrentCardSetID={this.props.setCurrentCardSetID}
+              editCardState={this.state.editCardState}
+              setCardState={this.setCardState}
               //   ############################
               userID={this.props.userID}
               currentCardSetID={this.props.currentCardSetID}

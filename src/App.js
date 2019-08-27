@@ -24,7 +24,7 @@ class App extends React.Component {
     this.state = {
       cards: "",
       selectedCardCategory: "",
-      selectedCardIndex: '',
+      selectedCardIndex: "",
       selectedCard: "",
       notes: {},
       isLoggedIn: false,
@@ -298,12 +298,17 @@ class App extends React.Component {
   };
 
   updateCard = (index, cardFront, cardBack) => {
-    const cardsCopy = JSON.parse(JSON.stringify(this.state.cards));
-    cardsCopy[index].front = cardFront;
-    cardsCopy[index].back = cardBack;
+    console.log(index);
+    const { currentCardSetID } = this.state;
+    const cards = this.state.cards;
+    const updatedCard = cards[currentCardSetID]["Cards"][index];
+
+    updatedCard.front = cardFront;
+    updatedCard.back = cardBack;
+
 
     this.setState({
-      cards: cardsCopy
+      cards
     });
   };
 
@@ -390,13 +395,13 @@ class App extends React.Component {
   };
 
   editSelectedCard = (key, cardfront, cardback) => {
-    const card = { "front": cardfront, "back": cardback };
+    const card = { front: cardfront, back: cardback };
     // console.log(card)
     this.setState({
       selectedCardIndex: key,
       selectedCard: card
     });
-  }
+  };
 
   isLoggedInAction = boolean => {
     boolean
