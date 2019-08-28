@@ -320,9 +320,6 @@ class App extends React.Component {
     const { currentCardSetID } = this.state;
     const cards = this.state.cards;
     const card = cards[currentCardSetID]["Cards"];
-    // console.log(card);
-
-    // console.log(card[index]);
     delete card[index];
 
     this.setState({ cards });
@@ -344,25 +341,25 @@ class App extends React.Component {
     // document.getElementById('routerLink').click()
   };
 
-  selectedCardSet = () => {
-    // event.preventDefault();
-    const { cards, currentCardSetID } = this.state;
-    // console.log(cards[`${currentCardSetID}`]);
-    const cardSet = cards[`${currentCardSetID}`];
-    // console.log(Object.keys(cardSet).map(key => cardSet[key]));
-    // const list = {};
-    // for (const card in cardSet) {
-    //   // console.log(cardSet[card]);
-    //   const cardsList = cardSet[card];
-    //   Object.assign(list, cardsList);
-    // }
+  // selectedCardSet = () => {
+  //   // event.preventDefault();
+  //   const { cards, currentCardSetID } = this.state;
+  //   // console.log(cards[`${currentCardSetID}`]);
+  //   const cardSet = cards[`${currentCardSetID}`];
+  //   // console.log(Object.keys(cardSet).map(key => cardSet[key]));
+  //   // const list = {};
+  //   // for (const card in cardSet) {
+  //   //   // console.log(cardSet[card]);
+  //   //   const cardsList = cardSet[card];
+  //   //   Object.assign(list, cardsList);
+  //   // }
 
-    // if (!cardSetEmpty) {
-    //   this.setState({
-    //     currentCardSet: list
-    //   });
-    // }
-  };
+  //   // if (!cardSetEmpty) {
+  //   //   this.setState({
+  //   //     currentCardSet: list
+  //   //   });
+  //   // }
+  // };
 
   setCurrentCardSetTitle = (cardSetTitle, cardSetID) => {
     this.setState({
@@ -382,6 +379,7 @@ class App extends React.Component {
   };
 
   setCurrentCardSetID = cardSetID => {
+    console.log(cardSetID);
     this.setState({
       currentCardSetID: cardSetID
     });
@@ -477,6 +475,7 @@ class App extends React.Component {
                   <FlashCardSetsByTitle
                     cards={cards}
                     setCurrentCardSetTitle={this.setCurrentCardSetTitle}
+                    setCurrentCardSetID={this.setCurrentCardSetID}
                   />
                 )}
               />
