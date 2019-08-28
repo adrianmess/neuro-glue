@@ -36,14 +36,9 @@ class FlashCardEditorMain extends React.Component {
 
   componentWillMount() {
     const { currentCardSetID } = this.props;
-    console.log(currentCardSetID);
-    console.log("component will mount check fire base");
 
     if (currentCardSetID === "") {
       this.createNewCardSet();
-    }
-    if (currentCardSetID !== "") {
-      this.editCardSet();
     }
   }
 
@@ -63,13 +58,11 @@ class FlashCardEditorMain extends React.Component {
       cardSetCategory: event.target.value
     });
 
-    // this.props.selectedCardSet();
   };
 
   componentDidUpdate() {
     const { currentCardSetID, userID } = this.props;
     const { cardSetTitle, cardSetCategory } = this.state;
-
     setTimeout(function() {
       firestore
         .collection(`${userID}`)
@@ -106,13 +99,6 @@ class FlashCardEditorMain extends React.Component {
     this.setState({ allCards: newCardSet });
     // RESET
     // this.props.addOrUpdateCard(newCardSet);
-  };
-
-  editCardSet = () => {
-    const { cards, currentCardSetID } = this.props;
-	const allCards = {...cards[currentCardSetID]["Cards"]};
-	console.log(allCards);
-
   };
 
   addCard = card => {
