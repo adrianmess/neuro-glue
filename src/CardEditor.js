@@ -53,7 +53,7 @@ class CardEditor extends React.Component {
 
   // ############################################
   componentDidUpdate = () => {
-    console.log(this.props.selectedCardIndex);
+    // console.log(this.props.selectedCardIndex);
     if ((this.props.selectedCard && this.props.selectedCardIndex) !== "") {
       if (
         this.props.selectedCardIndex !== this.state.cardIndex &&

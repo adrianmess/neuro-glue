@@ -20,7 +20,7 @@ class CardEditorList extends React.Component {
     Object.assign(cards, cardSet[`${cardSetID}`]);
 
     const cardsList = cards["Cards"];
-
+    // console.log(cardsList);
     if (cardsList !== undefined) {
       return Object.keys(cardsList).map(key => {
         return (
@@ -35,7 +35,7 @@ class CardEditorList extends React.Component {
                     key,
                     cardsList[key].front,
                     cardsList[key].back
-              )
+                  )
                 }
               >
                 <div id="card-front" name="front">
@@ -53,13 +53,13 @@ class CardEditorList extends React.Component {
                     renderHTML(cardsList[key].back)
                   )}
                 </div>
-                <button
-                  id="card-button-remove"
-                  onClick={() => this.props.deleteCard(key)}
-                >
-                  remove
-                </button>
               </div>
+              <button
+                id="card-button-remove"
+                onClick={event => this.props.deleteCard(event, key)}
+              >
+                remove
+              </button>
             </div>
           </div>
         );

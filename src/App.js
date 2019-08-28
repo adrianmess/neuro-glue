@@ -298,7 +298,6 @@ class App extends React.Component {
   };
 
   updateCard = (index, cardFront, cardBack) => {
-    console.log(index);
     const { currentCardSetID } = this.state;
     const cards = this.state.cards;
     const updatedCard = cards[currentCardSetID]["Cards"][index];
@@ -306,10 +305,7 @@ class App extends React.Component {
     updatedCard.front = cardFront;
     updatedCard.back = cardBack;
 
-
-    this.setState({
-      cards
-    });
+    this.setState({ cards });
   };
 
   newCard = () => {
@@ -319,11 +315,17 @@ class App extends React.Component {
     });
   };
 
-  deleteCard = key => {
-    const cards = { ...this.state.currentCardSet };
+  deleteCard = (e, index) => {
+    e.preventDefault();
+    const { currentCardSetID } = this.state;
+    const cards = this.state.cards;
+    const card = cards[currentCardSetID]["Cards"];
+    // console.log(card);
 
-    delete cards[key];
-    this.setState({ currentCardSet: cards });
+    // console.log(card[index]);
+    delete card[index];
+
+    this.setState({ cards });
   };
 
   selectCard = (card, index) =>
