@@ -28,10 +28,12 @@ class FlashCardSetsByTitle extends React.Component {
                 <Link to={`/FlashCardTest/${cardTitles[1]}`}>
                   {cardTitles[1]}
                 </Link>
-                <button>
-                  <Link to={"/FlashCardEditor"}>Edit</Link>
-                </button>
               </span>
+              <button
+                onClick={event => this.props.setCurrentCardSetID(cardTitles[0])}
+              >
+                <Link to={"/FlashCardEditor"}>Edit</Link>
+              </button>
             </div>
           ))}
         </div>
