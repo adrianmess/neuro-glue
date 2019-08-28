@@ -1,6 +1,7 @@
 import React from "react";
 import CardEditorList from "./CardEditorList";
 import CardEditor from "./CardEditor";
+import firebase from "firebase/app";
 import { firestore } from "./firebase";
 
 import "./FlashCardEditorMain.css";
@@ -53,9 +54,24 @@ class FlashCardEditorMain extends React.Component {
     });
   };
 
-  componentWillUnmount() {
-    console.log("FlashCardEditorMain unmounted");
-  }
+  componentWillUnmount = () => {
+    const allCards = { ...this.props.cards };
+    const { currentCardSetID, userID } = this.props;
+    const { cardSetTitle, cardSetCategory } = this.state;
+    console.log(allCards[currentCardSetID]);
+    if (
+      cardSetTitle === "" &&
+      cardSetCategory === "" &&
+      allCards[currentCardSetID]["Cards"] === undefined
+    ) {
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${currentCardSetID}`]: firebase.firestore.FieldValue.delete()
+        });
+    }
+  };
 
   handleTitleChange = event => {
     this.setState({
@@ -73,21 +89,21 @@ class FlashCardEditorMain extends React.Component {
   componentDidUpdate() {
     const { currentCardSetID, userID } = this.props;
     const { cardSetTitle, cardSetCategory } = this.state;
-    setTimeout(function() {
-      firestore
-        .collection(`${userID}`)
-        .doc("Cards")
-        .update({
-          [`${currentCardSetID}.CardSetTitle`]: `${cardSetTitle}`
-        });
+    // setTimeout(function() {
+    firestore
+      .collection(`${userID}`)
+      .doc("Cards")
+      .update({
+        [`${currentCardSetID}.CardSetTitle`]: `${cardSetTitle}`
+      });
 
-      firestore
-        .collection(`${userID}`)
-        .doc("Cards")
-        .update({
-          [`${currentCardSetID}.Category`]: `${cardSetCategory}`
-        });
-    }, 2000);
+    firestore
+      .collection(`${userID}`)
+      .doc("Cards")
+      .update({
+        [`${currentCardSetID}.Category`]: `${cardSetCategory}`
+      });
+    // }, 2000);
   }
 
   selectedCards() {}
