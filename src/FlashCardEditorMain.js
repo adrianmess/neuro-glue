@@ -39,8 +39,19 @@ class FlashCardEditorMain extends React.Component {
 
     if (currentCardSetID === "") {
       this.createNewCardSet();
+    } else {
+      this.loadCardInfo(currentCardSetID);
     }
   }
+  loadCardInfo = currentCardSetID => {
+    const card = { ...this.props.cards };
+    const cardSetTitle = card[currentCardSetID]["CardSetTitle"];
+    const cardSetCategory = card[currentCardSetID]["Category"];
+    this.setState({
+      cardSetTitle,
+      cardSetCategory
+    });
+  };
 
   componentWillUnmount() {
     console.log("FlashCardEditorMain unmounted");
@@ -57,7 +68,6 @@ class FlashCardEditorMain extends React.Component {
     this.setState({
       cardSetCategory: event.target.value
     });
-
   };
 
   componentDidUpdate() {
@@ -75,7 +85,7 @@ class FlashCardEditorMain extends React.Component {
         .collection(`${userID}`)
         .doc("Cards")
         .update({
-          [`${currentCardSetID}.CardSetCategory`]: `${cardSetCategory}`
+          [`${currentCardSetID}.Category`]: `${cardSetCategory}`
         });
     }, 2000);
   }
