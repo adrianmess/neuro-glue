@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import "./FlashCardSetTitlesByCategory.css";
 
 class FlashCardSetTitlesByCategory extends React.Component {
-  constructor() {
-    super();
-  }
 
   render() {
     const allCards = this.props.cards;
