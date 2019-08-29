@@ -1,2 +1,8 @@
 #carouselContainer {
   max-width: 200px; }
+
+.buttonNext {
+  visibility: hidden; }
+
+.thumbs {
+  visibility: initial !important; }

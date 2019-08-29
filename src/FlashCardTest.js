@@ -56,7 +56,6 @@ class FlashCardTest extends React.Component {
 
   thumbsUp = e => {
     e.preventDefault();
-
     this.setState({ thumbClicked: true });
 
     let cardScores = this.state.cardScores;
@@ -109,11 +108,7 @@ class FlashCardTest extends React.Component {
     for (let i = 0; i < cardsArray.length; i++) {
       cards.push(
         <div key={i}>
-          <Slide
-            index={i}
-            value={this.props.currentSlide}
-            ref={this.myRef}
-          >
+          <Slide index={i} value={this.props.currentSlide} ref={this.myRef}>
             <Cards
               cardindex={i}
               card={cardsArray[i]}
@@ -143,11 +138,25 @@ class FlashCardTest extends React.Component {
                 >
                   <Slider>{cards}</Slider>
 
-                  <ButtonNext className="buttonNext" ref="nextUpButtonRef">
-                    <ThumbUp onClick={event => this.thumbsUp(event)} />
+                  <ButtonNext
+                    className="buttonNext"
+                    ref="nextUpButtonRef"
+                    disabled={false}
+                  >
+                    <ThumbUp
+                      className="thumbs"
+                      onClick={event => this.thumbsUp(event)}
+                    />
                   </ButtonNext>
-                  <ButtonNext className="buttonNext" ref="nextDownButtonRef">
-                    <ThumbDown onClick={event => this.thumbsDown(event)} />
+                  <ButtonNext
+                    className="buttonNext"
+                    ref="nextDownButtonRef"
+                    disabled={false}
+                  >
+                    <ThumbDown
+                      className="thumbs"
+                      onClick={event => this.thumbsDown(event)}
+                    />
                   </ButtonNext>
                 </CarouselProvider>
               </div>
