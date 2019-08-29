@@ -372,10 +372,10 @@ class App extends React.Component {
   setCurrentCardSet = cardSetID => {
     const allCards = { ...this.state.cards };
     // console.log(allCards["1566766055824"]["Cards"]);
-    // const cards = allCards[cardSetID]["Cards"];
-    // this.setState({
-    //   currentCardSet: cards
-    // });
+    const cards = allCards[cardSetID]["Cards"];
+    this.setState({
+      currentCardSet: cards
+    });
   };
 
   setCurrentCardSetID = cardSetID => {
