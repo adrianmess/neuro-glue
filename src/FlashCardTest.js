@@ -56,6 +56,15 @@ class FlashCardTest extends React.Component {
 
   thumbsUp = e => {
     e.preventDefault();
+    this.cardScore("pass");
+  };
+
+  thumbsDown(e) {
+    e.preventDefault();
+    this.cardScore("fail");
+  }
+
+  cardScore = pass_fail => {
     this.setState({ thumbClicked: true });
 
     let cardScores = this.state.cardScores;
@@ -63,37 +72,17 @@ class FlashCardTest extends React.Component {
     const i = this.state.activeCardIndex;
     const cardSet = this.props.currentCardSet;
     let cardArrayLength = this.state.cardSetLength;
-    const cardsArray = Object.keys(cardSet).map(key =>
-      Object.assign({ pass_fail: "" }, { cardID: key }, cardSet[key])
+    const cardsArray = Object.keys(cardSet).map(
+      key => Object.assign({ pass_fail: "" }, { cardID: key })
+      // Object.assign({ pass_fail: "" }, { cardID: key }, cardSet[key])
     );
     const cardsArrayEdit = cardsArray[i];
-    cardsArrayEdit[`pass_fail`] = "pass";
+    cardsArrayEdit[`pass_fail`] = pass_fail;
 
     cardScores.splice(i, 1, cardsArrayEdit);
 
     this.setState({ cardScores: cardScores });
   };
-
-  thumbsDown(e) {
-    e.preventDefault();
-
-    this.setState({ thumbClicked: true });
-
-    let cardScores = this.state.cardScores;
-
-    const i = this.state.activeCardIndex;
-    const cardSet = this.props.currentCardSet;
-    let cardArrayLength = this.state.cardSetLength;
-    const cardsArray = Object.keys(cardSet).map(key =>
-      Object.assign({ pass_fail: "" }, { cardID: key }, cardSet[key])
-    );
-    const cardsArrayEdit = cardsArray[i];
-    cardsArrayEdit[`pass_fail`] = "fail";
-
-    cardScores.splice(i, 1, cardsArrayEdit);
-
-    this.setState({ cardScores: cardScores });
-  }
 
   cardRender() {
     const title = this.props.currentCardSetTitle;
