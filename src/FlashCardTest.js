@@ -70,8 +70,10 @@ class FlashCardTest extends React.Component {
     let cardScores = this.state.cardScores;
 
     const i = this.state.activeCardIndex;
+    const scoreIndex = i + 1;
     const cardSet = this.props.currentCardSet;
     let cardArrayLength = this.state.cardSetLength;
+
     const cardsArray = Object.keys(cardSet).map(
       key => Object.assign({ pass_fail: "" }, { cardID: key })
       // Object.assign({ pass_fail: "" }, { cardID: key }, cardSet[key])
@@ -82,6 +84,22 @@ class FlashCardTest extends React.Component {
     cardScores.splice(i, 1, cardsArrayEdit);
 
     this.setState({ cardScores: cardScores });
+    if (cardArrayLength === scoreIndex) {
+      const passes = cardScores.map(keys => keys["pass_fail"]);
+      const numbOfPasses = passes.reduce((n, x) => n + (x === "pass"), 0);
+
+      // console.log(typeof numbOfPasses)
+      const scorePercent = Number(
+        numbOfPasses / cardArrayLength
+      ).toLocaleString(undefined, {
+        style: "percent",
+        minimumFractionDigits: 0
+      });
+
+      console.log("complete");
+      console.log("You scored " + numbOfPasses + " out of " + cardArrayLength);
+      console.log("You scored " + scorePercent);
+    }
   };
 
   cardRender() {
