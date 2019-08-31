@@ -40,15 +40,15 @@ class CardEditor extends React.Component {
   topActive() {
     const topToolBar = document.getElementsByClassName("ql-toolbar")[0];
     const bottomToolBar = document.getElementsByClassName("ql-toolbar")[1];
-    topToolBar.style.display = "inherit";
-    bottomToolBar.style.display = "none";
+    topToolBar.style.visibility = "inherit";
+    bottomToolBar.style.visibility = "hidden";
   }
 
   bottomActive() {
     const topToolBar = document.getElementsByClassName("ql-toolbar")[0];
     const bottomToolBar = document.getElementsByClassName("ql-toolbar")[1];
-    // topToolBar.style.display = "none";
-    bottomToolBar.style.display = "inherit";
+    topToolBar.style.visibility = "hidden";
+    bottomToolBar.style.visibility = "inherit";
   }
 
   // ############################################
@@ -67,8 +67,7 @@ class CardEditor extends React.Component {
 
         //   if (this.props.selectedCardIndex === this.state.index) {
       }
-      }
-
+    }
   };
   // ############################################
 
