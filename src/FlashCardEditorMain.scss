@@ -1,9 +1,61 @@
+#cardEditor {
+	height: 148px;
+}
 #cardList {
-	float: left;
+	// float: left;
 	/* position: fixed; */
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
 }
 
 #alert_missing_title{
 	visibility: hidden;
-
+	position: absolute;
 }
+
+/* Small devices (small phones, 599px and down) */
+@media only screen and (max-width: 599px) {
+
+	#flashCardEditorContainer{
+	// 	    display: flex;
+    // flex-direction: column-reverse;
+	}
+	#flashCardEditorContainer_top_fixed{
+		display: flex;
+		flex-direction: row;
+	}
+	#flashCardEditor_input_fields{
+	// position: fixed;
+    // margin-top: -5vh;
+	}
+	#card_editor_main-list-and-editor{
+		display: flex;
+    	flex-direction: column-reverse;
+	}
+	#cardEditor{
+
+		float: initial;
+    	margin-right: initial;
+    	margin-top: initial;
+	}
+	#reactQuill-container{
+		    left: 0px;
+			right: 0px;
+			transform: scale(0.8);
+
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}

@@ -1,6 +1,53 @@
+#cardEditor {
+  height: 148px; }
+
 #cardList {
-  float: left;
-  /* position: fixed; */ }
+  /* position: fixed; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
 
 #alert_missing_title {
-  visibility: hidden; }
+  visibility: hidden;
+  position: absolute; }
+
+/* Small devices (small phones, 599px and down) */
+@media only screen and (max-width: 599px) {
+  #flashCardEditorContainer_top_fixed {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+  #card_editor_main-list-and-editor {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse; }
+  #cardEditor {
+    float: initial;
+    margin-right: initial;
+    margin-top: initial; }
+  #reactQuill-container {
+    left: 0px;
+    right: 0px;
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8); } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up) */

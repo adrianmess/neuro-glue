@@ -4,6 +4,8 @@ import { firestore } from "./firebase";
 
 import "react-quill/dist/quill.snow.css";
 import "./CardEditor.css";
+import "./FlashCardEditorMain.css";
+import { get } from "http";
 
 class CardEditor extends React.Component {
   constructor() {
@@ -14,6 +16,8 @@ class CardEditor extends React.Component {
       cardIndex: "null"
     };
 
+    this.quillContainer = React.createRef();
+
     this.handleChangeFront = this.handleChangeFront.bind(this);
     this.handleChangeBack = this.handleChangeBack.bind(this);
     this.addCard = this.addCard.bind(this);
@@ -23,19 +27,26 @@ class CardEditor extends React.Component {
 
   handleChangeFront = async value => {
     await this.setState({ cardFront: value });
+    this.sendQuillContainerHeight();
   };
 
   handleChangeBack = async value => {
     await this.setState({ cardBack: value });
+    this.sendQuillContainerHeight();
   };
 
-  // componentDidMount = () =>{
-  // 	const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
-  // 	const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
+  sendQuillContainerHeight = () => {
+    this.props.setCardEditorHeight(this.quillContainer.current.clientHeight);
+  };
 
-  // 	topToolBar.style.zIndex="101";
-  // 	bottomToolBar.style.zIndex="100";
-  // }
+  // componentDidMount = () => {
+
+  // const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
+  // const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
+
+  // topToolBar.style.zIndex="101";
+  // bottomToolBar.style.zIndex="100";
+  // };
 
   topActive() {
     const topToolBar = document.getElementsByClassName("ql-toolbar")[0];
@@ -139,38 +150,36 @@ class CardEditor extends React.Component {
 
   render() {
     return (
-      <>
-        <div id="reactQuill-container">
-          <div id="reactQuill-subContainer">
-            <div id="top-quill" onClick={this.topActive}>
-              <ReactQuill
-                name="front"
-                value={this.state.cardFront ? this.state.cardFront : ""}
-                onChange={this.handleChangeFront}
-              />
-            </div>
-
-            <div id="bottom-quill" onClick={event => this.bottomActive(event)}>
-              <ReactQuill
-                name="back"
-                value={this.state.cardBack ? this.state.cardBack : ""}
-                onChange={this.handleChangeBack}
-              />
-            </div>
+      <div id="reactQuill-container" ref={this.quillContainer}>
+        <div id="reactQuill-subContainer">
+          <div id="top-quill" onClick={this.topActive}>
+            <ReactQuill
+              name="front"
+              value={this.state.cardFront ? this.state.cardFront : ""}
+              onChange={this.handleChangeFront}
+            />
           </div>
 
-          {this.props.editCardState === "updateCard" ? (
-            <div>
-              <button id="updateCard-btn" onClick={this.updateCard}>
-                Update
-              </button>
-              <button onClick={this.newCard}>New Card</button>
-            </div>
-          ) : (
-            <button onClick={this.addCard}>Add Card</button>
-          )}
+          <div id="bottom-quill" onClick={event => this.bottomActive(event)}>
+            <ReactQuill
+              name="back"
+              value={this.state.cardBack ? this.state.cardBack : ""}
+              onChange={this.handleChangeBack}
+            />
+          </div>
         </div>
-      </>
+
+        {this.props.editCardState === "updateCard" ? (
+          <div>
+            <button id="updateCard-btn" onClick={this.updateCard}>
+              Update
+            </button>
+            <button onClick={this.newCard}>New Card</button>
+          </div>
+        ) : (
+          <button onClick={this.addCard}>Add Card</button>
+        )}
+      </div>
     );
   }
 }
