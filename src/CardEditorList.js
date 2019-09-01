@@ -1,5 +1,6 @@
 import React from "react";
 import renderHTML from "react-render-html";
+import './FlashCardEditorMain.css';
 
 class CardEditorList extends React.Component {
   constructor() {
