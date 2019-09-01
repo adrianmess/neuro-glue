@@ -144,6 +144,7 @@ class FlashCardEditorMain extends React.Component {
     this.setState({ cardSet: cards });
   };
 
+
   alertMissingTitle = () => {
     const alert = document.getElementById("alert_missing_title");
     alert.style.visibility = "initial";

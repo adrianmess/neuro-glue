@@ -84,9 +84,7 @@ class App extends React.Component {
           }
         },
         Category: "JavaSCript",
-        Scores: {
-          date: "score"
-        }
+        Scores: {}
       },
       card123455187: {
         Cards: {
@@ -138,9 +136,7 @@ class App extends React.Component {
           }
         },
         Category: "JavaSCript",
-        Scores: {
-          date: "score"
-        }
+        Scores: {}
       },
       opposite: {
         CardSetTitle: "JavaScript Functions",
@@ -152,9 +148,7 @@ class App extends React.Component {
           }
         },
         Category: "Ruby",
-        Scores: {
-          date: "score"
-        }
+        Scores: {}
       }
     };
 
@@ -171,7 +165,7 @@ class App extends React.Component {
     //   },
     //   Category: "JavaScript",
     //   Scores: {
-    //     date: "score"
+    //     date: {}
     //   }
     // };
 
@@ -240,6 +234,16 @@ class App extends React.Component {
     //   state: 'cards'
     // });
     // console.log(this.refCards)
+  };
+
+  addTestScore = (date, scoreRatio) => {
+    const { userID, currentCardSetID } = this.state;
+    firestore
+      .collection(`${userID}`)
+      .doc("Cards")
+      .update({
+        [`${currentCardSetID}.Scores.${date}`]: `${scoreRatio}`
+      });
   };
 
   addCard = (date, card) => {
@@ -419,7 +423,7 @@ class App extends React.Component {
     return (
       <>
         {this.state.isLoggedIn ? (
-          <div>
+          <div id="main">
             <Router>
               <Header
                 setUserId={this.setUserId}
@@ -487,6 +491,7 @@ class App extends React.Component {
                     cards={cards}
                     currentCardSetTitle={currentCardSetTitle}
                     currentCardSet={currentCardSet}
+                    addTestScore={this.addTestScore}
                   />
                 )}
               />
