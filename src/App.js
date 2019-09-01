@@ -17,6 +17,7 @@ import FlashCardSetTitlesByCategory from "./FlashCardSetTitlesByCategory";
 import FlashCardSetsByTitle from "./FlashCardSetsByTitle";
 import FlashCardTest from "./FlashCardTest";
 import FlashCardSetCategoriesList from "./FlashCardSetCategoriesList";
+import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";
 
 class App extends React.Component {
   constructor(props) {
@@ -425,27 +426,7 @@ class App extends React.Component {
         {this.state.isLoggedIn ? (
           <div id="main">
             <Router>
-              <Header
-                setUserId={this.setUserId}
-                cards={this.state.cards}
-                history={this.props.history}
-                userID={this.state.userID}
-                selectCardCategory={this.selectCardCategory}
-                clearSelectedCardSet={this.clearSelectedCardSet}
-              />
-              {/* <Link
-
-                to={`/flashcards/:${category}`}>
-                <span id="routerLink"
-                  onClick={event => this.selectedCardSet(event)}>asdasd</span>
-              </Link> */}
-
-              {/* {routes.map(({ path, component: C, selectedCardCategory }) => (
-                <Route
-                  path={path}
-                  render={(props) => <C {...props} selectedCardCategory={selectedCardCategory} />}
-                />
-              ))} */}
+              <SimpleAppMenu clearSelectedCardSet={this.clearSelectedCardSet}/>
 
               <Route
                 path={`/flashcards/:${this.state.selectedCardCategory}`}
