@@ -59,11 +59,10 @@ class FlashCardEditorMain extends React.Component {
     const allCards = { ...this.props.cards };
     const { currentCardSetID, userID } = this.props;
     const { cardSetTitle, cardSetCategory } = this.state;
-    console.log(allCards[currentCardSetID]);
-    if (
-      cardSetTitle === "" &&
-      cardSetCategory === "" &&
-      allCards[currentCardSetID]["Cards"] === undefined
+    const cardSetCreated = allCards[currentCardSetID] !== undefined;
+    if ((cardSetCreated === true)
+    &&
+      (cardSetTitle !== "" &&  cardSetCategory !== "")
     ) {
       firestore
         .collection(`${userID}`)
@@ -88,27 +87,32 @@ class FlashCardEditorMain extends React.Component {
   };
 
   setCardEditorHeight = height => {
-    document.getElementById("cardEditor").style.setProperty("height", height+'px', "important");
+    document
+      .getElementById("cardEditor")
+      .style.setProperty("height", height + "px", "important");
   };
 
   componentDidUpdate() {
     const { currentCardSetID, userID } = this.props;
     const { cardSetTitle, cardSetCategory } = this.state;
     // setTimeout(function() {
-    firestore
-      .collection(`${userID}`)
-      .doc("Cards")
-      .update({
-        [`${currentCardSetID}.CardSetTitle`]: `${cardSetTitle}`
-      });
+    const spaceStart = new RegExp(/^\s/);
+    if (cardSetTitle && cardSetCategory !== spaceStart) {
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${currentCardSetID}.CardSetTitle`]: `${cardSetTitle}`
+        });
 
-    firestore
-      .collection(`${userID}`)
-      .doc("Cards")
-      .update({
-        [`${currentCardSetID}.Category`]: `${cardSetCategory}`
-      });
-    // }, 2000);
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${currentCardSetID}.Category`]: `${cardSetCategory}`
+        });
+      // }, 2000);
+    }
   }
 
   selectedCards() {}
@@ -194,36 +198,40 @@ class FlashCardEditorMain extends React.Component {
             </div>
           </div>
           <div id="card_editor_main-list-and-editor">
-            <div id="cardList">
-              <CardEditorList
-                cards={this.props.cards}
-                deleteCard={this.props.deleteCard}
-                // selectCard={this.props.selectCard}
-                // cardCategory={this.props.cardCategory}
+            <div id="cardListContainer">
+              <div id="cardList">
+                <CardEditorList
+                  id="cardListComponent"
+                  cards={this.props.cards}
+                  deleteCard={this.props.deleteCard}
+                  // selectCard={this.props.selectCard}
+                  // cardCategory={this.props.cardCategory}
 
-                currentCardSet={this.props.currentCardSet}
-                currentCardSetID={this.props.currentCardSetID}
-                currentCardSetCategory={this.props.currentCardSetCategory}
-                currentCardSetTitle={this.props.currentCardSetTitle}
-                currentCardSetScores={this.props.currentCardSetScores}
-                currentCardSetCards={this.props.currentCardSetCards}
-                currentlySelectedCardID={this.props.currentlySelectedCardID}
-                currentCardSetCardsCardFront={
-                  this.props.currentCardSetCardsCardFront
-                }
-                currentCardSetCardsCardFack={
-                  this.props.currentCardSetCardsCardFack
-                }
-                currentCardSetCardsCardFotes={
-                  this.props.currentCardSetCardsCardFotes
-                }
-                setCurrentCardSet={this.props.setCurrentCardSet}
-                selectedCardSet={this.props.selectedCardSet}
-                editSelectedCard={this.props.editSelectedCard}
-                editCardState={this.state.editCardState}
-                setCardState={this.setCardState}
-              />
+                  currentCardSet={this.props.currentCardSet}
+                  currentCardSetID={this.props.currentCardSetID}
+                  currentCardSetCategory={this.props.currentCardSetCategory}
+                  currentCardSetTitle={this.props.currentCardSetTitle}
+                  currentCardSetScores={this.props.currentCardSetScores}
+                  currentCardSetCards={this.props.currentCardSetCards}
+                  currentlySelectedCardID={this.props.currentlySelectedCardID}
+                  currentCardSetCardsCardFront={
+                    this.props.currentCardSetCardsCardFront
+                  }
+                  currentCardSetCardsCardFack={
+                    this.props.currentCardSetCardsCardFack
+                  }
+                  currentCardSetCardsCardFotes={
+                    this.props.currentCardSetCardsCardFotes
+                  }
+                  setCurrentCardSet={this.props.setCurrentCardSet}
+                  selectedCardSet={this.props.selectedCardSet}
+                  editSelectedCard={this.props.editSelectedCard}
+                  editCardState={this.state.editCardState}
+                  setCardState={this.setCardState}
+                />
+              </div>
             </div>
+
             <div id="cardEditor" ref={this.cardEditorRef}>
               <CardEditor
                 cards={this.props.cards}
