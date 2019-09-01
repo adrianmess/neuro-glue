@@ -59,10 +59,10 @@ class FlashCardEditorMain extends React.Component {
     const allCards = { ...this.props.cards };
     const { currentCardSetID, userID } = this.props;
     const { cardSetTitle, cardSetCategory } = this.state;
-    const cardSetCreated = allCards[currentCardSetID] !== undefined;
-    if ((cardSetCreated === true)
-    &&
-      (cardSetTitle !== "" &&  cardSetCategory !== "")
+    const cardSetUndefined = allCards[currentCardSetID] === undefined;
+    if (
+      (cardSetUndefined === false ) &&
+      (cardSetTitle === "" && cardSetCategory === "")
     ) {
       firestore
         .collection(`${userID}`)
