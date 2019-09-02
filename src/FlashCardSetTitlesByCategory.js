@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import "./FlashCardSetTitlesByCategory.css";
 
 class FlashCardSetTitlesByCategory extends React.Component {
-
   render() {
     const allCards = this.props.cards;
     const categories = Object.keys(allCards).map(key => allCards[key].Category);
     const uniqueCategories = Array.from(new Set(categories));
 
     return (
-      <>
+      <div>
+        <div id="categories-Header">
+          <h2>Categories</h2>
+        </div>
+
         <div id="unique_Categories_Container">
           {uniqueCategories.map(uniqueCategory =>
             uniqueCategory === "" ? (
@@ -29,7 +32,7 @@ class FlashCardSetTitlesByCategory extends React.Component {
             )
           )}
         </div>
-      </>
+      </div>
     );
   }
 }
