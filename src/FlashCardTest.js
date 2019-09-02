@@ -18,7 +18,7 @@ class FlashCardTest extends React.Component {
   constructor() {
     super();
 
-    this.myRef = React.createRef();
+    this.activeSlideRef = React.createRef();
 
     this.nextUpButtonRef = React.createRef();
     this.sliderRef = React.createRef();
@@ -26,7 +26,10 @@ class FlashCardTest extends React.Component {
       activeCardIndex: "",
       thumbClicked: false,
       cardSetLength: null,
-      cardScores: []
+      cardScore: [],
+      testComplete: false,
+      scorePercent: "",
+      scoreRatioStatement: ""
     };
   }
 
@@ -41,9 +44,9 @@ class FlashCardTest extends React.Component {
 
     let cardSetLength = currentCardSetArray.length;
 
-    const cardScores = new Array(cardSetLength);
+    const cardScore = new Array(cardSetLength);
 
-    this.setState({ cardScores });
+    this.setState({ cardScore });
   }
 
   cardSetScore(a, cardID, cardScore) {}
@@ -67,7 +70,7 @@ class FlashCardTest extends React.Component {
   cardScore = pass_fail => {
     this.setState({ thumbClicked: true });
 
-    let cardScores = this.state.cardScores;
+    let cardScore = this.state.cardScore;
 
     const i = this.state.activeCardIndex;
     const scoreIndex = i + 1;
@@ -81,11 +84,11 @@ class FlashCardTest extends React.Component {
     const cardsArrayEdit = cardsArray[i];
     cardsArrayEdit[`pass_fail`] = pass_fail;
 
-    cardScores.splice(i, 1, cardsArrayEdit);
+    cardScore.splice(i, 1, cardsArrayEdit);
 
-    this.setState({ cardScores: cardScores });
+    this.setState({ cardScore: cardScore });
     if (cardArrayLength === scoreIndex) {
-      const passes = cardScores.map(keys => keys["pass_fail"]);
+      const passes = cardScore.map(keys => keys["pass_fail"]);
       const numbOfPasses = passes.reduce((n, x) => n + (x === "pass"), 0);
 
       // console.log(typeof numbOfPasses)
@@ -96,13 +99,24 @@ class FlashCardTest extends React.Component {
         minimumFractionDigits: 0
       });
 
-      console.log("complete");
-      console.log("You scored " + numbOfPasses + " out of " + cardArrayLength);
-      console.log("You scored " + scorePercent);
+      const scoreRatioStatement =
+        "You scored " + numbOfPasses + " out of " + cardArrayLength;
+      const scoreRatio = `${numbOfPasses}\/${cardArrayLength}`;
+
+      const date = Date.now().toString();
+      // const scoreRatioWithDate = { [`${date}`]: scoreRatio };
+      this.setState({ testComplete: true, scorePercent, scoreRatioStatement });
+
+      this.props.addTestScore(date, scoreRatio);
+
+      // console.log("complete");
+      // console.log("You scored " + numbOfPasses + " out of " + cardArrayLength);
+      // console.log("You scored " + scorePercent);
     }
   };
 
   cardRender() {
+    const { testComplete, scorePercent, scoreRatioStatement } = this.state;
     const title = this.props.currentCardSetTitle;
     const cardSet = this.props.currentCardSet;
 
@@ -115,7 +129,11 @@ class FlashCardTest extends React.Component {
     for (let i = 0; i < cardsArray.length; i++) {
       cards.push(
         <div key={i}>
-          <Slide index={i} value={this.props.currentSlide} ref={this.myRef}>
+          <Slide
+            index={i}
+            value={this.props.currentSlide}
+            ref={this.activeSlideRef}
+          >
             <Cards
               cardindex={i}
               card={cardsArray[i]}
@@ -123,7 +141,7 @@ class FlashCardTest extends React.Component {
               //   clickNextButton={this.clickNextButton}
               thumbClicked={this.state.thumbClicked}
               setActiveCard={this.setActiveCard}
-              activeSlideState={this.myRef}
+              activeSlideState={this.activeSlideRef}
             />
           </Slide>
         </div>
@@ -132,9 +150,15 @@ class FlashCardTest extends React.Component {
 
     return (
       <div>
-        {{ title } ? (
+        {testComplete === true ? (
+          <div id="endOfTestContainer">
+            <div>{scorePercent}</div>
+
+            <div>{scoreRatioStatement}</div>
+          </div>
+        ) : (
           <div>
-            <h2>Test: {title}</h2>
+            <h2> {title}</h2>
 
             <div>
               <div id="carouselContainer">
@@ -169,8 +193,6 @@ class FlashCardTest extends React.Component {
               </div>
             </div>
           </div>
-        ) : (
-          <span />
         )}
       </div>
     );
