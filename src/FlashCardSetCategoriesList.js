@@ -21,7 +21,8 @@ class FlashCardSetCategoriesList extends React.Component {
     }
 
     return (
-      <>
+      <div>
+        <h2>Category: {selectedCardCategory}</h2>
         {cardSetTitleIDPair.map(keys => (
           <div key={keys[0]}>
             <span
@@ -33,7 +34,7 @@ class FlashCardSetCategoriesList extends React.Component {
             </span>
           </div>
         ))}
-      </>
+      </div>
     );
   }
 }
