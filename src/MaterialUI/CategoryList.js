@@ -18,6 +18,8 @@ import FolderIcon from "@material-ui/icons/Folder";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { CenterFocusStrong } from "@material-ui/icons";
 
+import "./CategoryList.css";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -28,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     margin: theme.spacing(4, 0, 2),
-    'text-align': 'center'
+    "text-align": "center"
   }
 }));
 
@@ -62,7 +64,7 @@ export default function MaterialCategoryList(props) {
           >
             Categories
           </Typography>
-          <div className={classes.demo}>
+          <div className={classes.demo} id="category_list">
             <List dense={dense}>
               {uniqueCategories.map(uniqueCategory =>
                 uniqueCategory === noChars || uniqueCategory === undefined ? (
