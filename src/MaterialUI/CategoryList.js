@@ -73,7 +73,7 @@ export default function MaterialCategoryList(props) {
                       <FolderIcon />
                     </ListItemIcon>
                     <Link key="" to={`/Category/Unititled`}>
-                      <a> -> No Category Set </a>
+                      -> No Category Set
                     </Link>
                   </ListItem>
                 ) : (
