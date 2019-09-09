@@ -5,7 +5,9 @@ import { firestore } from "./firebase";
 import "react-quill/dist/quill.snow.css";
 import "./CardEditor.css";
 import "./FlashCardEditorMain.css";
-import { get } from "http";
+import PlusButton from "./MaterialUI/AddPlusButton";
+import NewCardButton from "./MaterialUI/CardEditor_NewCard_Button";
+import UpdateCardButton from "./MaterialUI/CardEditor_Update_Button";
 
 class CardEditor extends React.Component {
   constructor() {
@@ -119,18 +121,20 @@ class CardEditor extends React.Component {
     } = this.props;
     const cdate = Date.now();
 
-    firestore
-      .collection(`${userID}`)
-      .doc("Cards")
-      .update({
-        [`${currentCardSetID}.Cards.${cdate}.front`]: `${cardFront}`
-      });
+    if ((cardFront && cardBack) === "") { return null} else {
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${currentCardSetID}.Cards.${cdate}.front`]: `${cardFront}`
+        });
     firestore
       .collection(`${userID}`)
       .doc("Cards")
       .update({
         [`${currentCardSetID}.Cards.${cdate}.back`]: `${cardBack}`
       });
+    }
 
     this.setState({
       cardFront: "",
@@ -170,14 +174,22 @@ class CardEditor extends React.Component {
         </div>
 
         {this.props.editCardState === "updateCard" ? (
-          <div>
-            <button id="updateCard-btn" onClick={this.updateCard}>
-              Update
-            </button>
-            <button onClick={this.newCard}>New Card</button>
+          <div id="update_new_card_button">
+            <span id="updateCard-btn" onClick={this.updateCard}>
+              <UpdateCardButton />
+            </span>
+            <span onClick={this.newCard}>
+              <NewCardButton />
+            </span>
           </div>
         ) : (
-          <button onClick={this.addCard}>Add Card</button>
+          <div id="plus_button">
+            <span onClick={this.addCard}>
+              <PlusButton />
+            </span>
+          </div>
+
+          /* // <button onClick={this.addCard}>Add Card</button> */
         )}
       </div>
     );
