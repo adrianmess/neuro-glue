@@ -68,7 +68,7 @@ export default function MaterialCategoryList(props) {
             <List dense={dense}>
               {uniqueCategories.map(uniqueCategory =>
                 uniqueCategory === noChars || uniqueCategory === undefined ? (
-                  <ListItem>
+                  <ListItem key={'key'}>
                     <ListItemIcon>
                       <FolderIcon />
                     </ListItemIcon>
