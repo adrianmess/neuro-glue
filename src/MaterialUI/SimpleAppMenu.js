@@ -7,6 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import "./SimpleAppMenu.css";
+// import '../App.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,21 +22,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ButtonAppBar(props){
+export default function ButtonAppBar(props) {
   const classes = useStyles();
-	console.log(props)
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id="menuContainer">
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="subtitle2" className={classes.title}>
             <Link to="/Categories" className="headerLinks">
               Categories
@@ -46,13 +39,22 @@ export default function ButtonAppBar(props){
             </Link>
           </Typography>
           <Typography variant="subtitle2" className={classes.title}>
-			  <span onClick={event => props.clearSelectedCardSet(event)}>
-            <Link to="/FlashCardEditor" className="headerLinks">
-              New Flash Card Set
-            </Link>
-			</span>
+            <span onClick={event => props.clearSelectedCardSet(event)}>
+              <Link to="/FlashCardEditor" className="headerLinks">
+                <span className="headerLinks">New Flash Card Set</span>
+              </Link>
+            </span>
           </Typography>
           <Button color="inherit">Logout</Button>
+
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
