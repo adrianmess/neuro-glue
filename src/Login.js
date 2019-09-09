@@ -16,7 +16,6 @@ class Login extends React.Component{
 	}
 	authHandler = async (authData) =>{
 		const userID = await authData.user.uid;
-		this.props.isLoggedInAction(true)
 		this.props.setUserId(userID)
 		// const user = await base.fetch(this.props.userId, { context: this });
 

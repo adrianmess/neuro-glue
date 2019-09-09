@@ -11,13 +11,14 @@ import {
   Redirect
 } from "react-router-dom";
 import FlashCardEditorMain from "./FlashCardEditorMain";
-import Header from "./Header";
 import Login from "./Login";
 import FlashCardSetTitlesByCategory from "./FlashCardSetTitlesByCategory";
-import FlashCardSetsByTitle from "./FlashCardSetsByTitle";
+// import FlashCardSetsByTitle from "./FlashCardSetsByTitle";
 import FlashCardTest from "./FlashCardTest";
 import FlashCardSetCategoriesList from "./FlashCardSetCategoriesList";
 import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";
+import FlashCardSetsByTitle from "./MaterialUI/FlashCardSetsByTitle";
+import MaterialCategoryList from "./MaterialUI/CategoryList";
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +29,6 @@ class App extends React.Component {
       selectedCardIndex: "",
       selectedCard: "",
       notes: {},
-      isLoggedIn: false,
       userID: "",
       cardCategory: "",
       redirect: false,
@@ -49,7 +49,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.isLoggedIn == true) {
+    if (this.state.isLoggedIn === true) {
       const userID = this.state.userID;
       this.refCards = base.syncDoc(`/User/${userID}`, {
         context: this,
@@ -384,14 +384,12 @@ class App extends React.Component {
   };
 
   setCurrentCardSetID = cardSetID => {
-    console.log(cardSetID);
     this.setState({
       currentCardSetID: cardSetID
     });
   };
 
   clearSelectedCardSet = e => {
-    e.preventDefault();
     this.setState({
       currentCardSet: "",
       currentCardSetID: "",
@@ -408,14 +406,11 @@ class App extends React.Component {
     });
   };
 
-  isLoggedInAction = boolean => {
-    boolean
-      ? this.setState({
-          isLoggedIn: true
-        })
-      : this.setState({
-          isLoggedIn: false
-        });
+
+  logout = async event => {
+    event.preventDefault();
+    await firebase.auth().signOut();
+    this.setState({ userID: null });
   };
 
   render() {
@@ -423,10 +418,13 @@ class App extends React.Component {
 
     return (
       <>
-        {this.state.isLoggedIn ? (
+        {this.state.userID ? (
           <div id="main">
             <Router>
-              <SimpleAppMenu clearSelectedCardSet={this.clearSelectedCardSet}/>
+              <SimpleAppMenu
+                clearSelectedCardSet={this.clearSelectedCardSet}
+                logout={this.logout}
+              />
 
               <Route
                 path={`/flashcards/:${this.state.selectedCardCategory}`}
@@ -436,7 +434,13 @@ class App extends React.Component {
               <Route
                 path="/Categories"
                 render={props => (
-                  <FlashCardSetTitlesByCategory
+                  // (
+                  //   <FlashCardSetTitlesByCategory
+                  //     cards={cards}
+                  //     selectCardCategory={this.selectCardCategory}
+                  //   />
+                  // ),
+                  <MaterialCategoryList
                     cards={cards}
                     selectCardCategory={this.selectCardCategory}
                   />
@@ -492,6 +496,7 @@ class App extends React.Component {
                     isLoggedIn={this.state.isLoggedIn}
                     cardCategory={this.state.cardCategory}
                     addOrUpdateCard={this.addOrUpdateCard}
+                    clearSelectedCardSet={this.clearSelectedCardSet}
                     // ####################################
                     userID={this.state.userID}
                     selectedCardSet={this.selectedCardSet}
@@ -523,7 +528,6 @@ class App extends React.Component {
         ) : (
           <div>
             <Login
-              isLoggedInAction={this.isLoggedInAction}
               setUserId={this.setUserId}
             />
           </div>
