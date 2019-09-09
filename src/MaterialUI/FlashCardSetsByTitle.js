@@ -76,9 +76,9 @@ export default function FlashCardSetsByTitle(props) {
 
       {/* <div> */}
       <div className={classes.demo} id="flash_Cards_List">
-        <List dense={dense} >
+        <List dense={dense}>
           {cardTitles.map(cardTitles => (
-            <div>
+            <div key={cardTitles}>
               <ListItem>
                 <ListItemAvatar>
                   <Avatar>
@@ -102,8 +102,12 @@ export default function FlashCardSetsByTitle(props) {
                 <ListItemSecondaryAction>
                   <IconButton edge="end" aria-label="delete">
                     <Link to={"/FlashCardEditor"}>
-                      <span onClick={event => props.setCurrentCardSetID(cardTitles[0])}>
-                      <EditIcon />
+                      <span
+                        onClick={event =>
+                          props.setCurrentCardSetID(cardTitles[0])
+                        }
+                      >
+                        <EditIcon />
                       </span>
                     </Link>
                   </IconButton>
