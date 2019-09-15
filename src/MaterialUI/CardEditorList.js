@@ -60,7 +60,7 @@ export default function MaterialCardEditorList(props) {
               <List dense={dense}>
                 {Object.keys(cardsList).map(key => {
                   return (
-                    <div>
+                    <div key={key}>
                       <div id="card-containerMain">
                         <div
                           key={key}
@@ -95,9 +95,9 @@ export default function MaterialCardEditorList(props) {
                             id="card-button-remove"
                             onClick={event => props.deleteCard(event, key)}
                           >
-                              <IconButton edge="end" aria-label="delete">
-                                <DeleteIcon />
-                              </IconButton>
+                            <IconButton edge="end" aria-label="delete">
+                              <DeleteIcon />
+                            </IconButton>
                           </span>
                         </div>
                       </div>
