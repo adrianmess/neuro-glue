@@ -4,6 +4,10 @@ import CardEditor from "./CardEditor";
 import firebase from "firebase/app";
 import { firestore } from "./firebase";
 
+import DeleteSetButton from "./MaterialUI/CardEditor_DeleteSet_Button";
+
+import MaterialCardEditorList from "./MaterialUI/CardEditorList";
+
 import "./FlashCardEditorMain.css";
 
 class FlashCardEditorMain extends React.Component {
@@ -61,7 +65,7 @@ class FlashCardEditorMain extends React.Component {
     const { cardSetTitle, cardSetCategory } = this.state;
     const cardSetUndefined = allCards[currentCardSetID] === undefined;
     if (
-      (cardSetUndefined === false ) &&
+      cardSetUndefined === false &&
       (cardSetTitle === "" && cardSetCategory === "")
     ) {
       firestore
@@ -97,7 +101,14 @@ class FlashCardEditorMain extends React.Component {
     const { cardSetTitle, cardSetCategory } = this.state;
     // setTimeout(function() {
     const spaceStart = new RegExp(/^\s/);
-    if (cardSetTitle && cardSetCategory !== spaceStart) {
+    const noChars = new RegExp(/^\W*$/);
+
+
+    if (
+      cardSetTitle &&
+      cardSetCategory !== noChars &&
+      currentCardSetID !== ""
+    ) {
       firestore
         .collection(`${userID}`)
         .doc("Cards")
@@ -130,20 +141,17 @@ class FlashCardEditorMain extends React.Component {
     };
 
     this.props.setCurrentCardSetID(cardSetID);
-    console.log("create new card set");
     this.setState({ allCards: newCardSet });
     // RESET
     // this.props.addOrUpdateCard(newCardSet);
   };
 
   addCard = card => {
-    console.log(card);
     const cards = { ...this.state.cardSet };
     cards[`card${Date.now()}`] = card;
 
     this.setState({ cardSet: cards });
   };
-
 
   alertMissingTitle = () => {
     const alert = document.getElementById("alert_missing_title");
@@ -189,7 +197,9 @@ class FlashCardEditorMain extends React.Component {
 
             <span />
             <div id="card_editor_buttons">
-              <button>Delete Set</button>
+              <span>
+                <DeleteSetButton />
+              </span>
               <button
                 onClick={this.props.addOrUpdateCard}
                 // onClick={this.createNewCardSet}
@@ -201,7 +211,7 @@ class FlashCardEditorMain extends React.Component {
           <div id="card_editor_main-list-and-editor">
             <div id="cardListContainer">
               <div id="cardList">
-                <CardEditorList
+                <MaterialCardEditorList
                   id="cardListComponent"
                   cards={this.props.cards}
                   deleteCard={this.props.deleteCard}
@@ -230,6 +240,35 @@ class FlashCardEditorMain extends React.Component {
                   editCardState={this.state.editCardState}
                   setCardState={this.setCardState}
                 />
+                {/* <CardEditorList
+                  id="cardListComponent"
+                  cards={this.props.cards}
+                  deleteCard={this.props.deleteCard}
+                  // selectCard={this.props.selectCard}
+                  // cardCategory={this.props.cardCategory}
+
+                  currentCardSet={this.props.currentCardSet}
+                  currentCardSetID={this.props.currentCardSetID}
+                  currentCardSetCategory={this.props.currentCardSetCategory}
+                  currentCardSetTitle={this.props.currentCardSetTitle}
+                  currentCardSetScores={this.props.currentCardSetScores}
+                  currentCardSetCards={this.props.currentCardSetCards}
+                  currentlySelectedCardID={this.props.currentlySelectedCardID}
+                  currentCardSetCardsCardFront={
+                    this.props.currentCardSetCardsCardFront
+                  }
+                  currentCardSetCardsCardFack={
+                    this.props.currentCardSetCardsCardFack
+                  }
+                  currentCardSetCardsCardFotes={
+                    this.props.currentCardSetCardsCardFotes
+                  }
+                  setCurrentCardSet={this.props.setCurrentCardSet}
+                  selectedCardSet={this.props.selectedCardSet}
+                  editSelectedCard={this.props.editSelectedCard}
+                  editCardState={this.state.editCardState}
+                  setCardState={this.setCardState}
+                /> */}
               </div>
             </div>
 
