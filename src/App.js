@@ -45,7 +45,6 @@ class App extends React.Component {
       currentCardSetCardsCardFotes: ""
     };
     this.addOrUpdateCard = this.addOrUpdateCard.bind(this);
-    // this.addCard = this.addCard.bind(this);
   }
 
   componentDidMount() {
@@ -128,7 +127,7 @@ class App extends React.Component {
         }
       },
       carssd: {
-        CardSetTitle: "JavaScript poop",
+        CardSetTitle: "JavaScript test",
         Cards: {
           date: {
             back: "Answer",
@@ -237,13 +236,34 @@ class App extends React.Component {
     // console.log(this.refCards)
   };
 
-  addTestScore = (date, scoreRatio) => {
+  addTestScore = async (date, scoreRatio) => {
     const { userID, currentCardSetID } = this.state;
-    firestore
+    await firestore
       .collection(`${userID}`)
       .doc("Cards")
       .update({
         [`${currentCardSetID}.Scores.${date}`]: `${scoreRatio}`
+      });
+
+    this.calcTestScoresAvg(userID, currentCardSetID);
+  };
+
+  // generate score average and update to firestore
+  calcTestScoresAvg = (userID, currentCardSetID) => {
+    const { cards } = this.state;
+    const currentCardScores = cards[currentCardSetID]["Scores"];
+    const scores = Object.values(currentCardScores).map(x => eval(x));
+
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+    const addedScores = scores.reduce(reducer);
+    const scoreAvg = ((addedScores / scores.length) * 100).toFixed(0);
+
+    firestore
+      .collection(`${userID}`)
+      .doc("Cards")
+      .update({
+        [`${currentCardSetID}.ScoreAverage`]: scoreAvg
       });
   };
 
@@ -406,7 +426,6 @@ class App extends React.Component {
     });
   };
 
-
   logout = async event => {
     event.preventDefault();
     await firebase.auth().signOut();
@@ -527,9 +546,7 @@ class App extends React.Component {
           </div>
         ) : (
           <div>
-            <Login
-              setUserId={this.setUserId}
-            />
+            <Login setUserId={this.setUserId} />
           </div>
         )}
       </>
