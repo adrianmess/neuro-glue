@@ -215,8 +215,6 @@ class FlashCardEditorMain extends React.Component {
                   id="cardListComponent"
                   cards={this.props.cards}
                   deleteCard={this.props.deleteCard}
-                  // selectCard={this.props.selectCard}
-                  // cardCategory={this.props.cardCategory}
 
                   currentCardSet={this.props.currentCardSet}
                   currentCardSetID={this.props.currentCardSetID}
@@ -240,35 +238,6 @@ class FlashCardEditorMain extends React.Component {
                   editCardState={this.state.editCardState}
                   setCardState={this.setCardState}
                 />
-                {/* <CardEditorList
-                  id="cardListComponent"
-                  cards={this.props.cards}
-                  deleteCard={this.props.deleteCard}
-                  // selectCard={this.props.selectCard}
-                  // cardCategory={this.props.cardCategory}
-
-                  currentCardSet={this.props.currentCardSet}
-                  currentCardSetID={this.props.currentCardSetID}
-                  currentCardSetCategory={this.props.currentCardSetCategory}
-                  currentCardSetTitle={this.props.currentCardSetTitle}
-                  currentCardSetScores={this.props.currentCardSetScores}
-                  currentCardSetCards={this.props.currentCardSetCards}
-                  currentlySelectedCardID={this.props.currentlySelectedCardID}
-                  currentCardSetCardsCardFront={
-                    this.props.currentCardSetCardsCardFront
-                  }
-                  currentCardSetCardsCardFack={
-                    this.props.currentCardSetCardsCardFack
-                  }
-                  currentCardSetCardsCardFotes={
-                    this.props.currentCardSetCardsCardFotes
-                  }
-                  setCurrentCardSet={this.props.setCurrentCardSet}
-                  selectedCardSet={this.props.selectedCardSet}
-                  editSelectedCard={this.props.editSelectedCard}
-                  editCardState={this.state.editCardState}
-                  setCardState={this.setCardState}
-                /> */}
               </div>
             </div>
 
