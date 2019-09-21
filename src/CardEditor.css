@@ -1,6 +1,3 @@
-#reactQuill-container {
-  position: fixed; }
-
 #bottom-quill > div:nth-child(1) > div:nth-child(1) {
   position: absolute;
   top: 0;
@@ -8,3 +5,32 @@
 
 #reactQuill-subContainer {
   position: relative; }
+
+#card-containerMain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+#card-container {
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center; }
+
+#card-button-remove {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+#update_new_card_button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  margin: 20px auto; }

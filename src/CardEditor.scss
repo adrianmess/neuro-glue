@@ -4,7 +4,7 @@
   // width: 372px;
   // float: right;
   // margin-right: 100px;
-  position:fixed;
+  // position:fixed;
 }
 
 #bottom-quill > div:nth-child(1) > div:nth-child(1) {
@@ -15,4 +15,25 @@
 
 #reactQuill-subContainer{
   position: relative;
+}
+
+#card-containerMain{
+      display: flex;
+    // flex-direction: column;
+        align-items: center;
+}
+
+#card-container{
+  align-self: center;
+}
+
+#card-button-remove{
+          display: flex;
+              justify-content: center;
+}
+
+#update_new_card_button{
+    display: flex;
+    justify-content: space-around;
+        margin: 20px auto;
 }
