@@ -29,7 +29,7 @@ h2 {
 
 #input-no-title {
   height: 23px;
-  border: none;
+  border: initial;
   text-decoration: underline;
   -webkit-text-decoration-color: #3f51b542;
   text-decoration-color: #3f51b542; }

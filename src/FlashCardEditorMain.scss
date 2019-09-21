@@ -1,9 +1,3 @@
-// #cardEditor,
-// #flashCardEditorContainer_top_fixed,
-// #flashCardEditor_input_fields,
-// #card_editor_buttons{
-// position: static
-// }
 
 #flashCardEditorContainer{
 	    margin-top: 5px;
@@ -33,7 +27,7 @@ h2 {
 
 #input-no-title {
     height: 23px;
-	border: none;
+	border: initial;
 	    text-decoration: underline;
     text-decoration-color: #3f51b542;
 }
