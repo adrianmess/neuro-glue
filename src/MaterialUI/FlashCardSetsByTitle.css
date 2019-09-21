@@ -5,7 +5,6 @@
 
 #flash_cards_list {
   height: 100vh;
-  min-width: 320px;
   overflow: scroll; }
 
 #flash_cards_header {
