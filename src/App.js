@@ -443,6 +443,7 @@ class App extends React.Component {
               <SimpleAppMenu
                 clearSelectedCardSet={this.clearSelectedCardSet}
                 logout={this.logout}
+                selectedCardCategory={this.selectedCardCategory}
               />
 
               <Route
