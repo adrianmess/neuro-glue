@@ -5,26 +5,72 @@
 // position: static
 // }
 
+#flashCardEditorContainer{
+	    margin-top: 5px;
+}
+
+#flashCardEditorContainer_top_fixed{
+	display: flex;
+    flex-direction: column;
+}
+
+h2 {
+	    text-align: center;
+}
+
+#flashCardEditor_input_fields{
+	display:flex;
+	    align-self: center;
+}
+
+#input-with-title {
+    height: 23px;
+    border-radius: 3px;
+    border-style: groove;
+    border-color: #f0f8ff00;;
+    border-width: 2px;
+}
+
+#input-no-title {
+    height: 23px;
+	border: none;
+	    text-decoration: underline;
+    text-decoration-color: #3f51b542;
+}
+
+#card_editor_main-list-and-editor{
+	display: flex;
+    flex-direction: column-reverse;
+}
+
+#card_editor_buttons{
+      display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 #cardListContainer{
 overflow: hidden;
 height: 100%;
+align-self: center;
 }
 
 #cardList > div {
 	height:100%
 }
 
-#cardEditor {
-	height: 148px;
-	margin-bottom: 31px;
-}
+// #cardEditor {
+// 	height: 148px;
+// 	margin-bottom: 31px;
+// }
 #cardList {
 	// float: left;
 	/* position: fixed; */
-	    overflow: auto;
+	    // overflow: auto;
 	display: flex;
 	flex-direction: column-reverse;
-	align-items: center;
+	// align-items: center;
+	    // margin-left: 10vw;
 	height: 100%;
 }
 
@@ -33,43 +79,57 @@ height: 100%;
 	position: absolute;
 }
 
-/* Small devices (small phones, 599px and down) */
-@media only screen and (max-width: 599px) {
+//REACT QUILL TARGETING
 
-	#flashCardEditorContainer{
-		height: 100%;
-	// 	    display: flex;
-    // flex-direction: column-reverse;
-	}
-	#flashCardEditorContainer_top_fixed{
-		display: flex;
-		flex-direction: row;
-	}
-	#flashCardEditor_input_fields{
-	// position: fixed;
-    // margin-top: -5vh;
-	}
-	#card_editor_main-list-and-editor{
-		display: flex;
-		flex-direction: column-reverse;
-		height: 100%;
-	}
-	#cardEditor{
-
-		float: initial;
-    	margin-right: initial;
-    	margin-top: initial;
-	}
-	#cardList{
-		height: 85%;
-	}
-	#reactQuill-container{
-		    left: 0px;
-			right: 0px;
-			// transform: scale(0.8);
-
-	}
+.reactQuillCustom > div > div {
+	overflow: scroll
 }
+
+.reactQuillCustom > div > div > *{
+width: max-content;
+}
+
+#card-container{
+	max-width: 80vw;
+}
+
+/* Small devices (small phones, 599px and down) */
+// @media only screen and (max-width: 599px) {
+
+// 	#flashCardEditorContainer{
+// 		height: 100%;
+// 	// 	    display: flex;
+//     // flex-direction: column-reverse;
+// 	}
+// 	#flashCardEditorContainer_top_fixed{
+// 		display: flex;
+// 		flex-direction: row;
+// 	}
+// 	#flashCardEditor_input_fields{
+// 	// position: fixed;
+//     // margin-top: -5vh;
+// 	}
+// 	#card_editor_main-list-and-editor{
+// 		display: flex;
+// 		flex-direction: column-reverse;
+// 		height: 100%;
+// 	}
+// 	#cardEditor{
+
+// 		float: initial;
+//     	margin-right: initial;
+//     	margin-top: initial;
+// 	}
+// 	#cardList{
+// 		height: 85%;
+// 	}
+// 	#reactQuill-container{
+// 		    left: 0px;
+// 			right: 0px;
+// 			// transform: scale(0.8);
+
+// 	}
+// }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {}
