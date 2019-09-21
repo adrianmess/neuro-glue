@@ -1,12 +1,3 @@
-#reactQuill-container{
-  // box-sizing: border-box;
-  // width: calc(100% - 400px);
-  // width: 372px;
-  // float: right;
-  // margin-right: 100px;
-  // position:fixed;
-}
-
 #bottom-quill > div:nth-child(1) > div:nth-child(1) {
     position: absolute;
     top: 0;
@@ -19,7 +10,6 @@
 
 #card-containerMain{
       display: flex;
-    // flex-direction: column;
         align-items: center;
 }
 
