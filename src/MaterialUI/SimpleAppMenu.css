@@ -3,4 +3,8 @@
   color: white; }
 
 #menuContainer {
-  margin-bottom: 3vh; }
+  margin-bottom: 2vh; }
+
+#header-title {
+  -ms-grid-column-align: center;
+  justify-self: center; }
