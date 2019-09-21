@@ -1,5 +1,4 @@
 import React from "react";
-import CardEditorList from "./CardEditorList";
 import CardEditor from "./CardEditor";
 import firebase from "firebase/app";
 import { firestore } from "./firebase";
