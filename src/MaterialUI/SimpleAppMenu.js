@@ -64,7 +64,7 @@ export default function ButtonAppBar(props) {
     <AppBar position="static">
       <MyToolbar>
         <span id="header-content-left"></span>
-        <p id="header-title">Neuro Glue</p>
+        <h2 id="header-title">Neuro Glue</h2>
         <MyButton
           aria-controls="simple-menu"
           aria-haspopup="true"
