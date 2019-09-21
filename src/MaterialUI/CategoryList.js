@@ -3,20 +3,11 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FolderIcon from "@material-ui/icons/Folder";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { CenterFocusStrong } from "@material-ui/icons";
+
 
 import "./CategoryList.css";
 
@@ -49,14 +40,16 @@ export default function MaterialCategoryList(props) {
 
   const allCards = props.cards;
   const categories = Object.keys(allCards).map(key => allCards[key].Category);
-  const uniqueCategories = Array.from(new Set(categories));
-
   const noChars = new RegExp(/^\W*$/);
+  const uniqueCategories = Array.from(new Set(categories))
+                                .filter(x => (x !== ("")));
+
+
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+    <div className={classes.root} id="category_list_main">
+      <Grid container spacing={2} id="grid-main">
+        <Grid item xs={12} md={12}>
           <Typography
             variant="h6"
             className={classes.title}
@@ -68,7 +61,7 @@ export default function MaterialCategoryList(props) {
             <List dense={dense}>
               {uniqueCategories.map(uniqueCategory =>
                 uniqueCategory === noChars || uniqueCategory === undefined ? (
-                  <ListItem key={'key'}>
+                  <ListItem key={"key"}>
                     <ListItemIcon>
                       <FolderIcon />
                     </ListItemIcon>
@@ -87,11 +80,17 @@ export default function MaterialCategoryList(props) {
                       <ListItemIcon>
                         <FolderIcon />
                       </ListItemIcon>
-                      <Link to={`/Category/${uniqueCategory}`}>
-                        <ListItemText
+                      <Link
+                        to={`/Category/${uniqueCategory}`}
+                        underline="hover"
+                      >
+                        {" "}
+                        {uniqueCategory}
+                        {/* <ListItemText
                           primary={uniqueCategory}
                           secondary={secondary ? "Secondary text" : null}
-                        />
+                          underline="hover"
+                        /> */}
                       </Link>
                     </ListItem>
                   </div>
