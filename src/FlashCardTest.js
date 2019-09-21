@@ -36,17 +36,18 @@ class FlashCardTest extends React.Component {
   componentDidMount() {
     const { currentCardSet } = this.props;
 
-    const currentCardSetArray = Object.keys(currentCardSet).map(
-      key => currentCardSet
-    );
+    if (currentCardSet !== undefined) {
+      const currentCardSetArray = Object.keys(currentCardSet).map(
+        key => currentCardSet
+      );
+      this.setState({ cardSetLength: currentCardSetArray.length });
 
-    this.setState({ cardSetLength: currentCardSetArray.length });
+      let cardSetLength = currentCardSetArray.length;
 
-    let cardSetLength = currentCardSetArray.length;
+      const cardScore = new Array(cardSetLength);
 
-    const cardScore = new Array(cardSetLength);
-
-    this.setState({ cardScore });
+      this.setState({ cardScore });
+    }
   }
 
   cardSetScore(a, cardID, cardScore) {}
@@ -120,6 +121,9 @@ class FlashCardTest extends React.Component {
     const title = this.props.currentCardSetTitle;
     const cardSet = this.props.currentCardSet;
 
+    if (cardSet === undefined) {
+      return <div>Card Set Empty - Please Add Cards</div>;
+    }
     const cardsArray = Object.keys(cardSet).map(key =>
       Object.assign({ pass_fail: "" }, { cardID: key }, cardSet[key])
     );
