@@ -41,15 +41,6 @@ class CardEditor extends React.Component {
     this.props.setCardEditorHeight(this.quillContainer.current.clientHeight);
   };
 
-  // componentDidMount = () => {
-
-  // const topToolBar = document.getElementsByClassName('ql-toolbar')[0];
-  // const bottomToolBar = document.getElementsByClassName('ql-toolbar')[1];
-
-  // topToolBar.style.zIndex="101";
-  // bottomToolBar.style.zIndex="100";
-  // };
-
   topActive() {
     const topToolBar = document.getElementsByClassName("ql-toolbar")[0];
     const bottomToolBar = document.getElementsByClassName("ql-toolbar")[1];
@@ -94,12 +85,7 @@ class CardEditor extends React.Component {
       back: cardBack
     };
 
-    console.log(card);
     this.props.addCard(card);
-
-    // const cardIndex = `card${Date.now()}`;
-
-    // this.props.addCard(date, card);
   };
   // ############################################
 
@@ -121,19 +107,21 @@ class CardEditor extends React.Component {
     } = this.props;
     const cdate = Date.now();
 
-    if ((cardFront && cardBack) === "") { return null} else {
+    if ((cardFront && cardBack) === "") {
+      return null;
+    } else {
       firestore
         .collection(`${userID}`)
         .doc("Cards")
         .update({
           [`${currentCardSetID}.Cards.${cdate}.front`]: `${cardFront}`
         });
-    firestore
-      .collection(`${userID}`)
-      .doc("Cards")
-      .update({
-        [`${currentCardSetID}.Cards.${cdate}.back`]: `${cardBack}`
-      });
+      firestore
+        .collection(`${userID}`)
+        .doc("Cards")
+        .update({
+          [`${currentCardSetID}.Cards.${cdate}.back`]: `${cardBack}`
+        });
     }
 
     this.setState({
@@ -161,6 +149,7 @@ class CardEditor extends React.Component {
               name="front"
               value={this.state.cardFront ? this.state.cardFront : ""}
               onChange={this.handleChangeFront}
+              className="reactQuillCustom"
             />
           </div>
 
@@ -169,6 +158,7 @@ class CardEditor extends React.Component {
               name="back"
               value={this.state.cardBack ? this.state.cardBack : ""}
               onChange={this.handleChangeBack}
+              className="reactQuillCustom"
             />
           </div>
         </div>
@@ -188,8 +178,6 @@ class CardEditor extends React.Component {
               <PlusButton />
             </span>
           </div>
-
-          /* // <button onClick={this.addCard}>Add Card</button> */
         )}
       </div>
     );
