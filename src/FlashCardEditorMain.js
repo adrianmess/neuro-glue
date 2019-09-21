@@ -5,10 +5,12 @@ import firebase from "firebase/app";
 import { firestore } from "./firebase";
 
 import DeleteSetButton from "./MaterialUI/CardEditor_DeleteSet_Button";
+import CategorySelect from "./MaterialUI/CardEditor_CategorySelect_Button";
 
 import MaterialCardEditorList from "./MaterialUI/CardEditorList";
 
 import "./FlashCardEditorMain.css";
+import { ContactSupportOutlined } from "@material-ui/icons";
 
 class FlashCardEditorMain extends React.Component {
   constructor(props) {
@@ -25,7 +27,8 @@ class FlashCardEditorMain extends React.Component {
       cardFront: "",
       cardBack: "",
       cardNote: "",
-      editCardState: ""
+      editCardState: "",
+      uniqueCategories: []
     };
 
     this.cardEditorRef = React.createRef();
@@ -63,10 +66,15 @@ class FlashCardEditorMain extends React.Component {
     const allCards = { ...this.props.cards };
     const { currentCardSetID, userID } = this.props;
     const { cardSetTitle, cardSetCategory } = this.state;
-    const cardSetUndefined = allCards[currentCardSetID] === undefined;
+    // const cardSetUndefined = allCards[currentCardSetID] === undefined;
+    const cardSetUndefined = Object.values(x => allCards[currentCardSetID][x])
+      .length;
+    // const noChars = new RegExp(/^\W*$/);
+
     if (
-      cardSetUndefined === false &&
-      (cardSetTitle === "" && cardSetCategory === "")
+      cardSetUndefined === (undefined || 0) &&
+      cardSetTitle === "" &&
+      cardSetCategory === ""
     ) {
       firestore
         .collection(`${userID}`)
@@ -74,6 +82,7 @@ class FlashCardEditorMain extends React.Component {
         .update({
           [`${currentCardSetID}`]: firebase.firestore.FieldValue.delete()
         });
+      this.props.clearSelectedCardSet();
     }
   };
 
@@ -84,11 +93,11 @@ class FlashCardEditorMain extends React.Component {
 
     // this.props.selectedCardSet();
   };
-  handleCategoryChange = event => {
-    this.setState({
-      cardSetCategory: event.target.value
-    });
-  };
+  // handleCategoryChange = event => {
+  //   this.setState({
+  //     cardSetCategory: event.target.value
+  //   });
+  // };
 
   setCardEditorHeight = height => {
     document
@@ -99,14 +108,15 @@ class FlashCardEditorMain extends React.Component {
   componentDidUpdate() {
     const { currentCardSetID, userID } = this.props;
     const { cardSetTitle, cardSetCategory } = this.state;
-    // setTimeout(function() {
     const spaceStart = new RegExp(/^\s/);
     const noChars = new RegExp(/^\W*$/);
 
-
+    console.log("component did update");
+    console.log(cardSetTitle);
+    console.log(cardSetCategory);
     if (
       cardSetTitle &&
-      cardSetCategory !== noChars &&
+      cardSetCategory !== undefined &&
       currentCardSetID !== ""
     ) {
       firestore
@@ -125,6 +135,12 @@ class FlashCardEditorMain extends React.Component {
       // }, 2000);
     }
   }
+
+  updateCategory = category => {
+    this.setState({
+      cardSetCategory: category
+    });
+  };
 
   selectedCards() {}
 
@@ -167,6 +183,19 @@ class FlashCardEditorMain extends React.Component {
     });
   };
 
+  cardListEmptyCheck = e => {
+    e.preventDefault();
+    const cardSet = this.props.cards;
+    const cardSetID = this.props.currentCardSetID;
+    const cards = cardSet[cardSetID];
+    const cardsListLength = Object.keys(cards["Cards"]).length;
+    if (cardsListLength === 0) {
+      this.setState({
+        editCardState: ""
+      });
+    }
+  };
+
   render() {
     return (
       <>
@@ -177,35 +206,55 @@ class FlashCardEditorMain extends React.Component {
         </div>
         <div id="flashCardEditorContainer">
           <div id="flashCardEditorContainer_top_fixed">
+            <h2>Flash Card Editor</h2>
             <div id="flashCardEditor_input_fields">
-              <p>
+              {this.state.cardSetTitle !== "" ? (
                 <input
-                  placeholder="FlashCard Set Title"
+                  id="input-with-title"
+                  placeholder=""
                   type="text"
                   onChange={this.handleTitleChange}
                   value={this.state.cardSetTitle}
                 />
-                <br />
+              ) : (
                 <input
-                  placeholder="FlashCard Set Category"
+                  id="input-no-title"
+                  placeholder="Title"
                   type="text"
-                  onChange={this.handleCategoryChange}
-                  value={this.state.cardSetCategory}
+                  onChange={this.handleTitleChange}
+                  value={this.state.cardSetTitle}
                 />
-              </p>
+              )}
+
+              <br />
+              {/* <input
+                placeholder="FlashCard Set Category"
+                type="text"
+                onChange={this.handleCategoryChange}
+                value={this.state.cardSetCategory}
+              /> */}
             </div>
 
-            <span />
             <div id="card_editor_buttons">
-              <span>
+              <div id="DeleteSetButton">
                 <DeleteSetButton />
-              </span>
-              <button
+              </div>
+              <div id="SelectCategoryButton">
+                <CategorySelect
+                  cards={this.props.cards}
+                  currentCardSetID={this.props.currentCardSetID}
+                  cardSetCategory={this.state.cardSetCategory}
+                  currentCardSetID={this.props.currentCardSetID}
+                  userID={this.props.userID}
+                  updateCategory={this.updateCategory}
+                />
+              </div>
+              {/* <button
                 onClick={this.props.addOrUpdateCard}
                 // onClick={this.createNewCardSet}
               >
                 Save
-              </button>
+              </button> */}
             </div>
           </div>
           <div id="card_editor_main-list-and-editor">
@@ -215,7 +264,7 @@ class FlashCardEditorMain extends React.Component {
                   id="cardListComponent"
                   cards={this.props.cards}
                   deleteCard={this.props.deleteCard}
-
+                  cardListEmptyCheck={this.cardListEmptyCheck}
                   currentCardSet={this.props.currentCardSet}
                   currentCardSetID={this.props.currentCardSetID}
                   currentCardSetCategory={this.props.currentCardSetCategory}
