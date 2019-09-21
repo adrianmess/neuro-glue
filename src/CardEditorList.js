@@ -1,6 +1,6 @@
 import React from "react";
 import renderHTML from "react-render-html";
-import './FlashCardEditorMain.css';
+import "./FlashCardEditorMain.css";
 
 class CardEditorList extends React.Component {
   constructor() {
@@ -26,7 +26,7 @@ class CardEditorList extends React.Component {
       return Object.keys(cardsList).map(key => {
         return (
           <div>
-            <div>
+            <div id="card-containerMain">
               <div
                 key={key}
                 id="card-container"
