@@ -12,7 +12,6 @@ import {
 } from "react-router-dom";
 import FlashCardEditorMain from "./FlashCardEditorMain";
 import Login from "./Login";
-import FlashCardSetTitlesByCategory from "./FlashCardSetTitlesByCategory";
 import FlashCardTest from "./FlashCardTest";
 import FlashCardSetCategoriesList from "./FlashCardSetCategoriesList";
 import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";
@@ -453,12 +452,6 @@ class App extends React.Component {
               <Route
                 path="/Categories"
                 render={props => (
-                  // (
-                  //   <FlashCardSetTitlesByCategory
-                  //     cards={cards}
-                  //     selectCardCategory={this.selectCardCategory}
-                  //   />
-                  // ),
                   <MaterialCategoryList
                     cards={cards}
                     selectCardCategory={this.selectCardCategory}
