@@ -264,23 +264,7 @@ class FlashCardEditorMain extends React.Component {
                   cards={this.props.cards}
                   deleteCard={this.props.deleteCard}
                   cardListEmptyCheck={this.cardListEmptyCheck}
-                  currentCardSet={this.props.currentCardSet}
                   currentCardSetID={this.props.currentCardSetID}
-                  currentCardSetCategory={this.props.currentCardSetCategory}
-                  currentCardSetTitle={this.props.currentCardSetTitle}
-                  currentCardSetScores={this.props.currentCardSetScores}
-                  currentCardSetCards={this.props.currentCardSetCards}
-                  currentlySelectedCardID={this.props.currentlySelectedCardID}
-                  currentCardSetCardsCardFront={
-                    this.props.currentCardSetCardsCardFront
-                  }
-                  currentCardSetCardsCardFack={
-                    this.props.currentCardSetCardsCardFack
-                  }
-                  currentCardSetCardsCardFotes={
-                    this.props.currentCardSetCardsCardFotes
-                  }
-                  setCurrentCardSet={this.props.setCurrentCardSet}
                   selectedCardSet={this.props.selectedCardSet}
                   editSelectedCard={this.props.editSelectedCard}
                   editCardState={this.state.editCardState}
@@ -309,20 +293,6 @@ class FlashCardEditorMain extends React.Component {
                 //   ############################
                 userID={this.props.userID}
                 currentCardSetID={this.props.currentCardSetID}
-                currentCardSetCategory={this.props.currentCardSetCategory}
-                currentCardSetTitle={this.props.currentCardSetTitle}
-                currentCardSetScores={this.props.currentCardSetScores}
-                currentCardSetCards={this.props.currentCardSetCards}
-                currentlySelectedCardID={this.props.currentlySelectedCardID}
-                currentCardSetCardsCardFront={
-                  this.props.currentCardSetCardsCardFront
-                }
-                currentCardSetCardsCardFack={
-                  this.props.currentCardSetCardsCardFack
-                }
-                currentCardSetCardsCardFotes={
-                  this.props.currentCardSetCardsCardFotes
-                }
               />
             </div>
           </div>

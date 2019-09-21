@@ -35,12 +35,7 @@ class App extends React.Component {
       currentCardSet: "",
       currentCardSetCategory: "",
       currentCardSetTitle: "",
-      currentCardSetScores: "",
-      currentCardSetCards: "",
-      currentlySelectedCardID: "",
-      currentCardSetCardsCardFront: "",
-      currentCardSetCardsCardFack: "",
-      currentCardSetCardsCardFotes: ""
+      currentCardSetScores: ""
     };
     this.addOrUpdateCard = this.addOrUpdateCard.bind(this);
   }
@@ -512,26 +507,10 @@ class App extends React.Component {
                     // ####################################
                     userID={this.state.userID}
                     selectedCardSet={this.selectedCardSet}
-                    setCurrentCardSet={this.setCurrentCardSet}
                     saveCurrentCardSet={this.saveCurrentCardSet}
                     setCurrentCardSetID={this.setCurrentCardSetID}
                     editSelectedCard={this.editSelectedCard}
-                    currentCardSet={this.state.currentCardSet}
                     currentCardSetID={this.state.currentCardSetID}
-                    currentCardSetCategory={this.state.currentCardSetCategory}
-                    currentCardSetTitle={this.state.currentCardSetTitle}
-                    currentCardSetScores={this.state.currentCardSetScores}
-                    currentCardSetCards={this.state.currentCardSetCards}
-                    currentlySelectedCardID={this.state.currentlySelectedCardID}
-                    currentCardSetCardsCardFront={
-                      this.state.currentCardSetCardsCardFront
-                    }
-                    currentCardSetCardsCardFack={
-                      this.state.currentCardSetCardsCardFack
-                    }
-                    currentCardSetCardsCardFotes={
-                      this.state.currentCardSetCardsCardFotes
-                    }
                   />
                 )}
               />
