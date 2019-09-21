@@ -17,6 +17,7 @@ import FolderIcon from "@material-ui/icons/Folder";
 import DeleteIcon from "@material-ui/icons/Delete";
 import renderHTML from "react-render-html";
 
+import SimpleCard from "./CardEditor_CardList_Card";
 import "../FlashCardEditorMain.css";
 
 const useStyles = makeStyles(theme => ({
@@ -51,6 +52,15 @@ export default function MaterialCardEditorList(props) {
     props.setCardState("updateCard");
   }
 
+  const cardContainer = {
+    marginBottom: "20px"
+  };
+
+  function cardButtonRemove(event, key) {
+    props.deleteCard(event, key);
+    props.cardListEmptyCheck(event, key);
+  }
+
   if (cardsList !== undefined) {
     return (
       <div className={classes.root}>
@@ -73,12 +83,15 @@ export default function MaterialCardEditorList(props) {
                               cardsList[key].back
                             )
                           }
+                          style={cardContainer}
                         >
                           <div id="card-front" name="front">
                             {cardsList[key].front === undefined ? (
                               <span />
                             ) : (
-                              renderHTML(cardsList[key].front)
+                              <SimpleCard
+                                cardFace={renderHTML(cardsList[key].front)}
+                              />
                             )}
                           </div>
 
@@ -86,14 +99,17 @@ export default function MaterialCardEditorList(props) {
                             {cardsList[key].back === undefined ? (
                               <span />
                             ) : (
-                              renderHTML(cardsList[key].back)
+                              // renderHTML(cardsList[key].back)
+                              <SimpleCard
+                                cardFace={renderHTML(cardsList[key].back)}
+                              />
                             )}
                           </div>
                         </div>
                         <div id="trash-button-container">
                           <span
                             id="card-button-remove"
-                            onClick={event => props.deleteCard(event, key)}
+                            onClick={event => cardButtonRemove(event, key)}
                           >
                             <IconButton edge="end" aria-label="delete">
                               <DeleteIcon />
