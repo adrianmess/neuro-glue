@@ -1,6 +1,6 @@
 import React from "react";
 import ReactQuill from "react-quill";
-import { firestore } from "./firebase";
+import { firestore } from "../firebase";
 
 import "react-quill/dist/quill.snow.css";
 import "./CardEditor.css";

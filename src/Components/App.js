@@ -1,8 +1,8 @@
 import React from "react";
-import Note from "./Note";
+import Note from "../Note";
 import "./App.css";
 import firebase from "firebase/app";
-import base, { firestore, firebaseApp } from "./firebase";
+import base, { firestore, firebaseApp } from "../firebase";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,7 +11,7 @@ import {
   Redirect
 } from "react-router-dom";
 import FlashCardEditorMain from "./FlashCardEditorMain";
-import Login from "./Login";
+import Login from "../Login";
 import FlashCardTest from "./FlashCardTest";
 import FlashCardSetCategoriesList from "./FlashCardSetCategoriesList";
 import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";

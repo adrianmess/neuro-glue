@@ -1,7 +1,7 @@
 import React from "react";
 import CardEditor from "./CardEditor";
 import firebase from "firebase/app";
-import { firestore } from "./firebase";
+import { firestore } from "../firebase";
 
 import DeleteSetButton from "./MaterialUI/CardEditor_DeleteSet_Button";
 import CategorySelect from "./MaterialUI/CardEditor_CategorySelect_Button";

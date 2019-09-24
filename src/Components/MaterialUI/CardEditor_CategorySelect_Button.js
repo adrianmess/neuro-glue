@@ -8,7 +8,7 @@ import Select from "@material-ui/core/Select";
 // import PlusButton from "./AddPlusButton";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
-import { firestore } from "../firebase";
+import { firestore } from "../../firebase";
 
 import "./CardEditor_CategorySelect_Button.css";
 import { PlayCircleFilledWhite } from "@material-ui/icons";
