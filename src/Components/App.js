@@ -47,6 +47,7 @@ class App extends React.Component {
         context: this,
         state: "cards"
       });
+
     }
 
     // this.refCards = base.syncDoc('/User/Cards', {
@@ -432,6 +433,7 @@ class App extends React.Component {
       <>
         {this.state.userID ? (
           <div id="main">
+            <div>{this.props.store}</div>
             <Router>
               <SimpleAppMenu
                 clearSelectedCardSet={this.clearSelectedCardSet}
