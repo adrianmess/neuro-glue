@@ -4,11 +4,7 @@ import "./index.css";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 
-import reducer from "./reducers";
-import { createStore } from "redux";
-
-const initialState = { redux: "this is redux initialState" };
-const store = createStore(reducer, initialState);
+import store from "./store/index";
 
 render(
   // <Provider store={store}>
