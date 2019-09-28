@@ -89,14 +89,7 @@ class FlashCardEditorMain extends React.Component {
     this.setState({
       cardSetTitle: event.target.value
     });
-
-    // this.props.selectedCardSet();
   };
-  // handleCategoryChange = event => {
-  //   this.setState({
-  //     cardSetCategory: event.target.value
-  //   });
-  // };
 
   setCardEditorHeight = height => {
     document
@@ -110,9 +103,6 @@ class FlashCardEditorMain extends React.Component {
     const spaceStart = new RegExp(/^\s/);
     const noChars = new RegExp(/^\W*$/);
 
-    console.log("component did update");
-    console.log(cardSetTitle);
-    console.log(cardSetCategory);
     if (
       cardSetTitle &&
       cardSetCategory !== undefined &&
