@@ -8,11 +8,7 @@
   overflow: scroll; }
 
 a {
-  text-decoration: none !important;
   color: black; }
-
-a:hover {
-  text-decoration: underline !important; }
 
 #grid-main {
   -webkit-box-pack: center;

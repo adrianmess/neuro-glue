@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     margin: theme.spacing(4, 0, 2)
+  },
+  link: {
+    textDecoration: "none"
   }
 }));
 
@@ -72,25 +75,31 @@ export default function FlashCardSetsByTitle(props) {
           {cardTitles.map(cardTitles => (
             <div key={cardTitles}>
               <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <AssignmentIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <span
+                <div
                   onClick={event =>
                     setCardTitle(event, cardTitles[1], cardTitles[0])
                   }
+                  id="flash_cards_list_items"
                 >
-                  <ListItemText>
-                    <Link to={`/FlashCardTest/${cardTitles[1]}`} id="link">
+                  <Link
+                    to={`/FlashCardTest/${cardTitles[1]}`}
+                    id="link"
+                    className={classes.link}
+                  >
+                    <ListItem button>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <AssignmentIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+
                       <ListItemText
                         primary={cardTitles[1]}
                         secondary={secondary ? "Secondary text" : null}
                       />
-                    </Link>
-                  </ListItemText>
-                </span>
+                    </ListItem>
+                  </Link>
+                </div>
                 <ListItemSecondaryAction>
                   <IconButton edge="end" aria-label="delete">
                     <Link to={"/FlashCardEditor"}>
