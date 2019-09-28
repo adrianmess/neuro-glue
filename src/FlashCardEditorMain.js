@@ -34,14 +34,6 @@ class FlashCardEditorMain extends React.Component {
     this.createNewCardSet = this.createNewCardSet.bind(this);
   }
 
-  //grab current card set from firebase and store locally in state
-
-  // setDocToState = (allCards) =>{
-  // 	this.setState({
-  // 		allCards: allCards
-  // 	})
-  // }
-
   componentWillMount() {
     const { currentCardSetID } = this.props;
 
@@ -216,12 +208,6 @@ class FlashCardEditorMain extends React.Component {
               )}
 
               <br />
-              {/* <input
-                placeholder="FlashCard Set Category"
-                type="text"
-                onChange={this.handleCategoryChange}
-                value={this.state.cardSetCategory}
-              /> */}
             </div>
 
             <div id="card_editor_buttons">
@@ -238,12 +224,6 @@ class FlashCardEditorMain extends React.Component {
                   updateCategory={this.updateCategory}
                 />
               </div>
-              {/* <button
-                onClick={this.props.addOrUpdateCard}
-                // onClick={this.createNewCardSet}
-              >
-                Save
-              </button> */}
             </div>
           </div>
           <div id="card_editor_main-list-and-editor">
