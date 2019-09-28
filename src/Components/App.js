@@ -18,6 +18,10 @@ import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";
 import FlashCardSetsByTitle from "./MaterialUI/FlashCardSetsByTitle";
 import MaterialCategoryList from "./MaterialUI/CategoryList";
 
+import {useDispatch} from 'react-redux';
+import {changeText} from '../actions';
+import store from "../store/index";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -38,6 +42,7 @@ class App extends React.Component {
       currentCardSetScores: ""
     };
     this.addOrUpdateCard = this.addOrUpdateCard.bind(this);
+     const dispatch = useDispatch();
   }
 
   componentDidMount() {
@@ -47,7 +52,6 @@ class App extends React.Component {
         context: this,
         state: "cards"
       });
-
     }
 
     // this.refCards = base.syncDoc('/User/Cards', {
@@ -426,6 +430,12 @@ class App extends React.Component {
     this.setState({ userID: null });
   };
 
+  changeText = (e)=> {
+    e.preventDefault();
+    console.log("change text")
+    store.dispatch(changeText());
+  }
+
   render() {
     const { currentCardSet, currentCardSetTitle, cards } = this.state;
 
@@ -433,7 +443,8 @@ class App extends React.Component {
       <>
         {this.state.userID ? (
           <div id="main">
-            <div>{this.props.store}</div>
+            <div>{store.getState().test}</div>
+            <button onClick={event => this.changeText(event)}>Change Text</button>
             <Router>
               <SimpleAppMenu
                 clearSelectedCardSet={this.clearSelectedCardSet}
