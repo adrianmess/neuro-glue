@@ -9,7 +9,6 @@ import CategorySelect from "./MaterialUI/CardEditor_CategorySelect_Button";
 import MaterialCardEditorList from "./MaterialUI/CardEditorList";
 
 import "./FlashCardEditorMain.css";
-import { ContactSupportOutlined } from "@material-ui/icons";
 
 class FlashCardEditorMain extends React.Component {
   constructor(props) {
