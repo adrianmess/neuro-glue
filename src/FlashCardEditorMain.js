@@ -54,7 +54,7 @@ class FlashCardEditorMain extends React.Component {
 
   componentWillUnmount = () => {
     const allCards = { ...this.props.cards };
-    const { currentCardSetID, userID } = this.props;
+    const { currentCardSetID, userID, setCurrentCardSetID } = this.props;
     const { cardSetTitle, cardSetCategory } = this.state;
     // const cardSetUndefined = allCards[currentCardSetID] === undefined;
     const cardSetUndefined = Object.values(x => allCards[currentCardSetID][x])
@@ -74,6 +74,8 @@ class FlashCardEditorMain extends React.Component {
         });
       this.props.clearSelectedCardSet();
     }
+
+    setCurrentCardSetID("");
   };
 
   handleTitleChange = event => {
