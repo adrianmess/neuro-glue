@@ -211,14 +211,16 @@ class FlashCardEditorMain extends React.Component {
 
             <div id="card_editor_buttons">
               <div id="DeleteSetButton">
-                <DeleteSetButton />
+                <DeleteSetButton
+                  deleteCardSet={this.props.deleteCardSet}
+                  currentCardSetID={this.props.currentCardSetID}
+                />
               </div>
               <div id="SelectCategoryButton">
                 <CategorySelect
                   cards={this.props.cards}
                   currentCardSetID={this.props.currentCardSetID}
                   cardSetCategory={this.state.cardSetCategory}
-                  currentCardSetID={this.props.currentCardSetID}
                   userID={this.props.userID}
                   updateCategory={this.updateCategory}
                 />

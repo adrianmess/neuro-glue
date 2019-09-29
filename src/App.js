@@ -343,6 +343,21 @@ class App extends React.Component {
     this.setState({ cards });
   };
 
+  deleteCardSet = ( cardSetID) => {
+    const cards = { ...this.state.cards };
+
+    console.log(cards[cardSetID]);
+    console.log(cardSetID);
+
+    if (cards[cardSetID] !== undefined) {
+      delete cards[cardSetID];
+      console.log(cards);
+      this.setState({
+        cards
+      });
+    }
+  };
+
   selectCard = (card, index) =>
     this.setState({
       selectedCard: card,
@@ -504,6 +519,7 @@ class App extends React.Component {
                     cardCategory={this.state.cardCategory}
                     addOrUpdateCard={this.addOrUpdateCard}
                     clearSelectedCardSet={this.clearSelectedCardSet}
+                    deleteCardSet={this.deleteCardSet}
                     // ####################################
                     userID={this.state.userID}
                     selectedCardSet={this.selectedCardSet}
