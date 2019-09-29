@@ -353,7 +353,8 @@ class App extends React.Component {
       delete cards[cardSetID];
       console.log(cards);
       this.setState({
-        cards
+        cards,
+        currentCardSetID: ""
       });
     }
   };
