@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import SmallChart from "../charts/smallChart";
 
 import "./FlashCardSetsByTitle.css";
 
@@ -100,6 +101,7 @@ export default function FlashCardSetsByTitle(props) {
                     </ListItem>
                   </Link>
                 </div>
+                <SmallChart />
                 <ListItemSecondaryAction>
                   <IconButton edge="end" aria-label="delete">
                     <Link to={"/FlashCardEditor"}>
