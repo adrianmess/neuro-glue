@@ -118,6 +118,14 @@ class FlashCardTest extends React.Component {
       };
 
       const arrayOfScores = [];
+      if (cardScoreS === undefined || cardScoreS.length < 1) {
+        arrayOfScores.push(scoreSetObject);
+        this.props.addTestScore(arrayOfScores);
+      } else {
+        const cardScoreSCopy = [...cardScoreS];
+        cardScoreSCopy.push(scoreSetObject);
+        this.props.addTestScore(cardScoreSCopy);
+      }
 
     }
   };
