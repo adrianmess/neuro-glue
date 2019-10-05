@@ -17,8 +17,7 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "react-transition-group": "^4.2.2",
-    "react-with-firebase-auth": "^1.1.0"
+    "react-transition-group": "^4.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
