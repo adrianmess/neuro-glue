@@ -9,13 +9,16 @@ import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import ListItem from "@material-ui/core/ListItem";
 
 import "./SimpleAppMenu.css";
 import { flexbox } from "@material-ui/system";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    justifyContent: "center!important",
+    // height: 100
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -33,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 
 const MyToolbar = styled(Toolbar)({
   display: "grid",
-  gridTemplateColumns: "10% auto 10%",
+  gridTemplateColumns: "auto auto auto auto",
   background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
   border: 0,
   borderRadius: 3,
@@ -46,6 +49,10 @@ const MyToolbar = styled(Toolbar)({
 const MyButton = styled(Button)({
   color: "white",
   justifySelf: "flex-end"
+});
+
+const MyListItem = styled(ListItem)({
+  justifyContent: "center"
 });
 
 export default function ButtonAppBar(props) {
@@ -63,62 +70,25 @@ export default function ButtonAppBar(props) {
   return (
     <AppBar position="static">
       <MyToolbar>
-        <span id="header-content-left"></span>
-        <h2 id="header-title">Neuro Glue</h2>
-        <MyButton
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          {/* <IconButton
-          edge="start"
-          // className={classes.menuButton}
-          color="inherit"
-          aria-label="open drawer"
-        > */}
-          <MenuIcon />
-          {/* </IconButton> */}
-        </MyButton>
+        <div id="header-content-left">
+          <h2 id="header-title">Neuro Glue</h2>
+        </div>
 
-        {props.selectedCardCategory}
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-          style={{ top: "30px", opacity: 0.9}}
-        >
-          <MenuItem
+          <ListItem
+            button
             component={Link}
             to="/Categories"
-            onClick={handleClose}
-            className={classes.menuItem}
           >
             Categories
-          </MenuItem>
-          <MenuItem
-            onClick={handleClose}
-            className={classes.menuItem}
-            component={Link}
-            to="/FlashCards"
-          >
-            FlashCards
-          </MenuItem>
-          <MenuItem
-            onClick={handleClose}
-            className={classes.menuItem}
-            component={Link}
-            to="/FlashCardEditor"
-          >
-            FlashCardEditor
-          </MenuItem>
+          </ListItem>
 
-          <hr />
-          <MenuItem onClick={props.logout} className={classes.menuItem}>
-            Logout
-          </MenuItem>
-        </Menu>
+
+        <ListItem button component={Link} to="/FlashCards">
+          FlashCards
+        </ListItem>
+        <ListItem button component={Link} to="/FlashCardEditor">
+          FlashCardEditor
+        </ListItem>
       </MyToolbar>
     </AppBar>
   );
