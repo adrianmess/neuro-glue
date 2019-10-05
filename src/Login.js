@@ -3,6 +3,20 @@ import PropTypes from "prop-types";
 import firebase from "firebase/app";
 import { firebaseApp } from "./firebase";
 
+import "./Login.css";
+
+import {
+  FacebookLoginButton,
+  GoogleLoginButton,
+  GithubLoginButton,
+  TwitterLoginButton,
+  AmazonLoginButton,
+  InstagramLoginButton,
+  LinkedInLoginButton,
+  MicrosoftLoginButton,
+  BufferLoginButton
+} from "react-social-login-buttons";
+
 class Login extends React.Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
@@ -32,30 +46,25 @@ class Login extends React.Component {
   };
 
   render() {
-
     return (
       <nav id="login">
-        <button
+        <FacebookLoginButton
           className="loginButton"
           id="facebook"
           onClick={() => this.authenticate("Facebook")}
-        >
-          Continue With Facebook
-        </button>
-        <button
+        />
+
+        <GoogleLoginButton
           className="loginButton"
           id="google"
           onClick={() => this.authenticate("Google")}
-        >
-          Continue With Google
-        </button>
-        <button
+        />
+
+        <GithubLoginButton
           className="loginButton"
           id="github"
           onClick={() => this.authenticate("Github")}
-        >
-          Continue With GitHub
-        </button>
+        />
       </nav>
     );
   }
