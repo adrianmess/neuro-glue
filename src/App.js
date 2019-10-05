@@ -15,6 +15,7 @@ import Login from "./Login";
 import FlashCardTest from "./FlashCardTest";
 import FlashCardSetCategoriesList from "./FlashCardSetCategoriesList";
 import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";
+import SimpleAppMenuSmall from "./MaterialUI/SimpleAppMenuSmall";
 import FlashCardSetsByTitle from "./MaterialUI/FlashCardSetsByTitle";
 import MaterialCategoryList from "./MaterialUI/CategoryList";
 
@@ -41,25 +42,22 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.isLoggedIn === true) {
-      const userID = this.state.userID;
-      this.refCards = base.syncDoc(`/User/${userID}`, {
-        context: this,
-        state: "cards"
-      });
-    }
-
+    // if (this.state.isLoggedIn === true) {
+    //   const userID = this.state.userID;
+    //   this.refCards = base.syncDoc(`/User/${userID}`, {
+    //     context: this,
+    //     state: "cards"
+    //   });
+    // }
     // this.refCards = base.syncDoc('/User/Cards', {
     //   context: this,
     //   state: 'cards'
     // });
     // }
-
     // this.refNotes = base.syncDoc('User/Notes', {
     //   context: this,
     //   state: 'notes'
     // })
-
     //keep user signed in after refresh
   }
 
@@ -146,88 +144,39 @@ class App extends React.Component {
     };
 
     this.setState({ cards: data });
-
-    // const JavaSCript = {
-    //   CardSetTitle: "JavaScript Functions",
-    //   Cards: {
-    //     date: {
-    //       back: "Answer",
-    //       front: "the TERM",
-    //       notes: "notes"
-    //     }
-    //   },
-    //   Category: "JavaScript",
-    //   Scores: {
-    //     date: {}
-    //   }
-    // };
-
-    // const carssd = {
-    //   Category: 'JavaSCript',
-    //   CardSetTitle: 'JavaScript Functions',
-    //   Scores: {
-    //     date: 'score'
-    //   },
-    //   Cards: {
-    //     date: {
-    //       front: 'the TERM',
-    //       back: 'Answer',
-    //       notes: 'notes'
-    //     }
-    //   }
-    // };
-
-    // console.log(newCardSet);
-
-    // SET DATA !!!!!
-    // console.log(data)
-
-    // firestore.collection(`${userID}`).doc('Cards').update({
-    //   [`${cardDate}.Cards.date.back`]: "back of card update"
-    // })
-
-    // firestore
-    //   .collection(`${userID}`)
-    //   .doc("Cards")
-    //   .update({ JavaSCript });
-
-    //ADD OR UPDATE cards in CARDS document
-
-    // let cardsRef = firestore.collection(`${userID}`).doc("Cards");
-    // return cardsRef.update({ data });
-
-    // base.syncDoc(`${userID}/Cards`, data)
-    //   .then(() => {
-    //     //document is updated
-    //   }).catch(err => {
-    //     //handle error
-    //   });
   }
-
-  // componentWillUnmount(){
-  //   base.removeBinding(this.refCards);
-  // }
 
   setUserId = uid => {
     this.setState({
       loggedIn: true,
       userID: uid
     });
-    // this.refNotes = base.syncDoc(`User/${uid}`, {
-    //   context: this,
-    //   state: 'cards'
-    // })
+
+    this.checkUIDExistance(uid);
+  };
+
+  checkUIDExistance = async uid => {
+    // console.log("checkUID");
+    await firestore
+      .collection(`${uid}`)
+      .get()
+      .then(query => this.uidExistanceAction(query.size, uid));
+  };
+  uidExistanceAction = async (qSize, uid) => {
+    if (qSize === 0) {
+      await firestore
+        .collection(`${uid}`)
+        .doc(`Cards`)
+        .set({});
+    }
+    this.rebaseSyncCards(uid);
+  };
+  rebaseSyncCards(uid) {
     this.refNotes = base.syncDoc(`${uid}/Cards`, {
       context: this,
       state: "cards"
     });
-
-    // this.refCards = base.syncDoc('User/Cards', {
-    //   context: this,
-    //   state: 'cards'
-    // });
-    // console.log(this.refCards)
-  };
+  }
 
   addTestScore = async (date, scoreRatio) => {
     const { userID, currentCardSetID } = this.state;
@@ -271,48 +220,6 @@ class App extends React.Component {
       .update({
         [`${cardDate}.Cards.date.back`]: "back of card update"
       });
-
-    // console.log(cardsRef)
-    // return cardsRef.update({ data })
-    //   const card = {
-    //    `${cardIndex}`: {
-    //       front: cardFront,
-    //       back: cardBack
-    //     }
-    //   }
-    // console.log(card);
-    // if (this.state.isLoggedIn == false) {
-    //   this.setState({
-    //     cards: card
-    //   })
-
-    //   localStorage
-    //   .setItem('cards',
-    //   JSON.stringify(this.state.cards));
-    // }
-    // localStorage
-    //   .setItem('cards',
-    //     JSON.stringify(this.state.cards));
-
-    // if (this.state.loggedIn == false) {
-    //   localStorage
-    //     .setItem('cards',
-    //       JSON.stringify(this.state.cards));
-    // } else {
-
-    // take copy of existing state
-    //  ## const cards = { ...this.state.cards };
-    // add new card to cards variable
-    // Use Timestamp as keys
-    // ##  cards[`card${Date.now()}`] = card;
-    // set new fish object to state
-    // ##
-    //   this.setState({
-    //     cards,
-    //     selectedCardIndex: '',
-    //     selectedCard: '',
-    //   });
-    // ##
   };
 
   updateCard = (index, cardFront, cardBack) => {
@@ -343,7 +250,7 @@ class App extends React.Component {
     this.setState({ cards });
   };
 
-  deleteCardSet = ( cardSetID) => {
+  deleteCardSet = cardSetID => {
     const cards = { ...this.state.cards };
 
     console.log(cards[cardSetID]);
@@ -449,11 +356,21 @@ class App extends React.Component {
         {this.state.userID ? (
           <div id="main">
             <Router>
-              <SimpleAppMenu
-                clearSelectedCardSet={this.clearSelectedCardSet}
-                logout={this.logout}
-                selectedCardCategory={this.selectedCardCategory}
-              />
+              <div id="SimpleAppMenuSmall">
+                <SimpleAppMenuSmall
+                  clearSelectedCardSet={this.clearSelectedCardSet}
+                  logout={this.logout}
+                  selectedCardCategory={this.selectedCardCategory}
+                />
+              </div>
+
+              <div id="SimpleAppMenu">
+                <SimpleAppMenu
+                  clearSelectedCardSet={this.clearSelectedCardSet}
+                  logout={this.logout}
+                  selectedCardCategory={this.selectedCardCategory}
+                />
+              </div>
 
               <Route
                 path={`/flashcards/:${this.state.selectedCardCategory}`}
