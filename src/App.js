@@ -175,12 +175,15 @@ class App extends React.Component {
   calcTestScoresAvg = (userID, currentCardSetID) => {
     const { cards } = this.state;
     const currentCardScores = cards[currentCardSetID]["Scores"];
-    const scores = Object.values(currentCardScores).map(x => eval(x));
+    const allScores = [];
+    currentCardScores.map(x => allScores.push(parseInt(x.scorePercentAsNum)));
 
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let avg = 0;
+    for (let i = 0; i < allScores.length; i++) {
+      avg += allScores[i];
+    }
 
-    const addedScores = scores.reduce(reducer);
-    const scoreAvg = ((addedScores / scores.length) * 100).toFixed(0);
+    const scoreAvg = (avg / allScores.length).toFixed(0);
 
     firestore
       .collection(`${userID}`)
@@ -191,7 +194,6 @@ class App extends React.Component {
   };
 
   addCard = (date, card) => {
-    console.log(card);
 
     let userID = this.state.userID;
     let cardDate = "card123455187";
