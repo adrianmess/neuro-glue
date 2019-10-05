@@ -32,20 +32,30 @@ class Login extends React.Component {
   };
 
   render() {
+
     return (
-      <nav className="login">
+      <nav id="login">
         <button
-          className="facebook"
+          className="loginButton"
+          id="facebook"
           onClick={() => this.authenticate("Facebook")}
         >
-          Login In With Facebook
+          Continue With Facebook
         </button>
-        {/* <button
-          className="google"
+        <button
+          className="loginButton"
+          id="google"
           onClick={() => this.authenticate("Google")}
         >
-          Login In With Google
-        </button> */}
+          Continue With Google
+        </button>
+        <button
+          className="loginButton"
+          id="github"
+          onClick={() => this.authenticate("Github")}
+        >
+          Continue With GitHub
+        </button>
       </nav>
     );
   }
