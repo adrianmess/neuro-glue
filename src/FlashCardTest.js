@@ -71,6 +71,9 @@ class FlashCardTest extends React.Component {
   cardScore = pass_fail => {
     this.setState({ thumbClicked: true });
 
+    let { cards, currentCardSetID } = this.props;
+    let cardScoreS = cards[currentCardSetID]["Scores"];
+
     let cardScore = this.state.cardScore;
 
     const i = this.state.activeCardIndex;
@@ -108,11 +111,14 @@ class FlashCardTest extends React.Component {
       // const scoreRatioWithDate = { [`${date}`]: scoreRatio };
       this.setState({ testComplete: true, scorePercent, scoreRatioStatement });
 
-      this.props.addTestScore(date, scoreRatio);
+      const scoreSetObject = {
+        Date: date,
+        ScorePercent: scorePercent,
+        ScoreRatio: scoreRatio
+      };
 
-      // console.log("complete");
-      // console.log("You scored " + numbOfPasses + " out of " + cardArrayLength);
-      // console.log("You scored " + scorePercent);
+      const arrayOfScores = [];
+
     }
   };
 
