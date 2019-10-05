@@ -96,6 +96,7 @@ class FlashCardTest extends React.Component {
       const numbOfPasses = passes.reduce((n, x) => n + (x === "pass"), 0);
 
       // console.log(typeof numbOfPasses)
+      const scorePercentAsNum = ((numbOfPasses / cardArrayLength)*100).toFixed(0);
       const scorePercent = Number(
         numbOfPasses / cardArrayLength
       ).toLocaleString(undefined, {
@@ -114,6 +115,7 @@ class FlashCardTest extends React.Component {
       const scoreSetObject = {
         Date: date,
         ScorePercent: scorePercent,
+        scorePercentAsNum: scorePercentAsNum,
         ScoreRatio: scoreRatio
       };
 
@@ -126,7 +128,6 @@ class FlashCardTest extends React.Component {
         cardScoreSCopy.push(scoreSetObject);
         this.props.addTestScore(cardScoreSCopy);
       }
-
     }
   };
 
