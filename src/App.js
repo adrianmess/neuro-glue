@@ -42,7 +42,6 @@ class App extends React.Component {
     this.addOrUpdateCard = this.addOrUpdateCard.bind(this);
   }
 
-
   addOrUpdateCard(newCardSet) {
     let userID = this.state.userID;
     // console.log(this.state)
@@ -160,13 +159,13 @@ class App extends React.Component {
     });
   }
 
-  addTestScore = async (date, scoreRatio) => {
+  addTestScore = async cardScoresArray => {
     const { userID, currentCardSetID } = this.state;
     await firestore
       .collection(`${userID}`)
       .doc("Cards")
       .update({
-        [`${currentCardSetID}.Scores.${date}`]: `${scoreRatio}`
+        [`${currentCardSetID}.Scores`]: cardScoresArray
       });
 
     this.calcTestScoresAvg(userID, currentCardSetID);
@@ -353,7 +352,7 @@ class App extends React.Component {
                   selectedCardCategory={this.selectedCardCategory}
                 />
               </div>
-          <BigChart/>
+              <BigChart />
               <Route
                 path={`/flashcards/:${this.state.selectedCardCategory}`}
                 component={FlashCardEditorMain}
@@ -398,6 +397,7 @@ class App extends React.Component {
                     cards={cards}
                     currentCardSetTitle={currentCardSetTitle}
                     currentCardSet={currentCardSet}
+                    currentCardSetID={this.state.currentCardSetID}
                     addTestScore={this.addTestScore}
                   />
                 )}
