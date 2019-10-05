@@ -8,3 +8,12 @@
 #header-title {
   -ms-grid-column-align: center;
   justify-self: center; }
+
+#simpleAppMenu {
+  height: 100%; }
+
+a {
+  height: 100%;
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important; }
