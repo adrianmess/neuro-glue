@@ -18,6 +18,7 @@ import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";
 import SimpleAppMenuSmall from "./MaterialUI/SimpleAppMenuSmall";
 import FlashCardSetsByTitle from "./MaterialUI/FlashCardSetsByTitle";
 import MaterialCategoryList from "./MaterialUI/CategoryList";
+import BigChart from "./charts/bigChart";
 
 class App extends React.Component {
   constructor(props) {
@@ -352,7 +353,7 @@ class App extends React.Component {
                   selectedCardCategory={this.selectedCardCategory}
                 />
               </div>
-
+          <BigChart/>
               <Route
                 path={`/flashcards/:${this.state.selectedCardCategory}`}
                 component={FlashCardEditorMain}
