@@ -41,25 +41,6 @@ class App extends React.Component {
     this.addOrUpdateCard = this.addOrUpdateCard.bind(this);
   }
 
-  componentDidMount() {
-    // if (this.state.isLoggedIn === true) {
-    //   const userID = this.state.userID;
-    //   this.refCards = base.syncDoc(`/User/${userID}`, {
-    //     context: this,
-    //     state: "cards"
-    //   });
-    // }
-    // this.refCards = base.syncDoc('/User/Cards', {
-    //   context: this,
-    //   state: 'cards'
-    // });
-    // }
-    // this.refNotes = base.syncDoc('User/Notes', {
-    //   context: this,
-    //   state: 'notes'
-    // })
-    //keep user signed in after refresh
-  }
 
   addOrUpdateCard(newCardSet) {
     let userID = this.state.userID;
