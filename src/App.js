@@ -39,92 +39,6 @@ class App extends React.Component {
       currentCardSetTitle: "",
       currentCardSetScores: ""
     };
-    this.addOrUpdateCard = this.addOrUpdateCard.bind(this);
-  }
-
-  addOrUpdateCard(newCardSet) {
-    let userID = this.state.userID;
-    // console.log(this.state)
-    let data = {
-      card: {
-        CardSetTitle: "JavaScript Functions",
-        Cards: {
-          date: {
-            back: "Answer",
-            front: "the TERM",
-            notes: "notes"
-          }
-        },
-        Category: "JavaSCript",
-        Scores: {}
-      },
-      card123455187: {
-        Cards: {
-          "1564655054525": {
-            back: "<p>asdasd</p>",
-            front: "<p><em>asdasd</em></p>"
-          },
-          "1565222606874": {
-            back: "<p>asdasd</p>",
-            front: "<p>asdasd</p>"
-          },
-          "1565233966546": {
-            back: "<p>asdasd</p>",
-            front: "<p>asdasd</p>"
-          },
-          "1565234078559": {
-            back: "<p>asdsad</p>",
-            front: "<p>asdsa</p>"
-          },
-          "1565234164094": {
-            back: "<p>asdasd</p>",
-            front: "<p>asdasd</p>"
-          },
-          "1565234167750": {
-            back: "<p>asdasd</p>",
-            front: "<p>asdasd</p>"
-          },
-          "1565234213617": {
-            back: "<p>asdsad</p>",
-            front: "<p>asdasd</p>"
-          },
-          "1565234284539": {
-            back: "<p>asdasd</p>",
-            front: "<p>asdasd</p>"
-          },
-          "1565234427408": {
-            back: "<p>asdasd</p>",
-            front: "<p>is this being added?</p>"
-          }
-        }
-      },
-      carssd: {
-        CardSetTitle: "JavaScript test",
-        Cards: {
-          date: {
-            back: "Answer",
-            front: "the TERM",
-            notes: "notes"
-          }
-        },
-        Category: "JavaSCript",
-        Scores: {}
-      },
-      opposite: {
-        CardSetTitle: "JavaScript Functions",
-        Cards: {
-          date: {
-            back: "Answer",
-            front: "the TERM",
-            notes: "notes"
-          }
-        },
-        Category: "Ruby",
-        Scores: {}
-      }
-    };
-
-    this.setState({ cards: data });
   }
 
   setUserId = uid => {
@@ -236,12 +150,8 @@ class App extends React.Component {
   deleteCardSet = cardSetID => {
     const cards = { ...this.state.cards };
 
-    console.log(cards[cardSetID]);
-    console.log(cardSetID);
-
     if (cards[cardSetID] !== undefined) {
       delete cards[cardSetID];
-      console.log(cards);
       this.setState({
         cards,
         currentCardSetID: ""
@@ -261,29 +171,7 @@ class App extends React.Component {
       selectedCardCategory: CardCategory,
       redirect: true
     });
-
-    // document.getElementById('routerLink').click()
   };
-
-  // selectedCardSet = () => {
-  //   // event.preventDefault();
-  //   const { cards, currentCardSetID } = this.state;
-  //   // console.log(cards[`${currentCardSetID}`]);
-  //   const cardSet = cards[`${currentCardSetID}`];
-  //   // console.log(Object.keys(cardSet).map(key => cardSet[key]));
-  //   // const list = {};
-  //   // for (const card in cardSet) {
-  //   //   // console.log(cardSet[card]);
-  //   //   const cardsList = cardSet[card];
-  //   //   Object.assign(list, cardsList);
-  //   // }
-
-  //   // if (!cardSetEmpty) {
-  //   //   this.setState({
-  //   //     currentCardSet: list
-  //   //   });
-  //   // }
-  // };
 
   setCurrentCardSetTitle = (cardSetTitle, cardSetID) => {
     this.setState({
@@ -295,7 +183,6 @@ class App extends React.Component {
 
   setCurrentCardSet = cardSetID => {
     const allCards = { ...this.state.cards };
-    // console.log(allCards["1566766055824"]["Cards"]);
     const cards = allCards[cardSetID]["Cards"];
     this.setState({
       currentCardSet: cards
@@ -354,7 +241,6 @@ class App extends React.Component {
                   selectedCardCategory={this.selectedCardCategory}
                 />
               </div>
-              <BigChart />
               <Route
                 path={`/flashcards/:${this.state.selectedCardCategory}`}
                 component={FlashCardEditorMain}
@@ -386,6 +272,7 @@ class App extends React.Component {
                 render={props => (
                   <FlashCardSetsByTitle
                     cards={cards}
+                    currentCardSetID={this.state.currentCardSetID}
                     setCurrentCardSetTitle={this.setCurrentCardSetTitle}
                     setCurrentCardSetID={this.setCurrentCardSetID}
                   />
@@ -419,7 +306,6 @@ class App extends React.Component {
                     selectedCardIndex={this.state.selectedCardIndex}
                     isLoggedIn={this.state.isLoggedIn}
                     cardCategory={this.state.cardCategory}
-                    addOrUpdateCard={this.addOrUpdateCard}
                     clearSelectedCardSet={this.clearSelectedCardSet}
                     deleteCardSet={this.deleteCardSet}
                     // ####################################
