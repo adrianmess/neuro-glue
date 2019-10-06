@@ -124,12 +124,8 @@ class FlashCardEditorMain extends React.Component {
     });
   };
 
-  selectedCards() {}
-
   createNewCardSet = () => {
-    // let cardSetDate = this.state.cardSetDate;
     let cardSetID = Date.now();
-    // const Cards
     let newCardSet = {
       [`cardSet${cardSetID}`]: {
         CardSetTitle: `${this.state.cardSetTitle}`,
@@ -140,8 +136,6 @@ class FlashCardEditorMain extends React.Component {
 
     this.props.setCurrentCardSetID(cardSetID);
     this.setState({ allCards: newCardSet });
-    // RESET
-    // this.props.addOrUpdateCard(newCardSet);
   };
 
   addCard = card => {
