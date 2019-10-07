@@ -17,7 +17,6 @@ import FlashCardSetCategoriesList from "./FlashCardSetCategoriesList";
 import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";
 import SimpleAppMenuSmall from "./MaterialUI/SimpleAppMenuSmall";
 import FlashCardSetsByTitle from "./MaterialUI/FlashCardSetsByTitle";
-import MaterialCategoryList from "./MaterialUI/CategoryList";
 import BigChart from "./charts/bigChart";
 
 class App extends React.Component {
@@ -244,16 +243,6 @@ class App extends React.Component {
               <Route
                 path={`/flashcards/:${this.state.selectedCardCategory}`}
                 component={FlashCardEditorMain}
-              />
-
-              <Route
-                path="/Categories"
-                render={props => (
-                  <MaterialCategoryList
-                    cards={cards}
-                    selectCardCategory={this.selectCardCategory}
-                  />
-                )}
               />
 
               <Route
