@@ -13,6 +13,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import SmallChart from "../charts/smallChart";
 
+import AnimatedMulti from "../Components/react-select/multiple-animated";
+
 import "./FlashCardSetsByTitle.css";
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +47,10 @@ const iconStyle = {
 };
 
 export default function FlashCardSetsByTitle(props) {
+  const [values, setValues] = React.useState({
+    selectedCategories: []
+  });
+
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
@@ -53,12 +59,40 @@ export default function FlashCardSetsByTitle(props) {
     event.preventDefault();
     props.setCurrentCardSetTitle(cardTitle, cardSetID);
   }
+
+  function selectedCategories(categories) {
+    const categoryList = categories.map(x => {
+      return x.value;
+    });
+
+    setValues({
+      selectedCategories: categoryList
+    });
+  }
+
   const cards = props.cards;
 
   const cardTitles = Object.keys(cards).map(cardSetID => [
     cardSetID,
-    cards[cardSetID].CardSetTitle
+    cards[cardSetID].CardSetTitle,
+    cards[cardSetID].Category
   ]);
+
+  const cardTitlesByCategory = cardTitles.filter(x => {
+    const selected = values.selectedCategories;
+
+    for (let i = 0; i < x.length; i++) {
+      for (let b = 0; b < selected.length; b++) {
+        if (x[2] === selected[b]) {
+          return x;
+        }
+      }
+    }
+  });
+
+  const categoriesSelected = cardTitlesByCategory.length !== 0;
+
+
   return (
     <div className={classes.root} id="flash_cards_list_main">
       {/* <Grid item xs={12} md={6}> */}
@@ -69,57 +103,117 @@ export default function FlashCardSetsByTitle(props) {
       >
         Flash Cards
       </Typography>
+      <AnimatedMulti
+        selectedCategories={selectedCategories}
+        cards={props.cards}
+      />
 
-      {/* <div> */}
       <div className={classes.demo} id="flash_cards_list">
-        <List dense={dense}>
-          {cardTitles.map(cardTitles => (
-            <div key={cardTitles}>
-              <ListItem>
-                <div
-                  onClick={event =>
-                    setCardTitle(event, cardTitles[1], cardTitles[0])
-                  }
-                  id="flash_cards_list_items"
-                >
-                  <Link
-                    to={`/FlashCardTest/${cardTitles[1]}`}
-                    id="link"
-                    className={classes.link}
+        {categoriesSelected ? (
+          <List dense={dense}>
+            {cardTitlesByCategory.map(cardTitlesByCategory => (
+              <div key={cardTitlesByCategory}>
+                <ListItem>
+                  <div
+                    onClick={event =>
+                      setCardTitle(event, cardTitlesByCategory[1], cardTitlesByCategory[0])
+                    }
+                    id="flash_cards_list_items"
                   >
-                    <ListItem button>
-                      <ListItemAvatar>
-                        <Avatar>
-                          <AssignmentIcon />
-                        </Avatar>
-                      </ListItemAvatar>
+                    <Link
+                      to={`/FlashCardTest/${cardTitlesByCategory[1]}`}
+                      id="link"
+                      className={classes.link}
+                    >
+                      <ListItem button>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <AssignmentIcon />
+                          </Avatar>
+                        </ListItemAvatar>
 
-                      <ListItemText
-                        primary={cardTitles[1]}
-                        secondary={secondary ? "Secondary text" : null}
-                      />
-                    </ListItem>
-                  </Link>
-                </div>
-                <SmallChart />
-                <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="delete">
-                    <Link to={"/FlashCardEditor"}>
-                      <span
-                        onClick={event =>
-                          props.setCurrentCardSetID(cardTitles[0])
-                        }
-                      >
-                        {" "}
-                        <EditIcon />
-                      </span>
+                        <ListItemText
+                          primary={cardTitlesByCategory[1]}
+                          secondary={secondary ? "Secondary text" : null}
+                        />
+                      </ListItem>
                     </Link>
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            </div>
-          ))}
-        </List>
+                  </div>
+                  <SmallChart
+                    cards={props.cards}
+                    currentCardSetID={cardTitlesByCategory[0]}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton edge="end" aria-label="delete">
+                      <Link to={"/FlashCardEditor"}>
+                        <span
+                          onClick={event =>
+                            props.setCurrentCardSetID(cardTitlesByCategory[0])
+                          }
+                        >
+                          {" "}
+                          <EditIcon />
+                        </span>
+                      </Link>
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </div>
+            ))}
+          </List>
+        ) : (
+          <List dense={dense}>
+            {cardTitles.map(cardTitles => (
+              <div key={cardTitles}>
+                <ListItem>
+                  <div
+                    onClick={event =>
+                      setCardTitle(event, cardTitles[1], cardTitles[0])
+                    }
+                    id="flash_cards_list_items"
+                  >
+                    <Link
+                      to={`/FlashCardTest/${cardTitles[1]}`}
+                      id="link"
+                      className={classes.link}
+                    >
+                      <ListItem button>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <AssignmentIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+
+                        <ListItemText
+                          primary={cardTitles[1]}
+                          secondary={secondary ? "Secondary text" : null}
+                        />
+                      </ListItem>
+                    </Link>
+                  </div>
+                  <SmallChart
+                    cards={props.cards}
+                    currentCardSetID={cardTitles[0]}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton edge="end" aria-label="delete">
+                      <Link to={"/FlashCardEditor"}>
+                        <span
+                          onClick={event =>
+                            props.setCurrentCardSetID(cardTitles[0])
+                          }
+                        >
+                          {" "}
+                          <EditIcon />
+                        </span>
+                      </Link>
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </div>
+            ))}
+          </List>
+        )}
       </div>
     </div>
   );
