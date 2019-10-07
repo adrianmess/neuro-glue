@@ -74,15 +74,6 @@ export default function ButtonAppBar(props) {
           <h2 id="header-title">Neuro Glue</h2>
         </div>
 
-          <ListItem
-            button
-            component={Link}
-            to="/Categories"
-          >
-            Categories
-          </ListItem>
-
-
         <ListItem button component={Link} to="/FlashCards">
           FlashCards
         </ListItem>
