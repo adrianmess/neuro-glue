@@ -4,9 +4,9 @@ import firebase from "firebase/app";
 import { firestore } from "./firebase";
 
 import DeleteSetButton from "./MaterialUI/CardEditor_DeleteSet_Button";
-import CategorySelect from "./MaterialUI/CardEditor_CategorySelect_Button";
 
 import MaterialCardEditorList from "./MaterialUI/CardEditorList";
+import CreatableSingle from "./Components/react-select/CardEditor_CategorySelect_Button";
 
 import "./FlashCardEditorMain.css";
 
@@ -95,7 +95,6 @@ class FlashCardEditorMain extends React.Component {
     const { cardSetTitle, cardSetCategory } = this.state;
     const spaceStart = new RegExp(/^\s/);
     const noChars = new RegExp(/^\W*$/);
-
     if (
       cardSetTitle &&
       cardSetCategory !== undefined &&
@@ -119,9 +118,18 @@ class FlashCardEditorMain extends React.Component {
   }
 
   updateCategory = category => {
+    const { currentCardSetID, userID } = this.props;
+    const { cardSetTitle, cardSetCategory } = this.state;
     this.setState({
       cardSetCategory: category
     });
+
+    firestore
+      .collection(`${userID}`)
+      .doc("Cards")
+      .update({
+        [`${currentCardSetID}.Category`]: `${cardSetCategory}`
+      });
   };
 
   createNewCardSet = () => {
@@ -213,7 +221,7 @@ class FlashCardEditorMain extends React.Component {
                 />
               </div>
               <div id="SelectCategoryButton">
-                <CategorySelect
+                <CreatableSingle
                   cards={this.props.cards}
                   currentCardSetID={this.props.currentCardSetID}
                   cardSetCategory={this.state.cardSetCategory}
