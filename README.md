@@ -1,3 +1,49 @@
+# Neuro Glue
+
+
+#### By Adrian Messado
+[Adrian Messado](https://github.com/adrianmess)
+
+- [Live Demo](https://neuro-glue.firebaseapp.com)
+
+
+## Description
+
+
+## Objectives:
+
+
+## Known Bugs
+  * No known bugs at this time.
+
+## Technologies Used
+
+
+* React
+* Node.js
+* Firebase
+* Firestore
+* JavaScript
+* MaterialUI
+* React-Quill
+* recharts
+* react-select
+* pure-react-carousel
+
+
+## License
+
+* GPL
+
+Adrian Messado © 2019
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
