@@ -22,13 +22,14 @@ class Login extends React.Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.authHandler({ user });
-        this.props.setUserId(user.uid);
+        this.props.setUserId(user.uid, user.photoUrl);
       }
     });
   }
   authHandler = async authData => {
     const userID = await authData.user.uid;
-    this.props.setUserId(userID);
+    const photoURL = await authData.user.photoURL;
+    this.props.setUserId(userID, photoURL);
     // const user = await base.fetch(this.props.userId, { context: this });
 
     // if (!user.owner) {
