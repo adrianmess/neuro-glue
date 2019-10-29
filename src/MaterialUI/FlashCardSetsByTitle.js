@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import SmallChart from "../charts/smallChart";
+import NewFlashCardSetButton from "./NewFlashCardSet_Button";
 
 import AnimatedMulti from "../Components/react-select/multiple-animated";
 
@@ -92,7 +93,6 @@ export default function FlashCardSetsByTitle(props) {
 
   const categoriesSelected = cardTitlesByCategory.length !== 0;
 
-
   return (
     <div className={classes.root} id="flash_cards_list_main">
       {/* <Grid item xs={12} md={6}> */}
@@ -107,7 +107,11 @@ export default function FlashCardSetsByTitle(props) {
         selectedCategories={selectedCategories}
         cards={props.cards}
       />
+      <div id="new_card_button_container">
 
+          <NewFlashCardSetButton />
+
+      </div>
       <div className={classes.demo} id="flash_cards_list">
         {categoriesSelected ? (
           <List dense={dense}>
@@ -116,7 +120,11 @@ export default function FlashCardSetsByTitle(props) {
                 <ListItem>
                   <div
                     onClick={event =>
-                      setCardTitle(event, cardTitlesByCategory[1], cardTitlesByCategory[0])
+                      setCardTitle(
+                        event,
+                        cardTitlesByCategory[1],
+                        cardTitlesByCategory[0]
+                      )
                     }
                     id="flash_cards_list_items"
                   >
