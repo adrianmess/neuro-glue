@@ -9,8 +9,10 @@
 }
 
 #card-containerMain{
-      display: flex;
-        align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 35px;
 }
 
 #card-container{
@@ -25,5 +27,11 @@
 #update_new_card_button{
     display: flex;
     justify-content: space-around;
+    min-height: 52px;
         margin: 20px auto;
+}
+
+#plus_button{
+  min-height: 52px;
+  margin: 20px auto;
 }
