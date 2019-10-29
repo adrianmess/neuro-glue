@@ -4,6 +4,8 @@
 	margin: auto;
 	width: 80vw;
 	max-width:604px;
+	display: flex;
+    flex-direction: column;
 }
 
 #flash_cards_list{
@@ -13,6 +15,10 @@
 
 #flash_cards_header{
 	    text-align: center;
+}
+
+#new_card_button_container{
+	    margin: 0 auto;
 }
 
 #flash_cards_list_items{
