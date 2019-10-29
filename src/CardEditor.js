@@ -1,6 +1,7 @@
 import React from "react";
 import ReactQuill from "react-quill";
 import { firestore } from "./firebase";
+import highlight from "highlight.js";
 
 import "react-quill/dist/quill.snow.css";
 import "./CardEditor.css";
@@ -76,17 +77,17 @@ class CardEditor extends React.Component {
   // ############################################
 
   // ############################################
-  createCard = event => {
-    event.preventDefault();
-    const { cardFront, cardBack } = this.state;
-    // const date = Date.now();
-    const card = {
-      front: cardFront,
-      back: cardBack
-    };
+  // createCard = event => {
+  //   event.preventDefault();
+  //   const { cardFront, cardBack } = this.state;
+  //   // const date = Date.now();
+  //   const card = {
+  //     front: cardFront,
+  //     back: cardBack
+  //   };
 
-    this.props.addCard(card);
-  };
+  //   this.props.addCard(card);
+  // };
   // ############################################
 
   updateCard = () => {
@@ -141,6 +142,37 @@ class CardEditor extends React.Component {
   };
 
   render() {
+    const hljs = new highlight.configure({
+      // optionally configure hljs
+      languages: ["javascript", "ruby", "python", "html"]
+    });
+    const modules = {
+      toolbar: [
+        [{ header: "1" }, { header: "2" }, { font: [] }],
+        [{ size: [] }],
+        ["bold", "italic", "underline", "strike", "blockquote"],
+        [
+          { list: "ordered" },
+          { list: "bullet" },
+          { indent: "-1" },
+          { indent: "+1" }
+        ],
+        [
+          { align: "" },
+          { align: "center" },
+          { align: "right" },
+          { align: "justify" }
+        ],
+        ["code-block"],
+        ["link", "image", "video"],
+        ["clean"]
+      ],
+      clipboard: {
+        // toggle to add extra line breaks when pasting HTML:
+        matchVisual: false
+      }
+    };
+
     return (
       <div id="reactQuill-container" ref={this.quillContainer}>
         <div id="reactQuill-subContainer">
@@ -150,6 +182,8 @@ class CardEditor extends React.Component {
               value={this.state.cardFront ? this.state.cardFront : ""}
               onChange={this.handleChangeFront}
               className="reactQuillCustom"
+              modules={modules}
+              bounds={".app"}
             />
           </div>
 
@@ -159,6 +193,8 @@ class CardEditor extends React.Component {
               value={this.state.cardBack ? this.state.cardBack : ""}
               onChange={this.handleChangeBack}
               className="reactQuillCustom"
+              modules={modules}
+              bounds={".app"}
             />
           </div>
         </div>
