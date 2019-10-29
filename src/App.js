@@ -1,15 +1,9 @@
 import React from "react";
-import Note from "./Note";
+import Note from "./Notes";
 import "./App.css";
 import firebase from "firebase/app";
 import base, { firestore, firebaseApp } from "./firebase";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import FlashCardEditorMain from "./FlashCardEditorMain";
 import Login from "./Login";
 import FlashCardTest from "./FlashCardTest";
@@ -18,6 +12,7 @@ import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";
 import SimpleAppMenuSmall from "./MaterialUI/SimpleAppMenuSmall";
 import FlashCardSetsByTitle from "./MaterialUI/FlashCardSetsByTitle";
 import BigChart from "./charts/bigChart";
+import Notes from "./Notes";
 
 class App extends React.Component {
   constructor(props) {
@@ -27,10 +22,11 @@ class App extends React.Component {
       selectedCardCategory: "",
       selectedCardIndex: "",
       selectedCard: "",
-      notes: {},
+      notes: "",
       userID: "",
       cardCategory: "",
       redirect: false,
+      photoURL: "",
       // #########################
       currentCardSetID: "",
       currentCardSet: "",
@@ -40,35 +36,70 @@ class App extends React.Component {
     };
   }
 
-  setUserId = uid => {
+  setUserId = (uid, photoURL) => {
     this.setState({
       loggedIn: true,
-      userID: uid
+      userID: uid,
+      photoURL
     });
 
     this.checkUIDExistance(uid);
   };
 
   checkUIDExistance = async uid => {
-    // console.log("checkUID");
     await firestore
       .collection(`${uid}`)
+      .doc(`Cards`)
       .get()
-      .then(query => this.uidExistanceAction(query.size, uid));
+      .then(query => this.cardsExistanceAction(query.exists, uid));
+
+    await firestore
+      .collection(`${uid}`)
+      .doc(`Notes`)
+      .get()
+      .then(query => this.notesExistanceAction(query.exists, uid));
+    await firestore
+      .collection(`${uid}`)
+      .doc(`Dictionaries`)
+      .get()
+      .then(query => this.dictExistanceAction(query.exists, uid));
+
+    this.rebaseSyncCards(uid);
   };
-  uidExistanceAction = async (qSize, uid) => {
-    if (qSize === 0) {
+
+  cardsExistanceAction = async (exists, uid) => {
+    if (exists === false) {
       await firestore
         .collection(`${uid}`)
         .doc(`Cards`)
         .set({});
     }
-    this.rebaseSyncCards(uid);
   };
+  notesExistanceAction = async (exists, uid) => {
+    if (exists === false) {
+      await firestore
+        .collection(`${uid}`)
+        .doc(`Notes`)
+        .set({});
+    }
+  };
+  dictExistanceAction = async (exists, uid) => {
+    if (exists === false) {
+      await firestore
+        .collection(`${uid}`)
+        .doc(`Dictionaries`)
+        .set({});
+    }
+  };
+
   rebaseSyncCards(uid) {
-    this.refNotes = base.syncDoc(`${uid}/Cards`, {
+    this.refCards = base.syncDoc(`${uid}/Cards`, {
       context: this,
       state: "cards"
+    });
+    this.refNotes = base.syncDoc(`${uid}/Notes`, {
+      context: this,
+      state: "notes"
     });
   }
 
@@ -106,17 +137,16 @@ class App extends React.Component {
       });
   };
 
-  addCard = (date, card) => {
-
-    let userID = this.state.userID;
-    let cardDate = "card123455187";
-    firestore
-      .collection(`${userID}`)
-      .doc("Cards")
-      .update({
-        [`${cardDate}.Cards.date.back`]: "back of card update"
-      });
-  };
+  // addCard = (date, card) => {
+  //   let userID = this.state.userID;
+  //   let cardDate = "card123455187";
+  //   firestore
+  //     .collection(`${userID}`)
+  //     .doc("Cards")
+  //     .update({
+  //       [`${cardDate}.Cards.date.back`]: "back of card update"
+  //     });
+  // };
 
   updateCard = (index, cardFront, cardBack) => {
     const { currentCardSetID } = this.state;
@@ -211,6 +241,16 @@ class App extends React.Component {
     });
   };
 
+  deleteNote = noteID => {
+    const notes = this.state.notes;
+    // console.log(notes, noteID);
+    ;
+    // console.log(notes[noteID]);
+    delete notes[noteID];
+
+    this.setState({ notes });
+  };
+
   logout = async event => {
     event.preventDefault();
     await firebase.auth().signOut();
@@ -230,6 +270,7 @@ class App extends React.Component {
                   clearSelectedCardSet={this.clearSelectedCardSet}
                   logout={this.logout}
                   selectedCardCategory={this.selectedCardCategory}
+                  photoURL={this.state.photoURL}
                 />
               </div>
 
@@ -238,6 +279,7 @@ class App extends React.Component {
                   clearSelectedCardSet={this.clearSelectedCardSet}
                   logout={this.logout}
                   selectedCardCategory={this.selectedCardCategory}
+                  photoURL={this.state.photoURL}
                 />
               </div>
               <Route
@@ -287,7 +329,7 @@ class App extends React.Component {
                   <FlashCardEditorMain
                     cards={this.state.cards}
                     deleteCard={this.deleteCard}
-                    addCard={this.addCard}
+                    // addCard={this.addCard}
                     updateCard={this.updateCard}
                     newCard={this.newCard}
                     selectCard={this.selectCard}
@@ -304,6 +346,16 @@ class App extends React.Component {
                     setCurrentCardSetID={this.setCurrentCardSetID}
                     editSelectedCard={this.editSelectedCard}
                     currentCardSetID={this.state.currentCardSetID}
+                  />
+                )}
+              />
+              <Route
+                path="/Notes"
+                render={props => (
+                  <Notes
+                    notes={this.state.notes}
+                    userID={this.state.userID}
+                    deleteNote={this.deleteNote}
                   />
                 )}
               />
