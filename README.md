@@ -15,16 +15,27 @@ I also want to encorporate a dictionary into the web app that allows the user to
 
 ## Objectives:
 ### Flash Cards
-- [X] Allow user to create flash cards that support rich text and media
+- [X] Allow user to create & edit flash cards that support rich text and media
   - [X] Assign Flash Card sets to a category
   - [X] Sort Flash Card sets by category
 - [X] Test against Flash Card set
   - [X] Keep a history of test scores
 
-### Notes
-- [X] Allow user to create Notes that support rich text and media
-  - [ ] Assign each Note to a category
 
+### Notes
+- [X] User can create notes that support rich text and media
+  - [ ] Assign each note to a category
+- [ ] Sort notes by category
+
+### Dictionary
+- [ ] User can create Dictionaries
+- [ ] User can create & modify terms and definitions within each dictionary
+- [ ] User can assign categories to each dictionary
+
+      ### Reach Goals
+      • Hover over words and show dictionary term
+
+##
 
 ## Known Bugs
   * No known bugs at this time.
