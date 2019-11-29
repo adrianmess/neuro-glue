@@ -32,8 +32,8 @@ I also want to encorporate a dictionary into the web app that allows the user to
 - [ ] User can create & modify terms and definitions within each dictionary
 - [ ] User can assign categories to each dictionary
 
-      ### Reach Goals
-      • Hover over words and show dictionary term
+### Reach Goals
+  • [ ]  Hover over words and show dictionary term
 
 ##
 
