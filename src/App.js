@@ -3,7 +3,7 @@ import Note from "./Notes";
 import "./App.css";
 import firebase from "firebase/app";
 import base, { firestore, firebaseApp } from "./firebase";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import FlashCardEditorMain from "./FlashCardEditorMain";
 import Login from "./Login";
 import FlashCardTest from "./FlashCardTest";
@@ -11,7 +11,6 @@ import FlashCardSetCategoriesList from "./FlashCardSetCategoriesList";
 import SimpleAppMenu from "./MaterialUI/SimpleAppMenu";
 import SimpleAppMenuSmall from "./MaterialUI/SimpleAppMenuSmall";
 import FlashCardSetsByTitle from "./MaterialUI/FlashCardSetsByTitle";
-import BigChart from "./charts/bigChart";
 import Notes from "./Notes";
 
 class App extends React.Component {
@@ -282,83 +281,86 @@ class App extends React.Component {
                   photoURL={this.state.photoURL}
                 />
               </div>
-              <Route
-                path={`/flashcards/:${this.state.selectedCardCategory}`}
-                component={FlashCardEditorMain}
-              />
 
-              <Route
-                path={`/Category/${this.state.selectedCardCategory}`}
-                render={props => (
-                  <FlashCardSetCategoriesList
-                    cards={cards}
-                    selectedCardCategory={this.state.selectedCardCategory}
-                    setCurrentCardSetTitle={this.setCurrentCardSetTitle}
-                  />
-                )}
-              />
+                <Redirect from="" exact to="/FlashCards" />
+                <Route
+                  exact
+                  path="/FlashCards"
+                  render={props => (
+                    <FlashCardSetsByTitle
+                      cards={cards}
+                      currentCardSetID={this.state.currentCardSetID}
+                      setCurrentCardSetTitle={this.setCurrentCardSetTitle}
+                      setCurrentCardSetID={this.setCurrentCardSetID}
+                    />
+                  )}
+                />
+                <Route
+                  path={`/flashcards/:${this.state.selectedCardCategory}`}
+                  component={FlashCardEditorMain}
+                />
 
-              <Route
-                path="/FlashCards"
-                render={props => (
-                  <FlashCardSetsByTitle
-                    cards={cards}
-                    currentCardSetID={this.state.currentCardSetID}
-                    setCurrentCardSetTitle={this.setCurrentCardSetTitle}
-                    setCurrentCardSetID={this.setCurrentCardSetID}
-                  />
-                )}
-              />
+                <Route
+                  path={`/Category/${this.state.selectedCardCategory}`}
+                  render={props => (
+                    <FlashCardSetCategoriesList
+                      cards={cards}
+                      selectedCardCategory={this.state.selectedCardCategory}
+                      setCurrentCardSetTitle={this.setCurrentCardSetTitle}
+                    />
+                  )}
+                />
 
-              <Route
-                path={`/FlashCardTest/${currentCardSetTitle}`}
-                render={props => (
-                  <FlashCardTest
-                    cards={cards}
-                    currentCardSetTitle={currentCardSetTitle}
-                    currentCardSet={currentCardSet}
-                    currentCardSetID={this.state.currentCardSetID}
-                    addTestScore={this.addTestScore}
-                  />
-                )}
-              />
+                <Route
+                  path={`/FlashCardTest/${currentCardSetTitle}`}
+                  render={props => (
+                    <FlashCardTest
+                      cards={cards}
+                      currentCardSetTitle={currentCardSetTitle}
+                      currentCardSet={currentCardSet}
+                      currentCardSetID={this.state.currentCardSetID}
+                      addTestScore={this.addTestScore}
+                    />
+                  )}
+                />
 
-              <Route
-                path="/FlashCardEditor"
-                render={props => (
-                  <FlashCardEditorMain
-                    cards={this.state.cards}
-                    deleteCard={this.deleteCard}
-                    // addCard={this.addCard}
-                    updateCard={this.updateCard}
-                    newCard={this.newCard}
-                    selectCard={this.selectCard}
-                    selectedCard={this.state.selectedCard}
-                    selectedCardIndex={this.state.selectedCardIndex}
-                    isLoggedIn={this.state.isLoggedIn}
-                    cardCategory={this.state.cardCategory}
-                    clearSelectedCardSet={this.clearSelectedCardSet}
-                    deleteCardSet={this.deleteCardSet}
-                    // ####################################
-                    userID={this.state.userID}
-                    selectedCardSet={this.selectedCardSet}
-                    saveCurrentCardSet={this.saveCurrentCardSet}
-                    setCurrentCardSetID={this.setCurrentCardSetID}
-                    editSelectedCard={this.editSelectedCard}
-                    currentCardSetID={this.state.currentCardSetID}
-                  />
-                )}
-              />
-              <Route
-                path="/Notes"
-                render={props => (
-                  <Notes
-                    notes={this.state.notes}
-                    userID={this.state.userID}
-                    deleteNote={this.deleteNote}
-                  />
-                )}
-              />
+                <Route
+                  path="/FlashCardEditor"
+                  render={props => (
+                    <FlashCardEditorMain
+                      cards={this.state.cards}
+                      deleteCard={this.deleteCard}
+                      // addCard={this.addCard}
+                      updateCard={this.updateCard}
+                      newCard={this.newCard}
+                      selectCard={this.selectCard}
+                      selectedCard={this.state.selectedCard}
+                      selectedCardIndex={this.state.selectedCardIndex}
+                      isLoggedIn={this.state.isLoggedIn}
+                      cardCategory={this.state.cardCategory}
+                      clearSelectedCardSet={this.clearSelectedCardSet}
+                      deleteCardSet={this.deleteCardSet}
+                      // ####################################
+                      userID={this.state.userID}
+                      selectedCardSet={this.selectedCardSet}
+                      saveCurrentCardSet={this.saveCurrentCardSet}
+                      setCurrentCardSetID={this.setCurrentCardSetID}
+                      editSelectedCard={this.editSelectedCard}
+                      currentCardSetID={this.state.currentCardSetID}
+                    />
+                  )}
+                />
+                <Route
+                  path="/Notes"
+                  render={props => (
+                    <Notes
+                      notes={this.state.notes}
+                      userID={this.state.userID}
+                      deleteNote={this.deleteNote}
+                    />
+                  )}
+                />
+
             </Router>
           </div>
         ) : (

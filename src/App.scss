@@ -9,10 +9,14 @@
 
 #SimpleAppMenu{
 	display: none;
+	position: fixed;
+    width: 100%;
 }
 
 #SimpleAppMenuSmall{
 	display: initial;
+	position: fixed;
+    width: 100%;
 }
 
 }
@@ -21,10 +25,14 @@
 @media only screen and (min-width: 600px) {
 	#SimpleAppMenu{
 	display: initial;
+	position: fixed;
+    width: 100%;
 }
 
 #SimpleAppMenuSmall{
 	display: none;
+	position: fixed;
+    width: 100%;
 }
 }
 
