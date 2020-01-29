@@ -1,20 +1,34 @@
-
+#cardEditor{
+	z-index:100;
+	width: 80vw;
+	margin-top: 10px;
+	max-width: 80vw;
+}
 #flashCardEditorContainer{
-	    margin-top: 5px;
+		margin-top: 5px;
+		    height: 100%;
 }
 
 #flashCardEditorContainer_top_fixed{
 	display: flex;
-    flex-direction: column;
+	flex-direction: column;
+	z-index:100;
+		margin-top: 60px;
+		align-items: center;
 }
 
-h2 {
-	    text-align: center;
+h3 {
+	    margin-top: 11px;
+	    margin-bottom: 11px;
+		text-align: center;
+		color: #8080808c;
+		font-size: 16px;
 }
 
 #flashCardEditor_input_fields{
 	display:flex;
-	    align-self: center;
+	align-self: center;
+	margin-bottom: 10px;
 }
 
 #input-with-title {
@@ -22,50 +36,65 @@ h2 {
     border-radius: 3px;
     border-style: groove;
     border-color: #f0f8ff00;;
-    border-width: 2px;
+	border-width: 2px;
+	margin-bottom: 10px;
+    font-size: 18px;
+    font-family: arial;
+}
+
+input::placeholder{
+	color: #cecece;
 }
 
 #input-no-title {
     height: 23px;
 	border: initial;
 	    text-decoration: underline;
-    text-decoration-color: #3f51b542;
+	text-decoration-color: #3f51b542;
+		margin-bottom: 10px;
+    font-size: 14px;
 }
 
 #card_editor_main-list-and-editor{
 	display: flex;
-    flex-direction: column-reverse;
+	flex-direction: column;
+		height: 100%;
+		align-items: center;
 }
 
 #card_editor_buttons{
       display: flex;
     flex-direction: row;
-    justify-content: space-between;
+	justify-content: space-between;
+	width: 80vw;
 }
 
-#cardListContainer{
-overflow: hidden;
-height: 100%;
-align-self: center;
-}
-
-#cardList > div {
-	height:100%
-}
-
-// #cardEditor {
-// 	height: 148px;
-// 	margin-bottom: 31px;
-// }
-#cardList {
-	// float: left;
-	/* position: fixed; */
-	    // overflow: auto;
-	display: flex;
-	flex-direction: column-reverse;
-	// align-items: center;
-	    // margin-left: 10vw;
+#card_editor_list_root{
 	height: 100%;
+        overflow-y: scroll;
+    overflow-x: hidden;
+}
+// #cardListContainer{
+// overflow: scroll;
+// height: 99vh;
+// align-self: center;
+// width: 100%;
+// padding-right: 70px;
+// }
+
+
+#cardList {
+
+    // height: 50vh;
+    // /* margin-bottom: 100px; */
+    // bottom: 0px;
+    // position: fixed;
+	// align-self: flex-end;
+	height: 100%;
+    margin-bottom: 172px;
+    bottom: 0px;
+    position: relative;
+    align-self: flex-end;
 }
 
 #alert_missing_title{
@@ -76,7 +105,7 @@ align-self: center;
 //REACT QUILL TARGETING
 
 .reactQuillCustom > div > div {
-	overflow: scroll
+	overflow: scroll;
 }
 
 .reactQuillCustom > div > div > *{
@@ -85,45 +114,39 @@ width: max-content;
 
 #card-container{
 	max-width: 80vw;
+	min-width: 300px;
+}
+
+#SelectCategoryButton{
+ width: 210px;
+//  position: absolute;
+ align-self: center;
+}
+
+
+#card_editor_buttons{
+	display: flex;
+    flex-direction: column;
+}
+
+#creatableSelect > *{
+	z-index:100
+}
+
+#delete_save_btnContainer{
+    display: flex;
+    justify-content: space-between;
+    // position: fixed;
+    width: 100%;
 }
 
 /* Small devices (small phones, 599px and down) */
-// @media only screen and (max-width: 599px) {
+@media only screen and (max-width: 495px) {
 
-// 	#flashCardEditorContainer{
-// 		height: 100%;
-// 	// 	    display: flex;
-//     // flex-direction: column-reverse;
-// 	}
-// 	#flashCardEditorContainer_top_fixed{
-// 		display: flex;
-// 		flex-direction: row;
-// 	}
-// 	#flashCardEditor_input_fields{
-// 	// position: fixed;
-//     // margin-top: -5vh;
-// 	}
-// 	#card_editor_main-list-and-editor{
-// 		display: flex;
-// 		flex-direction: column-reverse;
-// 		height: 100%;
-// 	}
-// 	#cardEditor{
 
-// 		float: initial;
-//     	margin-right: initial;
-//     	margin-top: initial;
-// 	}
-// 	#cardList{
-// 		height: 85%;
-// 	}
-// 	#reactQuill-container{
-// 		    left: 0px;
-// 			right: 0px;
-// 			// transform: scale(0.8);
+}
 
-// 	}
-// }
+
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {}

@@ -1,5 +1,12 @@
+#cardEditor {
+  z-index: 100;
+  width: 80vw;
+  margin-top: 10px;
+  max-width: 80vw; }
+
 #flashCardEditorContainer {
-  margin-top: 5px; }
+  margin-top: 5px;
+  height: 100%; }
 
 #flashCardEditorContainer_top_fixed {
   display: -webkit-box;
@@ -8,40 +15,71 @@
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+  z-index: 100;
+  margin-top: 60px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
 
-h2 {
-  text-align: center; }
+h3 {
+  margin-top: 11px;
+  margin-bottom: 11px;
+  text-align: center;
+  color: #8080808c;
+  font-size: 16px; }
 
 #flashCardEditor_input_fields {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-item-align: center;
-  align-self: center; }
+  align-self: center;
+  margin-bottom: 10px; }
 
 #input-with-title {
   height: 23px;
   border-radius: 3px;
   border-style: groove;
   border-color: #f0f8ff00;
-  border-width: 2px; }
+  border-width: 2px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-family: arial; }
+
+input::-webkit-input-placeholder {
+  color: #cecece; }
+
+input:-ms-input-placeholder {
+  color: #cecece; }
+
+input::-ms-input-placeholder {
+  color: #cecece; }
+
+input::placeholder {
+  color: #cecece; }
 
 #input-no-title {
   height: 23px;
   border: initial;
   text-decoration: underline;
   -webkit-text-decoration-color: #3f51b542;
-  text-decoration-color: #3f51b542; }
+  text-decoration-color: #3f51b542;
+  margin-bottom: 10px;
+  font-size: 14px; }
 
 #card_editor_main-list-and-editor {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-  -ms-flex-direction: column-reverse;
-  flex-direction: column-reverse; }
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
 
 #card_editor_buttons {
   display: -webkit-box;
@@ -53,28 +91,21 @@ h2 {
   flex-direction: row;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between; }
+  justify-content: space-between;
+  width: 80vw; }
 
-#cardListContainer {
-  overflow: hidden;
+#card_editor_list_root {
   height: 100%;
-  -ms-flex-item-align: center;
-  -ms-grid-row-align: center;
-  align-self: center; }
-
-#cardList > div {
-  height: 100%; }
+  overflow-y: scroll;
+  overflow-x: hidden; }
 
 #cardList {
-  /* position: fixed; */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-  -ms-flex-direction: column-reverse;
-  flex-direction: column-reverse;
-  height: 100%; }
+  height: 100%;
+  margin-bottom: 172px;
+  bottom: 0px;
+  position: relative;
+  -ms-flex-item-align: end;
+  align-self: flex-end; }
 
 #alert_missing_title {
   visibility: hidden;
@@ -89,7 +120,35 @@ h2 {
   width: max-content; }
 
 #card-container {
-  max-width: 80vw; }
+  max-width: 80vw;
+  min-width: 300px; }
+
+#SelectCategoryButton {
+  width: 210px;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center; }
+
+#card_editor_buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+#creatableSelect > * {
+  z-index: 100; }
+
+#delete_save_btnContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%; }
 
 /* Small devices (small phones, 599px and down) */
 /* Small devices (portrait tablets and large phones, 600px and up) */
