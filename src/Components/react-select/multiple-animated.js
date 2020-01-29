@@ -56,6 +56,7 @@ export default function AnimatedMulti(props) {
       closeMenuOnSelect={false}
       components={animatedComponents}
       onChange={handleChange}
+      placeholder="Select Categories"
       //   defaultValue={[colourOptions[4], colourOptions[5]]}
       isMulti
       options={categoriesList}

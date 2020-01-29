@@ -38,8 +38,22 @@ export default function CreatableSingle(props) {
 
   function handleChange(newValue, actionMeta) {
     // console.group("Value Changed");
+
+    console.log(`action: ${actionMeta.action}`);
     // console.log(newValue.value);
-    // console.log(`handleChangeaction: ${actionMeta.action}`);
+    if (
+      actionMeta.action === "select-option" ||
+      actionMeta.action === "set-value" ||
+      actionMeta.action === "create-option"
+    ) {
+      props.updateCategory(newValue.value);
+      console.log("hangle change updated");
+      console.log("value: " + newValue.value);
+    }
+
+    if (actionMeta.action === "clear") {
+      props.updateCategory("");
+    }
     // console.groupEnd();
     // console.log("handleChange")
     // if (newValue !== null) {
@@ -57,15 +71,21 @@ export default function CreatableSingle(props) {
     // console.log(`action: ${actionMeta.action}`);
     // console.groupEnd();
     // console.log(inputValue);
-    if (actionMeta.action === "input-change") {
-      setValues(oldValues => ({
-        ...oldValues,
-        createdCategory: inputValue
-      }));
-    }
-    if (actionMeta.action === "set-value") {
-      props.updateCategory(values.createdCategory);
-    }
+    // if (actionMeta.action === "input-change") {
+    //   setValues(oldValues => ({
+    //     ...oldValues,
+    //     createdCategory: inputValue
+    //   }));
+    // }
+    // console.log(inputValue);
+    // if (actionMeta.action === "set-value" && inputValue == !"") {
+    //   setValues(oldValues => ({
+    //     ...oldValues,
+    //     createdCategory: inputValue
+    //   }));
+    //   console.log(values.createdCategory);
+    //   props.updateCategory(values.createdCategory);
+    // }
   }
 
   const categoriesList = Object.values(values.categories)
@@ -73,12 +93,13 @@ export default function CreatableSingle(props) {
     .map(value => Object.assign({ value: value }, { label: value }));
 
   return (
-    <>
+    <div id="creatableSelect">
       {values.category === "" ? (
         <CreatableSelect
           isClearable
           onChange={handleChange}
           onInputChange={handleInputChange}
+          placeholder="Select Category"
           // options={colourOptions}
           //   options={categoriesList}
           options={categoriesList}
@@ -110,6 +131,6 @@ export default function CreatableSingle(props) {
           })}
         />
       )}
-    </>
+    </div>
   );
 }
