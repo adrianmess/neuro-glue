@@ -17,7 +17,7 @@ import { flexbox } from "@material-ui/system";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    justifyContent: "center!important",
+    justifyContent: "center!important"
     // height: 100
   },
   menuButton: {
@@ -31,6 +31,7 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       textDecoration: "none!important"
     }
+    // marginTop: "5px",
   }
 }));
 
@@ -74,12 +75,53 @@ export default function ButtonAppBar(props) {
           <h2 id="header-title">Neuro Glue</h2>
         </div>
 
-        <ListItem button component={Link} to="/FlashCards">
+        <ListItem
+          button
+          component={Link}
+          to="/Notes"
+          style={{ justifyContent: "center", height: "100%" }}
+        >
+          Notes
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/FlashCards"
+          style={{ justifyContent: "center", height: "100%" }}
+        >
           FlashCards
         </ListItem>
-        <ListItem button component={Link} to="/FlashCardEditor">
-          FlashCardEditor
-        </ListItem>
+        <MyButton
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+          style={{ backgroundColor: "transparent" }}
+        >
+          {/* <MenuIcon /> */}
+          <img id="photoURL" src={props.photoURL} />
+        </MyButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          style={{
+            top: "40px",
+            opacity: 0.7,
+            padding: "0px",
+            marginLeft: "10px",
+            minHeight: "0px"
+          }}
+        >
+          <MenuItem
+            onClick={props.logout}
+            className={classes.menuItem}
+            style={{ padding: "5px", minHeight: "10px" }}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
       </MyToolbar>
     </AppBar>
   );
