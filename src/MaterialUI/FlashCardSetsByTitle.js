@@ -16,7 +16,7 @@ import NewFlashCardSetButton from "./NewFlashCardSet_Button";
 
 import AnimatedMulti from "../Components/react-select/multiple-animated";
 
-import "./FlashCardSetsByTitle.css";
+import "./FlashCardSetsByTitle.scss";
 
 const useStyles = makeStyles(theme => ({
   root: {

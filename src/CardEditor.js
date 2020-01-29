@@ -4,8 +4,8 @@ import { firestore } from "./firebase";
 import highlight from "highlight.js";
 
 import "react-quill/dist/quill.snow.css";
-import "./CardEditor.css";
-import "./FlashCardEditorMain.css";
+import "./CardEditor.scss";
+import "./FlashCardEditorMain.scss";
 import PlusButton from "./MaterialUI/AddPlusButton";
 import NewCardButton from "./MaterialUI/CardEditor_NewCard_Button";
 import UpdateCardButton from "./MaterialUI/CardEditor_Update_Button";

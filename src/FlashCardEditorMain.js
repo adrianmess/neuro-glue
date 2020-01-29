@@ -9,7 +9,7 @@ import SaveSetButton from "./MaterialUI/CardEditor_SaveSet_Button";
 import MaterialCardEditorList from "./MaterialUI/CardEditorList";
 import CreatableSingle from "./Components/react-select/CardEditor_CategorySelect_Button";
 
-import "./FlashCardEditorMain.css";
+import "./FlashCardEditorMain.scss";
 
 class FlashCardEditorMain extends React.Component {
   constructor(props) {

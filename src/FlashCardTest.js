@@ -7,7 +7,7 @@ import {
   Slide,
   ButtonNext
 } from "pure-react-carousel";
-import "./FlashCardTest.css";
+import "./FlashCardTest.scss";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { ThumbUp, ThumbDown } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";

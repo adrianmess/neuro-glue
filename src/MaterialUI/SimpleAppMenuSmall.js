@@ -9,7 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import "./SimpleAppMenuSmall.css";
+import "./SimpleAppMenuSmall.scss";
 
 const useStyles = makeStyles(theme => ({
   root: {

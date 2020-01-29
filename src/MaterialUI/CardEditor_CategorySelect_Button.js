@@ -10,7 +10,7 @@ import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import { firestore } from "../firebase";
 
-import "./CardEditor_CategorySelect_Button.css";
+import "./CardEditor_CategorySelect_Button.scss";
 import { PlayCircleFilledWhite } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({

@@ -7,7 +7,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import renderHTML from "react-render-html";
 
 import SimpleCard from "./CardEditor_CardList_Card";
-import "../FlashCardEditorMain.css";
+import "../FlashCardEditorMain.scss";
 
 const useStyles = makeStyles(theme => ({
   root: {

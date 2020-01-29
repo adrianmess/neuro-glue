@@ -1,6 +1,5 @@
 import React from "react";
 import Note from "./Notes";
-import "./App.css";
 import firebase from "firebase/app";
 import base, { firestore, firebaseApp } from "./firebase";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
@@ -13,6 +12,7 @@ import SimpleAppMenuSmall from "./MaterialUI/SimpleAppMenuSmall";
 import FlashCardSetsByTitle from "./MaterialUI/FlashCardSetsByTitle";
 import Notes from "./Notes";
 
+import "./App.scss";
 class App extends React.Component {
   constructor(props) {
     super(props);

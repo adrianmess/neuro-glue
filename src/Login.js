@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import firebase from "firebase/app";
 import { firebaseApp } from "./firebase";
 
-import "./Login.css";
+import "./Login.scss";
 
 import {
   FacebookLoginButton,

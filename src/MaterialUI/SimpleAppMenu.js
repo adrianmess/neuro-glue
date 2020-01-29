@@ -11,7 +11,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import ListItem from "@material-ui/core/ListItem";
 
-import "./SimpleAppMenu.css";
+import "./SimpleAppMenu.scss";
 import { flexbox } from "@material-ui/system";
 
 const useStyles = makeStyles(theme => ({
