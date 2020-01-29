@@ -6,13 +6,10 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuIcon from "@material-ui/icons/Menu";
-import IconButton from "@material-ui/core/IconButton";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import ListItem from "@material-ui/core/ListItem";
 
-import "./SimpleAppMenu.css";
-import { flexbox } from "@material-ui/system";
+import "./SimpleAppMenuSmall.css";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +25,8 @@ const useStyles = makeStyles(theme => ({
     textDecoration: "none!important",
     "&:hover": {
       textDecoration: "none!important"
-    }
+    },
+    textAlign: "left"
   }
 }));
 
@@ -85,14 +83,6 @@ export default function ButtonAppBar(props) {
           style={{ top: "30px", opacity: 0.9 }}
         >
           <MenuItem
-            component={Link}
-            to="/Categories"
-            onClick={handleClose}
-            className={classes.menuItem}
-          >
-            Categories
-          </MenuItem>
-          <MenuItem
             onClick={handleClose}
             className={classes.menuItem}
             component={Link}
@@ -104,14 +94,20 @@ export default function ButtonAppBar(props) {
             onClick={handleClose}
             className={classes.menuItem}
             component={Link}
-            to="/FlashCardEditor"
+            to="/Notes"
+            style={{textAlign: "left"}}
           >
-            FlashCardEditor
+            Notes
           </MenuItem>
 
           <hr />
-          <MenuItem onClick={props.logout} className={classes.menuItem}>
-            Logout
+          <MenuItem
+            onClick={props.logout}
+            className={classes.menuItem}
+            style={{ padding: "0px 15px" }}
+          >
+            <p id="logout-P">Logout</p>{" "}
+            <img id="photoURLSmall" src={props.photoURL} />
           </MenuItem>
         </Menu>
       </MyToolbar>
