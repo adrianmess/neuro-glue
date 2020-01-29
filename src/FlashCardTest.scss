@@ -1,5 +1,23 @@
 #carouselContainer{
-	max-width: 200px;
+	margin: 80px auto;
+    width: 63%;
+}
+
+#endOfTestContainer{
+margin: 111px auto;
+    /* text-align: center; */
+    background-color: #000000ad;
+    width: 80%;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    height: 110px;
+}
+
+#slider-buttons{
+	display: flex;
+    flex-direction: row;
+   justify-content: space-evenly;
 }
 
 .buttonNext{
@@ -8,4 +26,20 @@
 
 .thumbs{
 	visibility: initial!important;
+}
+
+#thumbsUp{
+	color: #1bb9eaab;
+}
+#thumbsDown{
+	color:#ea4e4e;
+}
+
+.cards{
+//     display: flex;
+//     justify-content: center;
+// }
+
+.react-card-flip{
+        width: 100%;
 }

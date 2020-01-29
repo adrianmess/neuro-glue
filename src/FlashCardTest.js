@@ -1,18 +1,16 @@
 import React from "react";
 import Cards from "./MaterialUI/Cards";
-import ReactCardFlip from "react-card-flip";
 
 import {
   CarouselProvider,
   Slider,
   Slide,
-  ButtonBack,
   ButtonNext
 } from "pure-react-carousel";
 import "./FlashCardTest.css";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { Cake } from "@material-ui/icons";
 import { ThumbUp, ThumbDown } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 
 class FlashCardTest extends React.Component {
   constructor() {
@@ -96,7 +94,10 @@ class FlashCardTest extends React.Component {
       const numbOfPasses = passes.reduce((n, x) => n + (x === "pass"), 0);
 
       // console.log(typeof numbOfPasses)
-      const scorePercentAsNum = ((numbOfPasses / cardArrayLength)*100).toFixed(0);
+      const scorePercentAsNum = (
+        (numbOfPasses / cardArrayLength) *
+        100
+      ).toFixed(0);
       const scorePercent = Number(
         numbOfPasses / cardArrayLength
       ).toLocaleString(undefined, {
@@ -147,21 +148,23 @@ class FlashCardTest extends React.Component {
 
     for (let i = 0; i < cardsArray.length; i++) {
       cards.push(
-        <div key={i}>
+        <div key={i} id="slide-container">
           <Slide
             index={i}
             value={this.props.currentSlide}
             ref={this.activeSlideRef}
           >
-            <Cards
-              cardindex={i}
-              card={cardsArray[i]}
-              cardSetScore={this.cardSetScore}
-              //   clickNextButton={this.clickNextButton}
-              thumbClicked={this.state.thumbClicked}
-              setActiveCard={this.setActiveCard}
-              activeSlideState={this.activeSlideRef}
-            />
+            <div className="cards">
+              <Cards
+                cardindex={i}
+                card={cardsArray[i]}
+                cardSetScore={this.cardSetScore}
+                //   clickNextButton={this.clickNextButton}
+                thumbClicked={this.state.thumbClicked}
+                setActiveCard={this.setActiveCard}
+                activeSlideState={this.activeSlideRef}
+              />
+            </div>
           </Slide>
         </div>
       );
@@ -170,10 +173,13 @@ class FlashCardTest extends React.Component {
     return (
       <div>
         {testComplete === true ? (
-          <div id="endOfTestContainer">
-            <div>{scorePercent}</div>
+          <div>
+            <div id="endOfTestContainer">
+              <div>{scorePercent}</div>
 
-            <div>{scoreRatioStatement}</div>
+              <div>{scoreRatioStatement}</div>
+            </div>
+            <button>Try Again</button> <button>Home</button>
           </div>
         ) : (
           <div>
@@ -182,32 +188,40 @@ class FlashCardTest extends React.Component {
             <div>
               <div id="carouselContainer">
                 <CarouselProvider
-                  naturalSlideWidth={100}
-                  naturalSlideHeight={125}
+                  naturalSlideWidth={4}
+                  naturalSlideHeight={2}
                   totalSlides={cards.length}
                 >
                   <Slider>{cards}</Slider>
+                  <div id="slider-buttons">
+                    <div className="button-container" id="bu">
+                      <ButtonNext
+                        id="thumbsUp"
+                        className="buttonNext"
+                        ref="nextUpButtonRef"
+                        disabled={false}
+                      >
+                        <ThumbUp
+                          className="thumbs"
+                          onClick={event => this.thumbsUp(event)}
+                        />
+                      </ButtonNext>
+                    </div>
 
-                  <ButtonNext
-                    className="buttonNext"
-                    ref="nextUpButtonRef"
-                    disabled={false}
-                  >
-                    <ThumbUp
-                      className="thumbs"
-                      onClick={event => this.thumbsUp(event)}
-                    />
-                  </ButtonNext>
-                  <ButtonNext
-                    className="buttonNext"
-                    ref="nextDownButtonRef"
-                    disabled={false}
-                  >
-                    <ThumbDown
-                      className="thumbs"
-                      onClick={event => this.thumbsDown(event)}
-                    />
-                  </ButtonNext>
+                    <div className="button-container">
+                      <ButtonNext
+                        id="thumbsDown"
+                        className="buttonNext"
+                        ref="nextDownButtonRef"
+                        disabled={false}
+                      >
+                        <ThumbDown
+                          className="thumbs"
+                          onClick={event => this.thumbsDown(event)}
+                        />
+                      </ButtonNext>
+                    </div>
+                  </div>
                 </CarouselProvider>
               </div>
             </div>
@@ -218,7 +232,7 @@ class FlashCardTest extends React.Component {
   }
 
   render() {
-    return <>{this.cardRender()}</>;
+    return <div id="card_test_containter">{this.cardRender()}</div>;
   }
 }
 
